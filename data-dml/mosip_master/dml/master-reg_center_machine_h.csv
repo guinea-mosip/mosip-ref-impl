@@ -1,4 +1,0 @@
-﻿regcntr_id,machine_id,lang_code,is_active,cr_by,cr_dtimes,eff_dtimes
-10002,10004,fra,TRUE,superadmin,now(),now()
-10002,10005,fra,TRUE,superadmin,now(),now()
-10002,10006,fra,TRUE,superadmin,now(),now()

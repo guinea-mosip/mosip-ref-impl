@@ -1,13 +1,4 @@
-﻿id,uin,name,email,mobile,status_code,lang_code,last_login_method,is_active,cr_by,cr_dtimes
-910001,9317596808,Mouctar,imouctar.diallo@wuriguinee.com,620223365,ACT,fra,PWD,TRUE,superadmin,2020-07-27 6:51:58
-910002,9317596854,Sory,isory.conde@wuriguinee.com,620223365,ACT,fra,PWD,TRUE,superadmin,2020-07-27 6:51:58
-910003,9317596855,Ferdiannd,ferdinand.goumou@wuriguinee.com,620223365,ACT,fra,PWD,TRUE,superadmin,2020-07-27 6:51:58
-910004,9317596868,Hadja,Hadja.cherif@wuriguinee.co,620223365,ACT,fra,PWD,TRUE,superadmin,2020-07-27 6:51:58
-910005,9317596869,Elhadj,esaidou.keita@wuriguinee.com,620223365,ACT,fra,PWD,TRUE,superadmin,2020-07-27 6:51:58
-910006,9317596869,DT,dt@wuriguinee.com,620223365,ACT,fra,PWD,TRUE,superadmin,2020-07-27 6:51:58
-910007,9317596869,Teli,iteli.bah@wuriguinee.com,620223365,ACT,fra,PWD,TRUE,superadmin,2020-07-27 6:51:58
-lisbon,9317596868,lisbon,lisbon@mosip.io,9876543213,ACT,fra,PWD,TRUE,superadmin,2020-07-27 6:51:58
-madrid,9317596869,madrid,madrid@mosip.io,9876543214,ACT,fra,PWD,TRUE,superadmin,2020-07-27 6:51:58
-berlin,9317596869,berlin,berlin@mosip.io,9876543214,ACT,fra,PWD,TRUE,superadmin,2020-07-27 6:51:58
-oslo,9317596869,oslo,oslo@mosip.io,9876543214,ACT,fra,PWD,TRUE,superadmin,2020-07-27 6:51:58
-rabat,9317596869,rabat,rabat@mosip.io,9876543214,ACT,fra,PWD,TRUE,superadmin,2020-07-27 6:51:58
+﻿id,uin,name,email,mobile,status_code,regcntr_id,lang_code,last_login_method,is_active,cr_by,cr_dtimes
+lisbon,9317596868,lisbon,lisbon@mosip.io,9876543213,ACT,10002,fra,PWD,TRUE,superadmin,2020-07-27 6:51:58
+madrid,9317596869,madrid,madrid@mosip.io,9876543214,ACT,10002,fra,PWD,TRUE,superadmin,2020-07-27 6:51:58
+berlin,9317596869,berlin,berlin@mosip.io,9876543214,ACT,10002,fra,PWD,TRUE,superadmin,2020-07-27 6:51:58
