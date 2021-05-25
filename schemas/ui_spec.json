@@ -1,0 +1,750 @@
+[{
+  "id": "IDSchemaVersion",
+  "description": "ID Schema Version",
+  "label": {
+    "primary": "Version du schema de l'ID"
+  },
+  "type": "number",
+  "minimum": 0,
+  "maximum": 0,
+  "controlType": null,
+  "fieldType": "default",
+  "format": "none",
+  "fieldCategory": "none",
+  "inputRequired": false,
+  "validators": [],
+  "bioAttributes": null,
+  "requiredOn": [],
+  "subType": "IdSchemaVersion",
+  "contactType": null,
+  "group": null,
+  "required": true
+},
+  {
+    "id": "UIN",
+    "description": "UIN",
+    "label": {
+      "primary": "INU"
+    },
+    "type": "string",
+    "minimum": 0,
+    "maximum": 0,
+    "controlType": "textbox",
+    "fieldType": "default",
+    "format": "none",
+    "fieldCategory": "none",
+    "inputRequired": false,
+    "validators": [],
+    "bioAttributes": null,
+    "requiredOn": [],
+    "subType": "UIN",
+    "contactType": null,
+    "group": null,
+    "required": false
+  },
+  {
+    "id": "firstName",
+    "description": "First Name",
+    "label": {
+      "primary": "Prénom(s)"
+    },
+    "type": "simpleType",
+    "minimum": 0,
+    "maximum": 0,
+    "controlType": "textbox",
+    "fieldType": "default",
+    "format": "none",
+    "fieldCategory": "pvt",
+    "inputRequired": true,
+    "validators": [{
+      "type": "regex",
+      "validator": "^(?=.{0,120}$).*",
+      "arguments": []
+    }],
+    "bioAttributes": null,
+    "requiredOn": [],
+    "subType": "name",
+    "contactType": null,
+    "group": "Prénom(s)",
+    "required": true
+  },
+  {
+    "id": "lastName",
+    "description": "Last Name",
+    "label": {
+      "primary": "Nom"
+    },
+    "type": "simpleType",
+    "minimum": 0,
+    "maximum": 0,
+    "controlType": "textbox",
+    "fieldType": "default",
+    "format": "none",
+    "fieldCategory": "pvt",
+    "inputRequired": true,
+    "validators": [{
+      "type": "regex",
+      "validator": "^(?=.{0,120}$).*",
+      "arguments": []
+    }],
+    "bioAttributes": null,
+    "requiredOn": [],
+    "subType": "name",
+    "contactType": null,
+    "group": "Nom",
+    "required": true
+  },
+  {
+    "id": "gender",
+    "description": "gender",
+    "label": {
+      "primary": "Genre"
+    },
+    "type": "simpleType",
+    "minimum": 0,
+    "maximum": 0,
+    "controlType": "dropdown",
+    "fieldType": "default",
+    "format": "",
+    "fieldCategory": "pvt",
+    "inputRequired": true,
+    "validators": [],
+    "bioAttributes": null,
+    "requiredOn": [],
+    "subType": "Gender",
+    "contactType": null,
+    "group": "Genre",
+    "required": true
+  },
+  {
+    "id": "dateOfBirth",
+    "description": "dateOfBirth",
+    "label": {
+      "primary": "Date de Naissance"
+    },
+    "type": "string",
+    "minimum": 0,
+    "maximum": 0,
+    "controlType": "ageDate",
+    "fieldType": "default",
+    "format": "none",
+    "fieldCategory": "pvt",
+    "inputRequired": true,
+    "validators": [{
+      "type": "regex",
+      "validator": "^(1869|18[7-9][0-9]|19[0-9][0-9]|20[0-9][0-9])/([0][1-9]|1[0-2])/([0][1-9]|[1-2][0-9]|3[01])$",
+      "arguments": []
+    }],
+    "bioAttributes": null,
+    "subType": "dateOfBirth",
+    "contactType": null,
+    "group": "Date de Naissance",
+    "required": true
+  },
+  {
+    "id": "phone",
+    "description": "phone",
+    "label": {
+      "primary": "Numéro de Téléphone"
+    },
+    "type": "string",
+    "minimum": 0,
+    "maximum": 0,
+    "controlType": "textbox",
+    "fieldType": "default",
+    "format": "none",
+    "fieldCategory": "pvt",
+    "inputRequired": true,
+    "validators": [{
+      "type": "regex",
+      "validator": "^[+]*([0-9]{1})([0-9]{9})$",
+      "arguments": []
+    }],
+    "bioAttributes": null,
+    "requiredOn": [],
+    "subType": "Phone",
+    "contactType": "email",
+    "group": "No. de Tél. Portable",
+    "required": true
+  },
+  {
+    "id": "email",
+    "description": "email",
+    "label": {
+      "primary": "E-mail"
+    },
+    "type": "string",
+    "minimum": 0,
+    "maximum": 0,
+    "controlType": "textbox",
+    "fieldType": "default",
+    "format": "none",
+    "fieldCategory": "pvt",
+    "inputRequired": true,
+    "validators": [{
+      "type": "regex",
+      "validator": "^[A-Za-z0-9_\\-]+(\\.[A-Za-z0-9_]+)*@[A-Za-z0-9_-]+(\\.[A-Za-z0-9_]+)*(\\.[a-zA-Z]{2,})$",
+      "arguments": []
+    }],
+    "bioAttributes": null,
+    "requiredOn": [],
+    "subType": "Email",
+    "contactType": "email",
+    "group": "E-mail",
+    "required": true
+  },
+  {
+    "id": "residenceStatus",
+    "description": "residenceStatus",
+    "label": {
+      "primary": "Nationalité"
+    },
+    "type": "simpleType",
+    "minimum": 0,
+    "maximum": 0,
+    "controlType": "dropdown",
+    "fieldType": "default",
+    "format": "none",
+    "fieldCategory": "kyc",
+    "inputRequired": true,
+    "validators": [],
+    "bioAttributes": null,
+    "requiredOn": [],
+    "subType": "residenceStatus",
+    "contactType": null,
+    "group": "Nationalité",
+    "required": false
+  },
+  {
+    "id": "region",
+    "description": "region",
+    "label": {
+      "primary": "Région"
+    },
+    "type": "simpleType",
+    "minimum": 0,
+    "maximum": 0,
+    "controlType": "dropdown",
+    "fieldType": "default",
+    "format": "none",
+    "fieldCategory": "pvt",
+    "inputRequired": true,
+    "validators": [{
+      "type": "regex",
+      "validator": "^(?=.{0,50}$).*",
+      "arguments": []
+    }],
+    "bioAttributes": null,
+    "requiredOn": [],
+    "subType": "REGION",
+    "contactType": "Postal",
+    "group": "Location",
+    "required": true
+  },
+  {
+    "id": "prefecture",
+    "description": "prefecture",
+    "label": {
+      "primary": "Préfecture"
+    },
+    "type": "simpleType",
+    "minimum": 0,
+    "maximum": 0,
+    "controlType": "dropdown",
+    "fieldType": "default",
+    "format": "none",
+    "fieldCategory": "pvt",
+    "inputRequired": true,
+    "validators": [{
+      "type": "regex",
+      "validator": "^(?=.{0,50}$).*",
+      "arguments": []
+    }],
+    "bioAttributes": null,
+    "requiredOn": [],
+    "subType": "PREFECTURE",
+    "contactType": "Postal",
+    "group": "Location",
+    "required": true
+  },
+  {
+    "id": "subPrefectureOrCommune",
+    "description": "subPrefecture Or Commune",
+    "label": {
+      "primary": "Sous-Préfecture"
+    },
+    "type": "simpleType",
+    "minimum": 0,
+    "maximum": 0,
+    "controlType": "dropdown",
+    "fieldType": "default",
+    "format": "none",
+    "fieldCategory": "pvt",
+    "inputRequired": true,
+    "validators": [{
+      "type": "regex",
+      "validator": "^(?=.{0,50}$).*",
+      "arguments": []
+    }],
+    "bioAttributes": null,
+    "requiredOn": [],
+    "subType": "SOUS_PREFECTURE_OU_COMMUNE",
+    "contactType": "Postal",
+    "group": "Location",
+    "required": true
+  },
+  {
+    "id": "district",
+    "description": "District",
+    "label": {
+      "primary": "District"
+    },
+    "type": "simpleType",
+    "minimum": 0,
+    "maximum": 0,
+    "controlType": "dropdown",
+    "fieldType": "default",
+    "format": "none",
+    "fieldCategory": "pvt",
+    "inputRequired": true,
+    "validators": [{
+      "type": "regex",
+      "validator": "^(?=.{0,50}$).*",
+      "arguments": []
+    }],
+    "bioAttributes": null,
+    "requiredOn": [],
+    "subType": "DISTRICT",
+    "contactType": "Postal",
+    "group": "Location",
+    "required": true
+  },
+  {
+    "id": "sector",
+    "description": "Sector",
+    "label": {
+      "primary": "Secteur"
+    },
+    "type": "simpleType",
+    "minimum": 0,
+    "maximum": 0,
+    "controlType": "dropdown",
+    "fieldType": "default",
+    "format": "none",
+    "fieldCategory": "pvt",
+    "inputRequired": true,
+    "validators": [],
+    "bioAttributes": null,
+    "requiredOn": [],
+    "subType": "SECTEUR",
+    "contactType": null,
+    "group": "Location",
+    "required": true
+  },
+  {
+    "id": "additionalAddressDetails",
+    "description": "additionalAddressDetails",
+    "label": {
+      "primary": "Complément d'Adresse"
+    },
+    "type": "simpleType",
+    "minimum": 0,
+    "maximum": 0,
+    "controlType": "textbox",
+    "fieldType": "default",
+    "format": "none",
+    "fieldCategory": "pvt",
+    "inputRequired": true,
+    "validators": [{
+      "type": "regex",
+      "validator": "^(?=.{0,50}$).*",
+      "arguments": []
+    }],
+    "bioAttributes": null,
+    "requiredOn": [],
+    "subType": "additionalAddressDetails",
+    "contactType": "Postal",
+    "group": "Address",
+    "required": true
+  },
+  {
+    "id": "parentOrGuardianFirstName",
+    "description": "parentOrGuardianFirstName",
+    "label": {
+      "primary": "Prénom(s)"
+    },
+    "type": "simpleType",
+    "minimum": 0,
+    "maximum": 0,
+    "controlType": "textbox",
+    "fieldType": "default",
+    "format": "none",
+    "fieldCategory": "evidence",
+    "inputRequired": true,
+    "validators": [{
+      "type": "regex",
+      "validator": "^(?=.{0,120}$).*",
+      "arguments": []
+    }],
+    "bioAttributes": null,
+    "requiredOn": [{
+      "engine": "MVEL",
+      "expr": "identity.age < 18"
+    }],
+    "subType": "parentOrGuardianFirstName",
+    "contactType": null,
+    "group": "Info. du parent/tuteur",
+    "required": false
+  },
+  {
+    "id": "parentOrGuardianLastName",
+    "description": "parentOrGuardianLastName",
+    "label": {
+      "primary": "Nom de Famille"
+    },
+    "type": "simpleType",
+    "minimum": 0,
+    "maximum": 0,
+    "controlType": "textbox",
+    "fieldType": "default",
+    "format": "none",
+    "fieldCategory": "evidence",
+    "inputRequired": true,
+    "validators": [{
+      "type": "regex",
+      "validator": "^(?=.{0,120}$).*",
+      "arguments": []
+    }],
+    "bioAttributes": null,
+    "requiredOn": [{
+      "engine": "MVEL",
+      "expr": "identity.age < 18"
+    }],
+    "subType": "parentOrGuardianLastName",
+    "contactType": null,
+    "group": "Info. du parent/tuteur",
+    "required": false
+  },
+  {
+    "id": "parentOrGuardianRID",
+    "description": "parentOrGuardianRID",
+    "label": {
+      "primary": "NDI"
+    },
+    "type": "string",
+    "minimum": 0,
+    "maximum": 0,
+    "controlType": "textbox",
+    "fieldType": "default",
+    "format": "none",
+    "fieldCategory": "evidence",
+    "inputRequired": true,
+    "validators": [],
+    "bioAttributes": null,
+    "requiredOn": [{
+      "engine": "MVEL",
+      "expr": "( identity.age < 18 && (identity.parentOrGuardianUIN == nil || identity.parentOrGuardianUIN == empty) )"
+    }],
+    "subType": "RID",
+    "contactType": null,
+    "group": "Info. du parent/tuteur",
+    "required": false
+  },
+  {
+    "id": "parentOrGuardianUIN",
+    "description": "parentOrGuardianUIN",
+    "label": {
+      "primary": "INU"
+    },
+    "type": "string",
+    "minimum": 0,
+    "maximum": 0,
+    "controlType": "textbox",
+    "fieldType": "default",
+    "format": "none",
+    "fieldCategory": "evidence",
+    "inputRequired": true,
+    "validators": [],
+    "bioAttributes": null,
+    "requiredOn": [{
+      "engine": "MVEL",
+      "expr": "( identity.age < 18 && (identity.parentOrGuardianRID == nil || identity.parentOrGuardianRID == empty) )"
+    }],
+    "subType": "UIN",
+    "contactType": null,
+    "group": "Info. du parent/tuteur",
+    "required": false
+  },
+  {
+    "id": "proofOfConsent",
+    "description": "proofOfConsent",
+    "label": {
+      "primary": "Justificatif de consentement"
+    },
+    "type": "documentType",
+    "minimum": 0,
+    "maximum": 0,
+    "controlType": "fileupload",
+    "fieldType": "default",
+    "format": "none",
+    "fieldCategory": "evidence",
+    "inputRequired": true,
+    "validators": [],
+    "bioAttributes": null,
+    "requiredOn": [],
+    "subType": "POC",
+    "contactType": null,
+    "group": "Documents",
+    "required": true
+  },
+  {
+    "id": "proofOfAddress",
+    "description": "proofOfAddress",
+    "label": {
+      "primary": "Justificatif de domicile"
+    },
+    "type": "documentType",
+    "minimum": 0,
+    "maximum": 0,
+    "controlType": "fileupload",
+    "fieldType": "default",
+    "format": "none",
+    "fieldCategory": "evidence",
+    "inputRequired": true,
+    "validators": [],
+    "bioAttributes": null,
+    "requiredOn": [],
+    "subType": "POA",
+    "contactType": null,
+    "group": "Documents",
+    "required": false
+  },
+  {
+    "id": "proofOfIdentity",
+    "description": "proofOfIdentity",
+    "label": {
+      "primary": "Justificatif d'identité"
+    },
+    "type": "documentType",
+    "minimum": 0,
+    "maximum": 0,
+    "controlType": "fileupload",
+    "fieldType": "default",
+    "format": "none",
+    "fieldCategory": "evidence",
+    "inputRequired": true,
+    "validators": [],
+    "bioAttributes": null,
+    "requiredOn": [],
+    "subType": "POI",
+    "contactType": null,
+    "group": "Documents",
+    "required": true
+  },
+  {
+    "id": "proofOfRelationship",
+    "description": "proofOfRelationship",
+    "label": {
+      "primary": "Justificatif de lien de parenté"
+    },
+    "type": "documentType",
+    "minimum": 0,
+    "maximum": 0,
+    "controlType": "fileupload",
+    "fieldType": "default",
+    "format": "none",
+    "fieldCategory": "evidence",
+    "inputRequired": true,
+    "validators": [],
+    "bioAttributes": null,
+    "requiredOn": [],
+    "subType": "POR",
+    "contactType": null,
+    "group": "Documents",
+    "required": false
+  },
+  {
+    "id": "proofOfDateOfBirth",
+    "description": "proofOfDateOfBirth",
+    "label": {
+      "primary": "Justificatif de date de naissance"
+    },
+    "type": "documentType",
+    "minimum": 0,
+    "maximum": 0,
+    "controlType": "fileupload",
+    "fieldType": "default",
+    "format": "none",
+    "fieldCategory": "evidence",
+    "inputRequired": true,
+    "validators": [],
+    "bioAttributes": null,
+    "requiredOn": [],
+    "subType": "POB",
+    "contactType": null,
+    "group": "Documents",
+    "required": false
+  },
+  {
+    "id": "proofOfException",
+    "description": "proofOfException",
+    "label": {
+      "primary": "Exception Proof",
+      "secondary": "إثبات الاستثناء"
+    },
+    "type": "documentType",
+    "minimum": 0,
+    "maximum": 0,
+    "controlType": "fileupload",
+    "fieldType": "default",
+    "format": "none",
+    "fieldCategory": "evidence",
+    "inputRequired": true,
+    "validators": [],
+    "bioAttributes": null,
+    "requiredOn": [],
+    "subType": "POE",
+    "contactType": null,
+    "group": "Documents",
+    "required": false
+  },
+  {
+    "id": "proofOfException-1",
+    "description": "proofOfException",
+    "label": {
+      "primary": "Justificatif d'exception biométrique"
+    },
+    "type": "documentType",
+    "minimum": 0,
+    "maximum": 0,
+    "controlType": "fileupload",
+    "fieldType": "default",
+    "format": "none",
+    "fieldCategory": "evidence",
+    "inputRequired": true,
+    "validators": [],
+    "bioAttributes": null,
+    "requiredOn": [],
+    "subType": "POE",
+    "contactType": null,
+    "group": "Documents",
+    "required": false
+  },
+  {
+    "id": "individualBiometrics",
+    "description": "",
+    "label": {
+      "primary": "Données Biométriques du Demandeur"
+    },
+    "type": "biometricsType",
+    "minimum": 0,
+    "maximum": 0,
+    "controlType": "biometrics",
+    "fieldType": "default",
+    "format": "none",
+    "fieldCategory": "pvt",
+    "inputRequired": true,
+    "validators": [],
+    "bioAttributes": [
+      "leftEye",
+      "rightEye",
+      "rightIndex",
+      "rightLittle",
+      "rightRing",
+      "rightMiddle",
+      "leftIndex",
+      "leftLittle",
+      "leftRing",
+      "leftMiddle",
+      "leftThumb",
+      "rightThumb",
+      "face"
+    ],
+    "requiredOn": [{
+      "engine": "MVEL",
+      "expr": "(identity.isNew || identity.isLost || ( identity.isUpdate && identity.updatableFieldGroups contains 'Biometrics'))"
+    }],
+    "subType": "applicant",
+    "contactType": null,
+    "group": "Biometrics",
+    "required": true
+  },
+  {
+    "id": "individualAuthBiometrics",
+    "description": "Used to hold biometrics only for authentication",
+    "label": {
+      "primary": "Donnée Biométrique d'authentification"
+    },
+    "type": "biometricsType",
+    "minimum": 0,
+    "maximum": 0,
+    "controlType": "biometrics",
+    "fieldType": "default",
+    "format": "none",
+    "fieldCategory": "pvt",
+    "inputRequired": true,
+    "validators": [],
+    "bioAttributes": [
+      "leftEye",
+      "rightEye",
+      "rightIndex",
+      "rightLittle",
+      "rightRing",
+      "rightMiddle",
+      "leftIndex",
+      "leftLittle",
+      "leftRing",
+      "leftMiddle",
+      "leftThumb",
+      "rightThumb",
+      "face"
+    ],
+    "requiredOn": [{
+      "engine": "MVEL",
+      "expr": "!identity.isChild && identity.isUpdate && !(identity.updatableFieldGroups contains 'Biometrics' || identity.updatableFieldGroups contains 'GuardianDetails')"
+    }],
+    "subType": "applicant-auth",
+    "contactType": null,
+    "group": null,
+    "required": false
+  },
+  {
+    "id": "parentOrGuardianBiometrics",
+    "description": "",
+    "label": {
+      "primary": "Données Biométriques du Parent ou Tuteur"
+    },
+    "type": "biometricsType",
+    "minimum": 0,
+    "maximum": 0,
+    "controlType": "biometrics",
+    "fieldType": "default",
+    "format": "none",
+    "fieldCategory": "pvt",
+    "inputRequired": true,
+    "validators": [],
+    "bioAttributes": [
+      "leftEye",
+      "rightEye",
+      "rightIndex",
+      "rightLittle",
+      "rightRing",
+      "rightMiddle",
+      "leftIndex",
+      "leftLittle",
+      "leftRing",
+      "leftMiddle",
+      "leftThumb",
+      "rightThumb",
+      "face"
+    ],
+    "requiredOn": [{
+      "engine": "MVEL",
+      "expr": "(identity.age < 18 && identity.isNew) || (identity.isUpdate && identity.age < 18)"
+    }],
+    "subType": "introducer",
+    "contactType": null,
+    "group": "Biometrics",
+    "required": false
+  }
+]
