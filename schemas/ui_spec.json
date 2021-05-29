@@ -1,25 +1,29 @@
-[{
-  "id": "IDSchemaVersion",
-  "description": "ID Schema Version",
-  "label": {
-    "primary": "Version du schema de l'ID"
+[
+  {
+    "id": "IDSchemaVersion",
+    "description": "ID Schema Version",
+    "label": {
+      "primary": "Version du schema de l'ID"
+    },
+    "type": "number",
+    "minimum": 0,
+    "maximum": 0,
+    "controlType": null,
+    "fieldType": "default",
+    "format": "none",
+    "fieldCategory": "none",
+    "inputRequired": false,
+    "validators": [],
+    "bioAttributes": null,
+    "requiredOn": [],
+    "subType": "IdSchemaVersion",
+    "contactType": null,
+    "group": null,
+    "alignmentGroup": null,
+    "visible": null,
+    "changeAction": null,
+    "required": true
   },
-  "type": "number",
-  "minimum": 0,
-  "maximum": 0,
-  "controlType": null,
-  "fieldType": "default",
-  "format": "none",
-  "fieldCategory": "none",
-  "inputRequired": false,
-  "validators": [],
-  "bioAttributes": null,
-  "requiredOn": [],
-  "subType": "IdSchemaVersion",
-  "contactType": null,
-  "group": null,
-  "required": true
-},
   {
     "id": "UIN",
     "description": "UIN",
@@ -40,6 +44,9 @@
     "subType": "UIN",
     "contactType": null,
     "group": null,
+    "alignmentGroup": null,
+    "visible": null,
+    "changeAction": null,
     "required": false
   },
   {
@@ -56,16 +63,21 @@
     "format": "none",
     "fieldCategory": "pvt",
     "inputRequired": true,
-    "validators": [{
-      "type": "regex",
-      "validator": "^(?=.{0,120}$).*",
-      "arguments": []
-    }],
+    "validators": [
+      {
+        "type": "regex",
+        "validator": "^(?=.{0,120}$).*",
+        "arguments": []
+      }
+    ],
     "bioAttributes": null,
     "requiredOn": [],
     "subType": "name",
     "contactType": null,
     "group": "Prénom(s)",
+    "alignmentGroup": "Informations Personnelles",
+    "visible": null,
+    "changeAction": null,
     "required": true
   },
   {
@@ -82,16 +94,21 @@
     "format": "none",
     "fieldCategory": "pvt",
     "inputRequired": true,
-    "validators": [{
-      "type": "regex",
-      "validator": "^(?=.{0,120}$).*",
-      "arguments": []
-    }],
+    "validators": [
+      {
+        "type": "regex",
+        "validator": "^(?=.{0,120}$).*",
+        "arguments": []
+      }
+    ],
     "bioAttributes": null,
     "requiredOn": [],
     "subType": "name",
     "contactType": null,
     "group": "Nom",
+    "alignmentGroup": "Informations Personnelles",
+    "visible": null,
+    "changeAction": null,
     "required": true
   },
   {
@@ -104,7 +121,7 @@
     "minimum": 0,
     "maximum": 0,
     "controlType": "dropdown",
-    "fieldType": "default",
+    "fieldType": "dynamic",
     "format": "",
     "fieldCategory": "pvt",
     "inputRequired": true,
@@ -114,6 +131,9 @@
     "subType": "Gender",
     "contactType": null,
     "group": "Genre",
+    "alignmentGroup": "Informations Personnelles",
+    "visible": null,
+    "changeAction": null,
     "required": true
   },
   {
@@ -130,15 +150,20 @@
     "format": "none",
     "fieldCategory": "pvt",
     "inputRequired": true,
-    "validators": [{
-      "type": "regex",
-      "validator": "^(1869|18[7-9][0-9]|19[0-9][0-9]|20[0-9][0-9])/([0][1-9]|1[0-2])/([0][1-9]|[1-2][0-9]|3[01])$",
-      "arguments": []
-    }],
+    "validators": [
+      {
+        "type": "regex",
+        "validator": "^(1869|18[7-9][0-9]|19[0-9][0-9]|20[0-9][0-9])/([0][1-9]|1[0-2])/([0][1-9]|[1-2][0-9]|3[01])$",
+        "arguments": []
+      }
+    ],
     "bioAttributes": null,
     "subType": "dateOfBirth",
     "contactType": null,
     "group": "Date de Naissance",
+    "alignmentGroup": "Informations Personnelles",
+    "visible": null,
+    "changeAction": null,
     "required": true
   },
   {
@@ -155,16 +180,21 @@
     "format": "none",
     "fieldCategory": "pvt",
     "inputRequired": true,
-    "validators": [{
-      "type": "regex",
-      "validator": "^[+]*([0-9]{1})([0-9]{9})$",
-      "arguments": []
-    }],
+    "validators": [
+      {
+        "type": "regex",
+        "validator": "^[+]*([0-9]{1})([0-9]{9})$",
+        "arguments": []
+      }
+    ],
     "bioAttributes": null,
     "requiredOn": [],
     "subType": "Phone",
     "contactType": "email",
     "group": "No. de Tél. Portable",
+    "alignmentGroup": "Informations Personnelles",
+    "visible": null,
+    "changeAction": null,
     "required": true
   },
   {
@@ -181,16 +211,21 @@
     "format": "none",
     "fieldCategory": "pvt",
     "inputRequired": true,
-    "validators": [{
-      "type": "regex",
-      "validator": "^[A-Za-z0-9_\\-]+(\\.[A-Za-z0-9_]+)*@[A-Za-z0-9_-]+(\\.[A-Za-z0-9_]+)*(\\.[a-zA-Z]{2,})$",
-      "arguments": []
-    }],
+    "validators": [
+      {
+        "type": "regex",
+        "validator": "^[A-Za-z0-9_\\-]+(\\.[A-Za-z0-9_]+)*@[A-Za-z0-9_-]+(\\.[A-Za-z0-9_]+)*(\\.[a-zA-Z]{2,})$",
+        "arguments": []
+      }
+    ],
     "bioAttributes": null,
     "requiredOn": [],
     "subType": "Email",
     "contactType": "email",
     "group": "E-mail",
+    "alignmentGroup": "Informations Personnelles",
+    "visible": null,
+    "changeAction": null,
     "required": true
   },
   {
@@ -203,7 +238,7 @@
     "minimum": 0,
     "maximum": 0,
     "controlType": "dropdown",
-    "fieldType": "default",
+    "fieldType": "dynamic",
     "format": "none",
     "fieldCategory": "kyc",
     "inputRequired": true,
@@ -213,6 +248,9 @@
     "subType": "residenceStatus",
     "contactType": null,
     "group": "Nationalité",
+    "alignmentGroup": "Informations Personnelles",
+    "visible": null,
+    "changeAction": null,
     "required": false
   },
   {
@@ -229,16 +267,21 @@
     "format": "none",
     "fieldCategory": "pvt",
     "inputRequired": true,
-    "validators": [{
-      "type": "regex",
-      "validator": "^(?=.{0,50}$).*",
-      "arguments": []
-    }],
+    "validators": [
+      {
+        "type": "regex",
+        "validator": "^(?=.{0,50}$).*",
+        "arguments": []
+      }
+    ],
     "bioAttributes": null,
     "requiredOn": [],
     "subType": "REGION",
     "contactType": "Postal",
     "group": "Location",
+    "alignmentGroup": "Adresse",
+    "visible": null,
+    "changeAction": null,
     "required": true
   },
   {
@@ -255,16 +298,21 @@
     "format": "none",
     "fieldCategory": "pvt",
     "inputRequired": true,
-    "validators": [{
-      "type": "regex",
-      "validator": "^(?=.{0,50}$).*",
-      "arguments": []
-    }],
+    "validators": [
+      {
+        "type": "regex",
+        "validator": "^(?=.{0,50}$).*",
+        "arguments": []
+      }
+    ],
     "bioAttributes": null,
     "requiredOn": [],
     "subType": "PREFECTURE",
     "contactType": "Postal",
     "group": "Location",
+    "alignmentGroup": "Adresse",
+    "visible": null,
+    "changeAction": null,
     "required": true
   },
   {
@@ -281,16 +329,21 @@
     "format": "none",
     "fieldCategory": "pvt",
     "inputRequired": true,
-    "validators": [{
-      "type": "regex",
-      "validator": "^(?=.{0,50}$).*",
-      "arguments": []
-    }],
+    "validators": [
+      {
+        "type": "regex",
+        "validator": "^(?=.{0,50}$).*",
+        "arguments": []
+      }
+    ],
     "bioAttributes": null,
     "requiredOn": [],
     "subType": "SOUS_PREFECTURE_OU_COMMUNE",
     "contactType": "Postal",
     "group": "Location",
+    "alignmentGroup": "Adresse",
+    "visible": null,
+    "changeAction": null,
     "required": true
   },
   {
@@ -307,16 +360,21 @@
     "format": "none",
     "fieldCategory": "pvt",
     "inputRequired": true,
-    "validators": [{
-      "type": "regex",
-      "validator": "^(?=.{0,50}$).*",
-      "arguments": []
-    }],
+    "validators": [
+      {
+        "type": "regex",
+        "validator": "^(?=.{0,50}$).*",
+        "arguments": []
+      }
+    ],
     "bioAttributes": null,
     "requiredOn": [],
     "subType": "DISTRICT",
     "contactType": "Postal",
     "group": "Location",
+    "alignmentGroup": "Adresse",
+    "visible": null,
+    "changeAction": null,
     "required": true
   },
   {
@@ -339,6 +397,9 @@
     "subType": "SECTEUR",
     "contactType": null,
     "group": "Location",
+    "alignmentGroup": "Adresse",
+    "visible": null,
+    "changeAction": null,
     "required": true
   },
   {
@@ -355,16 +416,21 @@
     "format": "none",
     "fieldCategory": "pvt",
     "inputRequired": true,
-    "validators": [{
-      "type": "regex",
-      "validator": "^(?=.{0,50}$).*",
-      "arguments": []
-    }],
+    "validators": [
+      {
+        "type": "regex",
+        "validator": "^(?=.{0,50}$).*",
+        "arguments": []
+      }
+    ],
     "bioAttributes": null,
     "requiredOn": [],
     "subType": "additionalAddressDetails",
     "contactType": "Postal",
     "group": "Address",
+    "alignmentGroup": "Adresse",
+    "visible": null,
+    "changeAction": null,
     "required": true
   },
   {
@@ -381,19 +447,29 @@
     "format": "none",
     "fieldCategory": "evidence",
     "inputRequired": true,
-    "validators": [{
-      "type": "regex",
-      "validator": "^(?=.{0,120}$).*",
-      "arguments": []
-    }],
+    "validators": [
+      {
+        "type": "regex",
+        "validator": "^(?=.{0,120}$).*",
+        "arguments": []
+      }
+    ],
     "bioAttributes": null,
-    "requiredOn": [{
-      "engine": "MVEL",
-      "expr": "identity.age < 18"
-    }],
+    "requiredOn": [
+      {
+        "engine": "MVEL",
+        "expr": "identity.age < 18"
+      }
+    ],
     "subType": "parentOrGuardianFirstName",
     "contactType": null,
     "group": "Info. du parent/tuteur",
+    "alignmentGroup": "Informations du Parent ou Tuteur",
+    "visible": {
+      "engine": "MVEL",
+      "expr": "identity.age < 18"
+    },
+    "changeAction": null,
     "required": false
   },
   {
@@ -410,19 +486,29 @@
     "format": "none",
     "fieldCategory": "evidence",
     "inputRequired": true,
-    "validators": [{
-      "type": "regex",
-      "validator": "^(?=.{0,120}$).*",
-      "arguments": []
-    }],
+    "validators": [
+      {
+        "type": "regex",
+        "validator": "^(?=.{0,120}$).*",
+        "arguments": []
+      }
+    ],
     "bioAttributes": null,
-    "requiredOn": [{
-      "engine": "MVEL",
-      "expr": "identity.age < 18"
-    }],
+    "requiredOn": [
+      {
+        "engine": "MVEL",
+        "expr": "identity.age < 18"
+      }
+    ],
     "subType": "parentOrGuardianLastName",
     "contactType": null,
     "group": "Info. du parent/tuteur",
+    "alignmentGroup": "Informations du Parent ou Tuteur",
+    "visible": {
+      "engine": "MVEL",
+      "expr": "identity.age < 18"
+    },
+    "changeAction": null,
     "required": false
   },
   {
@@ -441,13 +527,21 @@
     "inputRequired": true,
     "validators": [],
     "bioAttributes": null,
-    "requiredOn": [{
-      "engine": "MVEL",
-      "expr": "( identity.age < 18 && (identity.parentOrGuardianUIN == nil || identity.parentOrGuardianUIN == empty) )"
-    }],
+    "requiredOn": [
+      {
+        "engine": "MVEL",
+        "expr": "( identity.age < 18 && (identity.parentOrGuardianUIN == nil || identity.parentOrGuardianUIN == empty) )"
+      }
+    ],
     "subType": "RID",
     "contactType": null,
     "group": "Info. du parent/tuteur",
+    "alignmentGroup": "Informations du Parent ou Tuteur",
+    "visible": {
+      "engine": "MVEL",
+      "expr": "identity.age < 18"
+    },
+    "changeAction": null,
     "required": false
   },
   {
@@ -466,13 +560,21 @@
     "inputRequired": true,
     "validators": [],
     "bioAttributes": null,
-    "requiredOn": [{
-      "engine": "MVEL",
-      "expr": "( identity.age < 18 && (identity.parentOrGuardianRID == nil || identity.parentOrGuardianRID == empty) )"
-    }],
+    "requiredOn": [
+      {
+        "engine": "MVEL",
+        "expr": "( identity.age < 18 && (identity.parentOrGuardianRID == nil || identity.parentOrGuardianRID == empty) )"
+      }
+    ],
     "subType": "UIN",
     "contactType": null,
     "group": "Info. du parent/tuteur",
+    "alignmentGroup": "Informations du Parent ou Tuteur",
+    "visible": {
+      "engine": "MVEL",
+      "expr": "identity.age < 18"
+    },
+    "changeAction": null,
     "required": false
   },
   {
@@ -589,8 +691,7 @@
     "id": "proofOfException",
     "description": "proofOfException",
     "label": {
-      "primary": "Exception Proof",
-      "secondary": "إثبات الاستثناء"
+      "primary": "Exception Proof"
     },
     "type": "documentType",
     "minimum": 0,
@@ -660,10 +761,12 @@
       "rightThumb",
       "face"
     ],
-    "requiredOn": [{
-      "engine": "MVEL",
-      "expr": "(identity.isNew || identity.isLost || ( identity.isUpdate && identity.updatableFieldGroups contains 'Biometrics'))"
-    }],
+    "requiredOn": [
+      {
+        "engine": "MVEL",
+        "expr": "(identity.isNew || identity.isLost || ( identity.isUpdate && identity.updatableFieldGroups contains 'Biometrics'))"
+      }
+    ],
     "subType": "applicant",
     "contactType": null,
     "group": "Biometrics",
@@ -699,10 +802,12 @@
       "rightThumb",
       "face"
     ],
-    "requiredOn": [{
-      "engine": "MVEL",
-      "expr": "!identity.isChild && identity.isUpdate && !(identity.updatableFieldGroups contains 'Biometrics' || identity.updatableFieldGroups contains 'GuardianDetails')"
-    }],
+    "requiredOn": [
+      {
+        "engine": "MVEL",
+        "expr": "!identity.isChild && identity.isUpdate && !(identity.updatableFieldGroups contains 'Biometrics' || identity.updatableFieldGroups contains 'GuardianDetails')"
+      }
+    ],
     "subType": "applicant-auth",
     "contactType": null,
     "group": null,
@@ -738,10 +843,12 @@
       "rightThumb",
       "face"
     ],
-    "requiredOn": [{
-      "engine": "MVEL",
-      "expr": "(identity.age < 18 && identity.isNew) || (identity.isUpdate && identity.age < 18)"
-    }],
+    "requiredOn": [
+      {
+        "engine": "MVEL",
+        "expr": "(identity.age < 18 && identity.isNew) || (identity.isUpdate && identity.age < 18)"
+      }
+    ],
     "subType": "introducer",
     "contactType": null,
     "group": "Biometrics",
