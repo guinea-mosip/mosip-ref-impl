@@ -227,7 +227,7 @@ TRUNCATE TABLE master.device_master cascade ;
 ----- TRUNCATE master.machine_master TABLE Data and It's reference Data and COPY Data from CSV file -----
 TRUNCATE TABLE master.machine_master cascade ;
 
-\COPY master.machine_master (id,name,mac_address,serial_num,ip_address,mspec_id,public_key,key_index,zone_code,regcntr_id,lang_code,is_active,cr_by,cr_dtimes) FROM './dml/master-machine_master.csv' delimiter ',' HEADER  csv;
+\COPY master.machine_master (id,name,mac_address,serial_num,ip_address,mspec_id,public_key,key_index,sign_public_key,sign_key_index,zone_code,regcntr_id,lang_code,is_active,cr_by,cr_dtimes) FROM './dml/master-machine_master.csv' delimiter ',' HEADER  csv;
 
 ----- TRUNCATE master.screen_authorization TABLE Data and It's reference Data and COPY Data from CSV file -----
 TRUNCATE TABLE master.screen_authorization cascade ;
@@ -265,7 +265,7 @@ TRUNCATE TABLE master.device_master_h cascade ;
 ----- TRUNCATE master.machine_master_h TABLE Data and It's reference Data and COPY Data from CSV file -----
 TRUNCATE TABLE master.machine_master_h cascade ;
 
-\COPY master.machine_master_h (id,name,mac_address,serial_num,ip_address,mspec_id,public_key,key_index,zone_code,regcntr_id,lang_code,is_active,cr_by,cr_dtimes,eff_dtimes) FROM './dml/master-machine_master_h.csv' delimiter ',' HEADER  csv;
+\COPY master.machine_master_h (id,name,mac_address,serial_num,ip_address,mspec_id,public_key,key_index,sign_public_key,sign_key_index,zone_code,regcntr_id,lang_code,is_active,cr_by,cr_dtimes,eff_dtimes) FROM './dml/master-machine_master_h.csv' delimiter ',' HEADER  csv;
 
 ----- TRUNCATE master.registration_center_h TABLE Data and It's reference Data and COPY Data from CSV file -----
 TRUNCATE TABLE master.registration_center_h cascade ;
