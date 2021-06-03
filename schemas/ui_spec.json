@@ -22,7 +22,7 @@
     "alignmentGroup": null,
     "visible": null,
     "changeAction": null,
-    "required": true
+    "required": false
   },
   {
     "id": "UIN",
@@ -195,7 +195,7 @@
     "alignmentGroup": "Informations Personnelles",
     "visible": null,
     "changeAction": null,
-    "required": true
+    "required": false
   },
   {
     "id": "email",
@@ -226,7 +226,7 @@
     "alignmentGroup": "Informations Personnelles",
     "visible": null,
     "changeAction": null,
-    "required": true
+    "required": false
   },
   {
     "id": "residenceStatus",
@@ -282,7 +282,7 @@
     "alignmentGroup": "Adresse",
     "visible": null,
     "changeAction": null,
-    "required": true
+    "required": false
   },
   {
     "id": "prefecture",
@@ -313,7 +313,7 @@
     "alignmentGroup": "Adresse",
     "visible": null,
     "changeAction": null,
-    "required": true
+    "required": false
   },
   {
     "id": "subPrefectureOrCommune",
@@ -344,7 +344,7 @@
     "alignmentGroup": "Adresse",
     "visible": null,
     "changeAction": null,
-    "required": true
+    "required": false
   },
   {
     "id": "district",
@@ -375,7 +375,7 @@
     "alignmentGroup": "Adresse",
     "visible": null,
     "changeAction": null,
-    "required": true
+    "required": false
   },
   {
     "id": "sector",
@@ -400,7 +400,7 @@
     "alignmentGroup": "Adresse",
     "visible": null,
     "changeAction": null,
-    "required": true
+    "required": false
   },
   {
     "id": "additionalAddressDetails",
@@ -431,7 +431,7 @@
     "alignmentGroup": "Adresse",
     "visible": null,
     "changeAction": null,
-    "required": true
+    "required": false
   },
   {
     "id": "parentOrGuardianFirstName",
@@ -641,7 +641,7 @@
     "subType": "POI",
     "contactType": null,
     "group": "Documents",
-    "required": true
+    "required": false
   },
   {
     "id": "proofOfRelationship",
@@ -770,7 +770,7 @@
     "subType": "applicant",
     "contactType": null,
     "group": "Biometrics",
-    "required": true
+    "required": false
   },
   {
     "id": "individualAuthBiometrics",
