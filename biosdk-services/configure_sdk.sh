@@ -7,9 +7,9 @@ echo "Configuring SDK"
 mkdir -p /biosdk
 cd /biosdk
 
-echo "Download the biosdk from $biosdk_zip_url"
-wget $biosdk_zip_url -O biosdk.zip
-echo "Downloaded $biosdk_zip_url"
+echo "Download the biosdk from $biosdk_zip_file_path"
+wget $biosdk_zip_file_path -O biosdk.zip
+echo "Downloaded $biosdk_zip_file_path"
 
 unzip biosdk.zip
 
