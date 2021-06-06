@@ -1,3 +1,3 @@
 ﻿id,name,description,data_type,value_json,lang_code,is_active,cr_by,cr_dtimes
-gender,gender,Gender type,string,"[{""code"":""MLE"",""value"":""HOMME"",""langCode"":""fra"",""active"":true},{""code"":""FLE"",""value"":""Femme"",""langCode"":""fra"",""active"":true}]",fra,TRUE,superadmin,now()
+gender,gender,Gender type,string,"[{""code"":""MLE"",""value"":""HOMME"",""langCode"":""fra"",""active"":true},{""code"":""FLE"",""value"":""FEMME"",""langCode"":""fra"",""active"":true}]",fra,TRUE,superadmin,now()
 residenceStatus,residenceStatus,Residence status,string,"[{""code"":""FR"",""value"":""RESIDENT"",""langCode"":""fra"",""active"":true},{""code"":""NFR"",""value"":""NON RESIDENT"",""langCode"":""fra"",""active"":true}]",fra,TRUE,superadmin,now()

@@ -13,7 +13,7 @@ export default class Utils {
     return formattedDate;
   }
 
-  static getURL(currentURL: string, nextRoute: string, numberofPop = 2) {
+  static getURL(currentURL: string, nextRoute: string, numberofPop = 1) {
     if (currentURL) {
       const urlSegments = currentURL.split('/');
       for (let index = 0; index < numberofPop; index++) {
@@ -46,10 +46,20 @@ export default class Utils {
   static formatTime(time_slot_from: string) {
     const time = time_slot_from.split(':');
     const appointmentDateTime =
-      (Number(time[0]) > 12 ? Number(time[0]) - 12 : Number(time[0])) +
-      ':' +
-      time[1] +
-      (Number(time[0]) >= 12 ? ' PM' : ' AM');
+    (Number(time[0]) > 24 ? Number(time[0]) - 12 : Number(time[0])) +
+    ':' +
+    time[1] + 
+    (Number(time[0]) >= 12 ? ' PM' : ' AM');
     return appointmentDateTime;
+  }
+
+  static formatTimeFrench(time_slot_from: string) {
+    const time = time_slot_from.split(':');
+    const appointmentDateTime =
+    (Number(time[0]) > 24 ? Number(time[0]) - 12 : Number(time[0])) +
+    ':' +
+    time[1];
+    
+    return appointmentDateTime ;
   }
 }

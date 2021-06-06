@@ -8,11 +8,13 @@
 export interface Applicant {
   applicationID: string;
   name: string;
+  firstName: string;
+  lastName: string;
   appointmentDateTime: string;
   appointmentDate: string;
   appointmentTime: string;
   status: string;
   regDto: any;
   nameInSecondaryLanguage: string;
-  postalCode: string;
+  location: string;
 }

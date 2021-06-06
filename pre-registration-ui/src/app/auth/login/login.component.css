@@ -6,10 +6,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-left: 10%;
 }
 
 .spacing {
   margin-top: 20%;
+}
+
+.form_bdy {
+  padding: 0% 20% 8% 20%;
 }
 
 .error {
@@ -18,29 +23,88 @@
   margin-top: -10px;
 }
 
+.logo_wrapper {
+  border-radius: 10px;
+  box-shadow: 0px 3px 6px darkgray;
+  background: #fafafa;
+  margin-right: 67rem;
+}
+
+.logo_wrapper .mat-card {
+  padding-top: 5rem;
+}
+
+.login-mobile{
+  display: none;
+}
+
+.login-input {
+  margin-left: 2%;
+}
+
+:host /deep/ .mat-form-field-wrapper {
+   padding-bottom: 0; 
+}
+
+:host /deep/ .mat-form-field-appearance-outline .mat-form-field-flex {
+  padding: 0 !important;
+  margin-left: 5px;
+}
+
+:host /deep/ .mat-raised-button {
+  padding: 0 1% ;
+}
+
 .form_wrapper {
-  margin: 4% 0%;
-  line-height: 2rem;
-  height: 64vh;
+  margin: 15% 64% 15% 64%;
+  border-radius: 30px;
+  box-shadow: 0px 3px 6px darkgray;
+  background: #fafafa;
+  padding: 20px;
+  width: 35rem;
+  padding-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+
+@media screen and (min-width: 936px) and (max-width: 1500px){
+
+  .form_wrapper[_ngcontent-c13] {
+    margin: 8% 64% 0% 64%;
+    border-radius: 30px;
+    box-shadow: 0px 3px 6px darkgray;
+    background: #fafafa;
+    padding: 20px;
+    width: 35rem;
+    padding-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .positionimgbiom[_ngcontent-c13]{
+    height: 21rem;
+    margin-top: -98px;
+  }
+  
 }
 
 .form_fields_padding {
-  margin: 5px auto;
+  margin: 30px 22px 0px 228px;
   width: 38vw;
   max-width: 323px;
 }
 
 .heading {
-  font-size: 1.6rem;
+  font-size: 2rem;
   text-align: center;
-  font-weight: 400;
-  
+  margin-bottom: 10%;
+  margin-top: 3%;
 }
 
 .subHeading {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   text-align: center;
-  font-weight: 300;
 }
 
 mat-form-field {
@@ -57,11 +121,11 @@ mat-form-field {
 }
 
 .boldText {
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .pinkText {
-  color: #fe528d;
+  color:#020F59 ;
 }
 
 button {
@@ -70,8 +134,8 @@ button {
 
 #timer {
   text-align: center;
-  padding: 8px;
-  visibility: hidden;
+  padding-top: 20px;
+  visibility: hidden;  
 }
 
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
@@ -79,14 +143,10 @@ button {
 }
 
 ::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
-  color: lightgrey;
-  border-bottom: 2px solid #22a8c9;
-  border-bottom-left-radius: 2px;
-  border-bottom-right-radius: 2px;
+  border-radius: 3px;
 }
-::ng-deep.mat-form-field-wrapper {
-  padding-bottom: 0.65em !important;
-}
+
+
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
   color: white !important;
 }
@@ -95,8 +155,213 @@ button {
   .form_fields_padding {
     margin-left: 16%;
   }
+  .wrapper[_ngcontent-c13] {
+    margin-right: 10%;
+  }
+
 }
-.captcha{
-  padding-bottom: 10px !important;
-  transform: scale(0.8);
+@media (max-width: 700px) {
+  .form_wrapper[_ngcontent-c13] {
+    margin: 6% 64% 62% 64%;
+    border-radius: 10px;
+    box-shadow: 0px 3px 6px darkgray;
+    background: #fafafa;
+     width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .login-mobile{
+    display: block;
+  }
+  
+  .login-input {
+    display: none;
+    margin-left: 2%;
+  }
+
+}
+.mat-input-element {
+  font: inherit;
+  background: 0 0;
+  color: currentColor;
+  border: solid 1px #0D5EDE  !important;
+  outline: 0;
+  padding: 0;
+  margin: 0;
+  vertical-align: bottom;
+  text-align: inherit;
+  height: 44px !important;
+  border-radius: 8px !important;
+  opacity: 0.6;
+  font-size: 14px;
+  padding: 10px;
+}
+button {
+  margin-left: 2%;
+}
+.connexiontxt{
+  position: relative;
+  top: 2vw;
+  color: #020F59;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline-start{
+  border: none !important;
+}
+.mat-form-field-appearance-outline .mat-form-field-outline-end, .mat-form-field-appearance-outline .mat-form-field-outline-start{
+  border: none !important;
+}
+
+#logobiometrie{
+background-image: url("/src/assets/biometrie.jpg");
+background-size: cover;
+z-index: 44;
+width: 180px;
+height: 180px;
+position: absolute;
+top: 26vh;
+left: 15vw;
+}
+
+.mat-card{
+  position: absolute;
+  margin-right: 15px;
+  background: transparent;
+  padding: 0px;
+  margin-top: 10%;
+}
+
+@media screen and (min-width: 501px) and (max-width: 935px) {
+  .positionimgbiom {
+    display: none !important;
+  }
+  .connexiontxt{
+    left: 5px;
+  }
+  .input_pri{
+    width: 80%;
+  }
+  .btn_axn-pri{
+    margin: 0 36px 5px 5px;
+  }  
+}
+
+@media screen and (min-width: 936px) and (max-width: 1000px) {
+  .positionimgbiom {
+    display: none !important;
+  }
+  .connexiontxt{
+    left: 5px;
+  }
+  
+  .btn_axn-pri{
+    margin: 0 36px 5px 5px;
+  }
+}
+
+@media screen and (min-width: 1001px) and (max-width: 1040px) {
+  .positionimgbiom {
+    display: none !important;
+  }
+  .connexiontxt{
+    left: 5px;
+  }
+ 
+  .btn_axn-pri{
+    margin: 0 36px 5px 5px;
+  }
+}
+@media screen and (min-width: 1041px) and (max-width: 1101px) {
+  .positionimgbiom {
+    display: none !important;
+  }
+  .connexiontxt{
+    left: 5px;
+  }
+}
+@media screen and (min-width: 501px) and (max-width: 935px) {
+  .positionimgbiom {
+    display: none !important;
+  }
+  .connexiontxt{
+    left: 5px;
+  }
+  
+  .btn_axn-pri{
+    margin: 0 36px 5px 5px;
+  }
+  .form_wrapper[_ngcontent-c13] {    
+     width: 80%; 
+  }
+}
+@media (max-width: 1000px) {
+  .positionimgbiom {
+    display: none !important;
+  }
+  .connexiontxt{
+    left: 0px;
+    font-size: 22px;
+  }
+  .input_pri{
+    width: 80%;
+  }
+  .btn_axn-pri{
+    left: 0px;
+    padding: initial;
+  }  
+}
+.positionimgbiom{
+  height: 21rem;
+  margin-top: -10px;
+}
+
+.mat-card:not([class*=mat-elevation-z]){
+  box-shadow: none !important;
+}
+button.mat-raised-button.mat-primary{
+  width: 24%;
+  background-color: #020F59 !important;
+  line-height: 48px !important;
+}
+mat-form-field-infix{
+  border: none !important;
+}
+
+.btn_axn-pri[disabled]{
+  background: #BCE0FD;
+}
+
+@media (max-width: 699px){
+  #inputFieldOTP{
+    font-size: 13px !important;
+    display: none;
+  }
+
+  #inputFieldOTPm{
+    display: block;
+  }
+
+  .login_inputm{
+    margin-top: -3rem;
+  }
+}
+
+@media (min-width: 700px){
+  #inputFieldOTPm{
+    display: none;
+  }
+
+  #inputFieldOTP{
+    font-size: 14px !important;
+    display: block;
+  }
+
+  .login_inputm{
+    display: none;
+  }
+
+  .login_input{
+    display: block;
+  }
+
 }

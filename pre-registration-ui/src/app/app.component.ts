@@ -7,6 +7,7 @@ import { NavigationStart } from '@angular/router';
 import { AutoLogoutService } from 'src/app/core/services/auto-logout.service';
 import { ConfigService } from './core/services/config.service';
 import { Subscription } from 'rxjs';
+import {AppConfigService} from "./app-config.service";
 
 @Component({
   selector: 'app-root',
@@ -18,13 +19,16 @@ export class AppComponent implements OnInit, OnDestroy {
   message: object;
   subscriptions: Subscription[] = [];
 
-  constructor(private autoLogout: AutoLogoutService, private router: Router, private configService: ConfigService) {}
-
-  ngOnInit() {
-    this.subscriptions.push(this.autoLogout.currentMessageAutoLogout.subscribe(() => {}));
-    this.autoLogout.changeMessage({ timerFired: false });
-    this.routerType();
+  constructor(
+    private autoLogout: AutoLogoutService,
+    private router: Router,
+    private configService: ConfigService,
+    private appConfigService: AppConfigService
+  ) {
+    this.router.navigate(['/']);
   }
+
+  ngOnInit() {}
 
   routerType() {
     this.subscriptions.push(
@@ -32,7 +36,7 @@ export class AppComponent implements OnInit, OnDestroy {
         .pipe(filter((event: NavigationEvent) => event instanceof NavigationStart))
         .subscribe((event: NavigationStart) => {
           if (event.restoredState) {
-           // this.configService.navigationType = 'popstate';
+            this.configService.navigationType = 'popstate';
             this.preventBack();
           }
         })

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject, BehaviorSubject } from 'rxjs';
 import { UserModel } from '../../shared/models/demographic-model/user.modal';
 import { DocumentTypeModel } from '../../shared/models/document-type.modal';
+import {CodeValueModal} from "../../shared/models/demographic-model/code.value.modal";
 
 /**
  * @author Shashank Agrawal
@@ -20,6 +21,8 @@ export class RegistrationService {
   currentMessage = this.messageSource.asObservable();
   private users: UserModel[] = [];
   private regCenterId: string;
+  private genderTypes: [];
+  private individualTypes: [];
   sameAs = '';
   documentCategories: DocumentTypeModel[];
 
@@ -164,5 +167,21 @@ export class RegistrationService {
 
   getDocumentCategories() {
     return this.documentCategories;
+  }
+
+  setGenderTypes(g){
+    this.genderTypes = g;
+  }
+
+  getGenderTypes(){
+    return this.genderTypes;
+  }
+
+  setIndividualTypes(g){
+    this.individualTypes = g;
+  }
+
+  getIndividualTypes(){
+    return this.individualTypes;
   }
 }

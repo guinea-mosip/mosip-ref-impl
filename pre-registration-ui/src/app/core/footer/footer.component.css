@@ -1,21 +1,128 @@
 .main-footer {
   display: flex;
   justify-content: center;
-  font-family: Roboto;
-  font-size: 12px;
-  padding-top: 10px;
-  padding-bottom: 0px;
-  position: fixed;
-  bottom: -9px;
-  width: 100%;
-  z-index: -1;
-  margin-bottom: 2px;
-  background: white;
+  border-color: #707070;
+  padding-top: 0px;
+  padding-bottom: 4px;
+  position: relative;
+  height: 59px;
+  bottom: 0px;
+  width: 99%;
+  z-index: 2;
+  margin-bottom: -30px;
+  background: #020F59;
+  flex-direction: row-reverse;
+}
+
+.unirtext{
+  font-size: 10px;
+  margin-left: 35%;
+  font-family: Roboto-footer;
+  font-weight: 100;
+  display: block;
+  color: #FFFFFF;
+}
+
+.droittext{
+  font-size: 10px;
+  margin-left: 20%;
+  margin-bottom: 17%;
+  font-family: Roboto-footer;
+  font-weight: 100;
+  display: block;
+  color: #FFFFFF;
 }
 
 .version-txt{
-  font-size: 8px;
-  font-family: "Roboto", sans-serif;
+  font-size: 10px;
+  font-family: Roboto-footer;
   font-weight: 100;
   display: block;
+  color: #FFFFFF;
+}
+
+.logofb{
+  width: 7px;
+  position: absolute;
+  margin-top: 0.4%;
+  margin-left: 691px;
+}
+
+.iconinstagram{
+  width: 11px;
+  position: absolute;
+  margin-left: 635px;
+  margin-top: 0.5%;
+  vertical-align: middle;
+}
+
+.icontwitter{
+  width: 13px;
+  position: absolute;
+  margin-left: 663px;
+  margin-top: 0.5%;
+  vertical-align: middle;
+}
+
+@media (max-width: 700px){
+  .main-footer{
+    display: flex;
+    justify-content: center;
+    font-family: Roboto;
+    border-color: #707070;
+    font-size: 12px;
+    padding-top: 0;
+    padding-bottom: 4px;
+    position: relative;
+    bottom: -20px;
+    width: 98.4%;
+    z-index: 2;
+    margin-bottom: -30px;
+    margin: 2px;
+    height: 59px;
+    background: #020f59;
+}
+}
+@media (min-width: 900px) and (max-width: 1300px){
+  .main-footer{
+    display: flex;
+    justify-content: center;
+    font-family: Roboto;
+    border-color: #707070;
+    font-size: 12px;
+    padding-top: 0;
+    padding-bottom: 4px;
+    position: fixed;
+    bottom: 0;
+    width: 98.4%;
+    z-index: 2;
+    margin-bottom: -25px;
+    background: #020f59;
+}
+}
+
+@media (min-width:1430px){
+  .logofb{
+    width: 7px;
+    position: absolute;
+    margin-top: 0.4%;
+    margin-left: 915px;
+  }
+  
+  .iconinstagram{
+    width: 11px;
+    position: absolute;
+    margin-left: 855px;
+    margin-top: 0.5%;
+    vertical-align: middle;
+  }
+  
+  .icontwitter{
+    width: 13px;
+    position: absolute;
+    margin-left: 885px;
+    margin-top: 0.5%;
+    vertical-align: middle;
+  }
+
 }

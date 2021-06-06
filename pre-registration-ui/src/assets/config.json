@@ -1,4 +1,5 @@
 {
-  "BASE_URL": "https://dev.mosip.net/",
+  "BASE_URL":"https://guinea115.mosip.net/",
+
   "PRE_REG_URL": "preregistration/v1/"
 }

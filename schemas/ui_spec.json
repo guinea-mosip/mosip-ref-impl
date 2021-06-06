@@ -105,7 +105,7 @@
     "requiredOn": [],
     "subType": "name",
     "contactType": null,
-    "group": "Nom",
+    "group": "Prénom(s)",
     "alignmentGroup": "Informations Personnelles",
     "visible": null,
     "changeAction": null,
@@ -153,7 +153,7 @@
     "validators": [
       {
         "type": "regex",
-        "validator": "^(1869|18[7-9][0-9]|19[0-9][0-9]|20[0-9][0-9])/([0][1-9]|1[0-2])/([0][1-9]|[1-2][0-9]|3[01])$",
+        "validator": "^([0][1-9]|[1-2]\\d|3[01])/([0][1-9]|1[0-2])/(1869|18[7-9][0-9]|19\\d\\d|20\\d\\d)$",
         "arguments": []
       }
     ],
@@ -278,11 +278,11 @@
     "requiredOn": [],
     "subType": "REGION",
     "contactType": "Postal",
-    "group": "Location",
+    "group": "Adresse",
     "alignmentGroup": "Adresse",
     "visible": null,
     "changeAction": null,
-    "required": false
+    "required": true
   },
   {
     "id": "prefecture",
@@ -309,11 +309,11 @@
     "requiredOn": [],
     "subType": "PREFECTURE",
     "contactType": "Postal",
-    "group": "Location",
+    "group": "Adresse",
     "alignmentGroup": "Adresse",
     "visible": null,
     "changeAction": null,
-    "required": false
+    "required": true
   },
   {
     "id": "subPrefectureOrCommune",
@@ -340,11 +340,11 @@
     "requiredOn": [],
     "subType": "SOUS_PREFECTURE_OU_COMMUNE",
     "contactType": "Postal",
-    "group": "Location",
+    "group": "Adresse",
     "alignmentGroup": "Adresse",
     "visible": null,
     "changeAction": null,
-    "required": false
+    "required": true
   },
   {
     "id": "district",
@@ -371,11 +371,11 @@
     "requiredOn": [],
     "subType": "DISTRICT",
     "contactType": "Postal",
-    "group": "Location",
+    "group": "Adresse",
     "alignmentGroup": "Adresse",
     "visible": null,
     "changeAction": null,
-    "required": false
+    "required": true
   },
   {
     "id": "sector",
@@ -396,11 +396,11 @@
     "requiredOn": [],
     "subType": "SECTEUR",
     "contactType": null,
-    "group": "Location",
+    "group": "Adresse",
     "alignmentGroup": "Adresse",
     "visible": null,
     "changeAction": null,
-    "required": false
+    "required": true
   },
   {
     "id": "additionalAddressDetails",
@@ -427,7 +427,7 @@
     "requiredOn": [],
     "subType": "additionalAddressDetails",
     "contactType": "Postal",
-    "group": "Address",
+    "group": "Adresse",
     "alignmentGroup": "Adresse",
     "visible": null,
     "changeAction": null,

@@ -1,46 +1,36 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  ElementRef,
-  OnDestroy,
-  HostListener,
-  ViewChildren,
-} from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  AbstractControl,
-} from "@angular/forms";
-import { MatDialog } from "@angular/material";
-import { TranslateService } from "@ngx-translate/core";
+import {Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild, ViewChildren} from '@angular/core';
+import {MatSelect} from "@angular/material/select";
+import {Router} from '@angular/router';
+import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
+import {MatButtonToggleChange, MatDialog, MatSelectChange} from '@angular/material';
+import {TranslateService} from '@ngx-translate/core';
+import {BookingService} from '../../booking/booking.service';
 
-import { DataStorageService } from "src/app/core/services/data-storage.service";
-import { RegistrationService } from "src/app/core/services/registration.service";
+import {DataStorageService} from 'src/app/core/services/data-storage.service';
+import {RegistrationService} from 'src/app/core/services/registration.service';
 
-import { UserModel } from "src/app/shared/models/demographic-model/user.modal";
-import { CodeValueModal } from "src/app/shared/models/demographic-model/code.value.modal";
-import * as appConstants from "../../../app.constants";
-import Utils from "src/app/app.util";
-import { DialougComponent } from "src/app/shared/dialoug/dialoug.component";
-import { ConfigService } from "src/app/core/services/config.service";
-import { AttributeModel } from "src/app/shared/models/demographic-model/attribute.modal";
-import { FilesModel } from "src/app/shared/models/demographic-model/files.model";
-import {
-  MatKeyboardService,
-  MatKeyboardRef,
-  MatKeyboardComponent,
-} from "ngx7-material-keyboard";
-import { LogService } from "src/app/shared/logger/log.service";
-import LanguageFactory from "src/assets/i18n";
-import { FormDeactivateGuardService } from "src/app/shared/can-deactivate-guard/form-guard/form-deactivate-guard.service";
-import { Subscription } from "rxjs";
-import { ValueConverter } from "@angular/compiler/src/render3/view/template";
-import { Engine, Rule } from "json-rules-engine";
-import moment from "moment";
-import identityStubJson from "../../../../assets/identity-spec.json";
+import {UserModel} from 'src/app/shared/models/demographic-model/user.modal';
+import {CodeValueModal} from 'src/app/shared/models/demographic-model/code.value.modal';
+import {FormControlModal} from 'src/app/shared/models/demographic-model/form.control.modal';
+import {IdentityModel} from 'src/app/shared/models/demographic-model/identity.modal';
+import {DemoIdentityModel} from 'src/app/shared/models/demographic-model/demo.identity.modal';
+import {RequestModel} from 'src/app/shared/models/demographic-model/request.modal';
+import * as appConstants from '../../../app.constants';
+import Utils from 'src/app/app.util';
+import {DialougComponent} from 'src/app/shared/dialoug/dialoug.component';
+import {ConfigService} from 'src/app/core/services/config.service';
+import {AttributeModel} from 'src/app/shared/models/demographic-model/attribute.modal';
+import {ResponseModel} from 'src/app/shared/models/demographic-model/response.model';
+import {FilesModel} from 'src/app/shared/models/demographic-model/files.model';
+import {MatKeyboardComponent, MatKeyboardRef, MatKeyboardService} from 'ngx7-material-keyboard';
+import {RouterExtService} from 'src/app/shared/router/router-ext.service';
+import {LogService} from 'src/app/shared/logger/log.service';
+import LanguageFactory from 'src/assets/i18n';
+import {FormDeactivateGuardService} from 'src/app/shared/can-deactivate-guard/form-guard/form-deactivate-guard.service';
+import {Subscription} from 'rxjs';
+import $ from 'jquery';
+// import { ErrorService } from 'src/app/shared/error/error.service';
+
 /**
  * @description This component takes care of the demographic page.
  * @author Shashank Agrawal
@@ -51,38 +41,36 @@ import identityStubJson from "../../../../assets/identity-spec.json";
  * @implements {OnDestroy}
  */
 @Component({
-  selector: "app-demographic",
-  templateUrl: "./demographic.component.html",
-  styleUrls: ["./demographic.component.css"],
+  selector: 'app-demographic',
+  templateUrl: './demographic.component.html',
+  styleUrls: ['./demographic.component.css']
 })
-export class DemographicComponent
-  extends FormDeactivateGuardService
-  implements OnInit, OnDestroy {
-  textDir = localStorage.getItem("dir");
-  secTextDir = localStorage.getItem("secondaryDir");
-  primaryLang = localStorage.getItem("langCode");
-  secondaryLang = localStorage.getItem("secondaryLangCode");
+export class DemographicComponent extends FormDeactivateGuardService implements OnInit, OnDestroy {
+  textDir = localStorage.getItem('dir');
+  secTextDir = localStorage.getItem('secondaryDir');
+  primaryLang = localStorage.getItem('langCode');
+  secondaryLang = localStorage.getItem('secondaryLangCode');
   languages = [this.primaryLang, this.secondaryLang];
   keyboardLang = appConstants.virtual_keyboard_languages[this.primaryLang];
-  keyboardSecondaryLang =
-    appConstants.virtual_keyboard_languages[this.secondaryLang];
+  keyboardSecondaryLang = appConstants.virtual_keyboard_languages[this.secondaryLang];
 
   files: FilesModel;
   agePattern: string;
   MOBILE_PATTERN: string;
   MOBILE_LENGTH: string;
+  REFERENCE_IDENTITY_NUMBER_PATTERN: string;
+  REFERENCE_IDENTITY_NUMBER_PATTERN_LENGTH: string;
   EMAIL_PATTERN: string;
   EMAIL_LENGTH: string;
   DOB_PATTERN: string;
   ADDRESS_PATTERN: string;
   defaultDay: string;
   defaultMonth: string;
+  FIRSTNAME_PATTERN: string;
+  LASTNAME_PATTERN: string;
   defaultLocation: string;
-  date: string = "";
-  month: string = "";
-  year: string = "";
-  currentAge: string = "";
-  ageOrDobPref = "";
+
+  ageOrDobPref = '';
   showDate = false;
   isNewApplicant = false;
   checked = true;
@@ -101,78 +89,74 @@ export class DemographicComponent
   oldAge: number;
   oldKeyBoardIndex: number;
   numberOfApplicants: number;
-  userForm = new FormGroup({});
-  transUserForm = new FormGroup({});
+  userForm: FormGroup;
+  transUserForm: FormGroup;
   maxDate = new Date(Date.now());
-  preRegId = "";
-  loginId = "";
-  user: UserModel = new UserModel();
+  preRegId = '';
+  user: UserModel;
   demodata: string[];
   secondaryLanguagelabels: any;
   demographiclabels: any;
   errorlabels: any;
   uppermostLocationHierarchy: any;
-  primaryGender = [];
-  secondaryGender = [];
   primaryResidenceStatus = [];
-  secondaryResidenceStatus = [];
   secondaryResidenceStatusTemp = [];
-  genders: any;
-  residenceStatus: any;
+  genders: [];
+  residenceStatus: [];
   message = {};
   config = {};
   consentMessage: any;
-  titleOnError = "";
+  titleOnError = '';
 
-  @ViewChild("dd") dd: ElementRef;
-  @ViewChild("mm") mm: ElementRef;
-  @ViewChild("yyyy") yyyy: ElementRef;
-  @ViewChild("age") age: ElementRef;
+  @ViewChild('dd') dd: ElementRef;
+  @ViewChild('mm') mm: ElementRef;
+  @ViewChild('yyyy') yyyy: ElementRef;
+  @ViewChild('age') age: ElementRef;
+  @ViewChild('form') form: ElementRef;
+  @ViewChild('submitButton') submitButton: ElementRef;
 
   private _keyboardRef: MatKeyboardRef<MatKeyboardComponent>;
-  @ViewChildren("keyboardRef", { read: ElementRef })
+  @ViewChildren('keyboardRef', { read: ElementRef })
   private _attachToElementMesOne: any;
 
-  regions_in_primary_lang: CodeValueModal[] = [];
-  regions_in_secondary_lang: CodeValueModal[] = [];
-  regions: CodeValueModal[][] = [
-    this.regions_in_primary_lang,
-    this.regions_in_secondary_lang,
-  ];
-  provinces_in_primary_lang: CodeValueModal[] = [];
-  provinces_in_secondary_lang: CodeValueModal[] = [];
-  provinces: CodeValueModal[][] = [
-    this.provinces_in_primary_lang,
-    this.provinces_in_secondary_lang,
-  ];
-  cities_in_primary_lang: CodeValueModal[] = [];
-  cities_in_secondary_lang: CodeValueModal[] = [];
-  cities: CodeValueModal[][] = [
-    this.cities_in_primary_lang,
-    this.cities_in_secondary_lang,
-  ];
-  zones_in_primary_lang: CodeValueModal[] = [];
-  zones_in_secondary_lang: CodeValueModal[] = [];
-  zones: CodeValueModal[][] = [
-    this.zones_in_primary_lang,
-    this.zones_in_secondary_lang,
-  ];
-  locations = [this.regions, this.provinces, this.cities, this.zones];
+  @ViewChild("gender") genderFocus: MatSelect;
+  @ViewChild("nationnality") nationality: MatSelect;
+
+  regions: CodeValueModal[] = [];
+  prefectures: CodeValueModal[] = [];
+  subPrefectureOrCommunes: CodeValueModal[] = [];
+  districts: CodeValueModal[] = [];
+  sectors: CodeValueModal[] = [];
+  locations = [this.regions, this.prefectures, this.subPrefectureOrCommunes, this.districts, this.sectors];
   selectedLocationCode = [];
+  locationHierarchy = ["region", "prefecture", "subPrefectureOrCommune", "district", "sector"];
   codeValue: CodeValueModal[] = [];
   subscriptions: Subscription[] = [];
 
-  identityData = [];
-  uiFields = [];
-  jsonRulesEngine = new Engine();
-  primaryuserForm = false;
-  primarydropDownFields = {};
-  secondaryDropDownLables = {};
-  secondaryuserForm = false;
-  locationHeirarchies = [];
-  validationMessage: any;
-  dynamicFields = [];
-  dynamicFieldAndValues = [];
+
+
+  formControlValues: FormControlModal;
+  formControlNames: FormControlModal = {
+    firstName: 'firstName',
+    lastName: 'lastName',
+    gender: 'gender',
+    dateOfBirth: 'dateOfBirth',
+    residenceStatus: 'residenceStatus',
+    additionalAddressDetails: 'additionalAddressDetails',
+    region: 'region',
+    prefecture: 'prefecture',
+    subPrefectureOrCommune: 'subPrefectureOrCommune',
+    district: 'district',
+    sector: 'sector',
+    email: 'email',
+    phone: 'phone',
+
+    age: 'age',
+    date: 'date',
+    month: 'month',
+    year: 'year'
+  };
+
   /**
    * @description Creates an instance of DemographicComponent.
    * @param {Router} router
@@ -186,22 +170,19 @@ export class DemographicComponent
    */
   constructor(
     private router: Router,
-    private activatedRoute: ActivatedRoute,
     private regService: RegistrationService,
     private dataStorageService: DataStorageService,
+    private bookingService: BookingService,
     private configService: ConfigService,
     private translate: TranslateService,
     public dialog: MatDialog,
     private matKeyboardService: MatKeyboardService,
+    private routerService: RouterExtService,
     private loggerService: LogService // private errorService: ErrorService
   ) {
     super(dialog);
-    this.translate.use(localStorage.getItem("langCode"));
-    this.subscriptions.push(
-      this.regService
-        .getMessage()
-        .subscribe((message) => (this.message = message))
-    );
+    this.translate.use(localStorage.getItem('langCode'));
+    this.subscriptions.push(this.regService.getMessage().subscribe(message => (this.message = message)));
   }
 
   /**
@@ -211,24 +192,52 @@ export class DemographicComponent
    */
   async ngOnInit() {
     this.initialization();
-    await this.getIdentityJsonFormat();
-    this.config = this.configService.getConfig();
+    // changed by Ankit
+     this.dataStorageService.getConfig().subscribe( response => {
+        this.configService.setConfig(response);
+        this.config = this.configService.getConfig();
+        this.setConfig();
+     }, error => { } );
+     // this.config = this.configService.getConfig();
+
     this.getPrimaryLabels();
     await this.getConsentMessage();
-    this.validationMessage = appConstants.errorMessages;
+    this.initForm();
+
     let factory = new LanguageFactory(this.secondaryLang);
     let response = factory.getCurrentlanguage();
-    this.secondaryLanguagelabels = response["demographic"];
-    this.initForm();
-    await this.setFormControlValues();
+    this.secondaryLanguagelabels = response['demographic'];
+
+    let previousURL = this.routerService.getPreviousUrl();
     if (!this.dataModification) {
-      if (this.isConsentMessage) this.consentDeclaration();
+      if (
+        !previousURL.includes('demographic') ||
+        (previousURL.includes('demographic') && this.configService.navigationType !== 'popstate')
+      )
+        if (this.isConsentMessage) this.consentDeclaration();
     }
-    this.showHideFormFields();
   }
 
   /**
+   * @description This set the global configuration used in the demographic component.
+   *
+   * @memberof DemographicComponent
+   */
+  setConfig() {
+    this.MOBILE_PATTERN = this.config[appConstants.CONFIG_KEYS.mosip_regex_phone];
+    this.REFERENCE_IDENTITY_NUMBER_PATTERN = this.config[appConstants.CONFIG_KEYS.mosip_regex_referenceIdentityNumber];
+    this.EMAIL_PATTERN = this.config[appConstants.CONFIG_KEYS.mosip_regex_email];
+    this.DOB_PATTERN = this.config[appConstants.CONFIG_KEYS.mosip_regex_DOB];
+    this.defaultDay = this.config[appConstants.CONFIG_KEYS.mosip_default_dob_day];
+    this.defaultMonth = this.config[appConstants.CONFIG_KEYS.mosip_default_dob_month];
+    this.ADDRESS_PATTERN = this.config[appConstants.CONFIG_KEYS.preregistration_address_length];
+    this.FIRSTNAME_PATTERN = this.config[appConstants.CONFIG_KEYS.preregistration_firstname_length];
+    this.LASTNAME_PATTERN = this.config[appConstants.CONFIG_KEYS.preregistration_lastname_length];
+    this.agePattern = this.config[appConstants.CONFIG_KEYS.mosip_id_validation_identity_age];
+    this.defaultLocation = this.config[appConstants.CONFIG_KEYS.mosip_default_location];
+  }
 
+  /**
    * @description This will return the json object of label of demographic in the primary language.
    *
    * @private
@@ -238,25 +247,22 @@ export class DemographicComponent
   private getPrimaryLabels() {
     let factory = new LanguageFactory(this.primaryLang);
     let response = factory.getCurrentlanguage();
-    this.demographiclabels = response["demographic"];
-    this.errorlabels = response["error"];
+    this.demographiclabels = response['demographic'];
+    this.errorlabels = response['error'];
   }
 
   private getConsentMessage() {
     return new Promise((resolve, reject) => {
       this.subscriptions.push(
-        this.dataStorageService.getGuidelineTemplate("consent").subscribe(
-          (response) => {
+        this.dataStorageService.getGuidelineTemplate('consent').subscribe(
+          response => {
             this.isConsentMessage = true;
             if (response && response[appConstants.RESPONSE])
-              this.consentMessage = response["response"][
-                "templates"
-              ][0].fileText.split("\n");
-            else if (response[appConstants.NESTED_ERROR])
-              this.onError(this.errorlabels.error, "");
+              this.consentMessage = response['response']['templates'][0].fileText.split('\n');
+            else if (response[appConstants.NESTED_ERROR]) this.onError(this.errorlabels.error, '');
             resolve(true);
           },
-          (error) => {
+          error => {
             this.isConsentMessage = false;
             this.onError(this.errorlabels.error, error);
           }
@@ -272,43 +278,20 @@ export class DemographicComponent
    * @private
    * @memberof DemographicComponent
    */
-  private async initialization() {
-    if (localStorage.getItem("newApplicant") === "true") {
+  private initialization() {
+    if (localStorage.getItem('newApplicant') === 'true') {
       this.isNewApplicant = true;
     }
-    if (localStorage.getItem("modifyUser") === "true") {
-      console.log(localStorage.getItem("modifyUser"));
+    if (this.message['modifyUser'] === 'true' || this.message['modifyUserFromPreview'] === 'true') {
       this.dataModification = true;
-      await this.getPreRegId();
-      await this.getUserInfo(this.preRegId);
-      if (localStorage.getItem("modifyUserFromPreview") === "true") {
-        this.showPreviewButton = true;
-      }
-      this.loginId = localStorage.getItem("loginId");
+      this.step = this.regService.getUsers().length - 1;
+      if (this.message['modifyUserFromPreview'] === 'true') this.showPreviewButton = true;
+    } else {
+      this.dataModification = false;
+      this.step = this.regService.getUsers().length;
     }
   }
 
-  getPreRegId() {
-    return new Promise((resolve) => {
-      this.activatedRoute.params.subscribe((param) => {
-        this.preRegId = param["appId"];
-        console.log(this.preRegId);
-        resolve(true);
-      });
-    });
-  }
-
-  getUserInfo(preRegId) {
-    return new Promise((resolve) => {
-      this.dataStorageService.getUser(preRegId).subscribe((response) => {
-        if (response[appConstants.RESPONSE]) {
-          this.user.request = response[appConstants.RESPONSE];
-          console.log(this.user.request);
-          resolve(response[appConstants.RESPONSE]);
-        }
-      });
-    });
-  }
   /**
    * @description This is the consent form, which applicant has to agree upon to proceed forward.
    *
@@ -318,7 +301,7 @@ export class DemographicComponent
   private consentDeclaration() {
     if (this.demographiclabels) {
       const data = {
-        case: "CONSENTPOPUP",
+        case: 'CONSENTPOPUP',
         title: this.demographiclabels.consent.title,
         subtitle: this.demographiclabels.consent.subtitle,
         message: this.consentMessage,
@@ -326,70 +309,16 @@ export class DemographicComponent
         acceptButton: this.demographiclabels.consent.acceptButton,
         alertMessageFirst: this.demographiclabels.consent.alertMessageFirst,
         alertMessageSecond: this.demographiclabels.consent.alertMessageSecond,
-        alertMessageThird: this.demographiclabels.consent.alertMessageThird,
+        alertMessageThird: this.demographiclabels.consent.alertMessageThird
       };
       this.dialog.open(DialougComponent, {
-        width: "550px",
+        width: '550px',
         data: data,
-        disableClose: true,
+        disableClose: true
       });
     }
   }
 
-  /**
-   * @description This method will get the Identity Schema Json
-   *
-   *
-   */
-
-  async getIdentityJsonFormat() {
-    return new Promise((resolve, reject) => {
-      this.dataStorageService.getIdentityJson().subscribe((response) => {
-        //response = identityStubJson;
-        console.log(response);
-        // this.identityData = response["identity"];
-        // this.locationHeirarchy = [...response["locationHierarchy"]];
-        this.identityData = response["response"]["idSchema"]["identity"];
-        let locationHeirarchiesFromJson = [
-          ...response["response"]["idSchema"]["locationHierarchy"],
-        ];
-        if (Array.isArray(locationHeirarchiesFromJson[0])) {
-          this.locationHeirarchies = locationHeirarchiesFromJson;
-        } else {
-          let hierarchiesArray = [];
-          hierarchiesArray.push(locationHeirarchiesFromJson);
-          this.locationHeirarchies = hierarchiesArray;
-        }
-        localStorage.setItem(
-          "locationHierarchy",
-          JSON.stringify(this.locationHeirarchies[0])
-        );
-
-        this.identityData.forEach((obj) => {
-          if (
-            obj.inputRequired === true &&
-            obj.controlType !== null &&
-            !(obj.controlType === "fileupload")
-          ) {
-            this.uiFields.push(obj);
-          }
-        });
-        this.dynamicFields = this.uiFields.filter(
-          (fields) =>
-            (fields.controlType === "dropdown" ||
-              fields.controlType === "button") &&
-            fields.fieldType === "dynamic"
-        );
-        //console.log(this.dynamicFields);
-        this.setDropDownArrays();
-        this.setLocations();
-        // this.setGender();
-        // this.setResident();
-        this.setDynamicFieldValues();
-        resolve(true);
-      });
-    });
-  }
   /**
    * @description This will initialize the demographic form and
    * if update set the inital values of the attributes.
@@ -398,349 +327,58 @@ export class DemographicComponent
    * @memberof DemographicComponent
    */
   async initForm() {
-    this.uiFields.forEach((control, index) => {
-      this.userForm.addControl(control.id, new FormControl(""));
-      if (this.primaryLang !== this.secondaryLang) {
-        this.transUserForm.addControl(control.id, new FormControl(""));
-      }
-      this.addValidators(control);
-      if (this.uiFields.length === index + 1) {
-        this.primaryuserForm = true;
-        if (this.primaryLang !== this.secondaryLang) {
-          this.secondaryuserForm = true;
-        }
-      }
-    });
-  }
+    if (this.dataModification) {
+      this.user = this.regService.getUser(this.step);
+      this.preRegId = this.user.preRegId;
+    }
+    this.setFormControlValues();
 
-  addValidators = (control: any) => {
-    if (control.required) {
-      this.userForm.controls[`${control.id}`].setValidators(
-        Validators.required
-      );
-      if (this.primaryLang !== this.secondaryLang) {
-        this.transUserForm.controls[`${control.id}`].setValidators(
-          Validators.required
-        );
-      }
-    }
-    if (control.validators !== null && control.validators.length > 0) {
-      this.userForm.controls[`${control.id}`].setValidators([
-        Validators.pattern(control.validators[0].validator),
-      ]);
-      if (this.primaryLang !== this.secondaryLang) {
-        this.transUserForm.controls[`${control.id}`].setValidators([
-          Validators.pattern(control.validators[0].validator),
-        ]);
-      }
-    }
-    if (
-      control.required &&
-      control.validators !== null &&
-      control.validators.length > 0
-    ) {
-      this.userForm.controls[`${control.id}`].setValidators([
+    this.userForm = new FormGroup({
+      [this.formControlNames.firstName]: new FormControl(this.formControlValues.firstName.trim(), [
         Validators.required,
-        Validators.pattern(control.validators[0].validator),
-      ]);
-      if (this.primaryLang !== this.secondaryLang) {
-        this.transUserForm.controls[`${control.id}`].setValidators([
-          Validators.required,
-          Validators.pattern(control.validators[0].validator),
-        ]);
-      }
-    }
-  };
-
-  /**
-   * @description sets the dropdown arrays for primary and secondary forms.
-   */
-  setDropDownArrays() {
-    this.getIntialDropDownArrays();
-  }
-  /**
-   * @description this method initialise the primary and secondary dropdown array for the
-   *  dropdown fields.
-   */
-  getIntialDropDownArrays() {
-    this.uiFields.forEach((control) => {
-      if (
-        control.controlType === "dropdown" ||
-        control.controlType === "button"
-      ) {
-        this.primarydropDownFields[control.id] = [];
-        if (this.primaryLang !== this.secondaryLang) {
-          this.secondaryDropDownLables[control.id] = [];
-        }
-      }
+        Validators.pattern(this.FIRSTNAME_PATTERN),
+        this.noWhitespaceValidator
+      ]),
+      [this.formControlNames.lastName]: new FormControl(this.formControlValues.lastName.trim(), [
+        Validators.required,
+        Validators.pattern(this.LASTNAME_PATTERN),
+        this.noWhitespaceValidator
+      ]),
+      [this.formControlNames.gender]: new FormControl(this.formControlValues.gender, Validators.required),
+      [this.formControlNames.residenceStatus]: new FormControl(
+        this.formControlValues.residenceStatus,
+        Validators.required
+      ),
+      [this.formControlNames.age]: new FormControl(this.formControlValues.age, [
+        Validators.required,
+        Validators.pattern(this.agePattern)
+      ]),
+      [this.formControlNames.dateOfBirth]: new FormControl(this.formControlValues.dateOfBirth, [
+        Validators.pattern(this.DOB_PATTERN)
+      ]),
+      [this.formControlNames.date]: new FormControl(this.formControlValues.date, [Validators.required]),
+      [this.formControlNames.month]: new FormControl(this.formControlValues.month, [Validators.required]),
+      [this.formControlNames.year]: new FormControl(this.formControlValues.year, [Validators.required]),
+      [this.formControlNames.additionalAddressDetails]: new FormControl(
+        this.formControlValues.additionalAddressDetails,
+        Validators.pattern(this.ADDRESS_PATTERN)
+      ),
+      [this.formControlNames.region]: new FormControl(this.formControlValues.region, Validators.required),
+      [this.formControlNames.prefecture]: new FormControl(this.formControlValues.prefecture, Validators.required),
+      [this.formControlNames.subPrefectureOrCommune]: new FormControl(this.formControlValues.subPrefectureOrCommune, Validators.required),
+      [this.formControlNames.district]: new FormControl(this.formControlValues.district, Validators.required),
+      [this.formControlNames.sector]: new FormControl(this.formControlValues.sector, Validators.required),
+      [this.formControlNames.email]: new FormControl(this.formControlValues.email, [
+        Validators.pattern(this.EMAIL_PATTERN)
+      ]),
+      [this.formControlNames.phone]: new FormControl(this.formControlValues.phone, [
+        Validators.pattern(this.MOBILE_PATTERN)
+      ]),
     });
-  }
 
-  isThisFieldInLocationHeirarchies = (fieldId) => {
-    let items = this.getLocationHierarchy(fieldId);
-    return items.length > 0 ? true : false;
-  };
-
-  getIndexInLocationHeirarchy = (fieldId) => {
-    let items = this.getLocationHierarchy(fieldId);
-    return items.indexOf(fieldId);
-  };
-
-  getLocationNameFromIndex = (fieldId, fieldIndex) => {
-    let items = this.getLocationHierarchy(fieldId);
-    return items[fieldIndex];
-  };
-
-  getLocationHierarchy = (fieldId) => {
-    let items = [];
-    this.locationHeirarchies.forEach((locationHeirarchy) => {
-      let filteredItems = locationHeirarchy.filter((item) => item == fieldId);
-      if (filteredItems.length > 0) {
-        items = locationHeirarchy;
-      }
-    });
-    return items;
-  };
-
-  /**
-
-   *
-   * @description this method is to make dropdown api calls
-   *
-   * @param controlObject is Identity Type Object
-   *  ex: { id : 'region',controlType: 'dropdown' ...}
-   */
-  dropdownApiCall(controlObject: any) {
-    if (this.isThisFieldInLocationHeirarchies(controlObject.id)) {
-      if (this.getIndexInLocationHeirarchy(controlObject.id) !== 0) {
-        this.primarydropDownFields[controlObject.id] = [];
-        const locationIndex = this.getIndexInLocationHeirarchy(
-          controlObject.id
-        );
-        const parentLocationName = this.getLocationNameFromIndex(
-          controlObject.id,
-          locationIndex - 1
-        );
-        let locationCode = this.userForm.get(`${parentLocationName}`).value;
-        this.loadLocationData(locationCode, controlObject.id);
-      }
-    }
-  }
-
-  /**
-   * @description this method will copy dropdown values from its
-   * respective dropdown inputs to it's ssecondary input
-   *
-   * @param fieldName input field
-   * @param fieldValue input field value
-   */
-  copyDataToSecondaryForm(fieldName: string, fieldValue: string) {
-    if (this.primaryLang !== this.secondaryLang) {
-      this.secondaryDropDownLables[fieldName].forEach((element) => {
-        if (element.valueCode === fieldValue) {
-          this.transUserForm.controls[fieldName].setValue(fieldValue);
-        }
-      });
-    }
-  }
-
-  /**
-
-   * @description This method will copy non dropdown field values
-   * from primary form to secondary form
-   *
-   * @param fieldName input field name
-   * @param event event type
-   */
-  copyToSecondaryFormNonDropDown(fieldName: string, event: Event) {
-    const transliterate = [...appConstants.TRANSLITERATE_FIELDS];
-    if (this.primaryLang !== this.secondaryLang) {
-      if (transliterate.includes(fieldName)) {
-        if (event.type === "focusout") {
-          this.onTransliteration(fieldName, fieldName);
-        }
-      } else {
-        this.transUserForm.controls[`${fieldName}`].setValue(
-          this.userForm.controls[`${fieldName}`].value
-        );
-      }
-    }
-  }
-
-  /**
-   * This function will reset the value of the hidden field in the form.
-   * @param uiField
-   */
-  resetHiddenField = (uiField) => {
-    this.userForm.controls[uiField.id].reset();
-    this.userForm.controls[uiField.id].setValue("");
-    if (this.primaryLang !== this.secondaryLang) {
-      if (this.transUserForm && this.transUserForm.controls[`${uiField.id}`]) {
-        this.transUserForm.controls[`${uiField.id}`].reset();
-        this.transUserForm.controls[`${uiField.id}`].setValue("");
-      }
-    }
-  };
-
-  /**
-   * This function will reset the value of the hidden field in the form.
-   * @param uiField
-   */
-   addRequiredValidator = (uiField) => {
-    this.addValidators(uiField);
-    this.userForm.controls[uiField.id].setValue(this.userForm.controls[uiField.id].value);
-    if (this.primaryLang !== this.secondaryLang) {
-      if (this.transUserForm && this.transUserForm.controls[`${uiField.id}`]) {
-        this.transUserForm.controls[`${uiField.id}`].setValue(this.transUserForm.controls[uiField.id].value);
-      }
-    }
-  };
-
-  /**
-   * This function looks for "visibleCondition" attribute for each field in UI Specs.
-   * Using "json-rules-engine", these conditions are evaluated
-   * and fields are shown/hidden in the UI form.
-   */
-  showHideFormFields() {
-    console.log("showHideFormFields");
-    //if (!this.dataModification || (this.dataModification && this.userForm.valid) ) {
-    //populate form data in json for json-rules-engine to evalatute the conditions
-    const identityFormData = this.createIdentityJSONDynamic(true);
-    let isChild = false;
-    let currentAge = null;
-    if (identityFormData.identity["dateOfBirth"]) {
-      let calcAge = this.calculateAge(identityFormData.identity["dateOfBirth"]);
-      if (calcAge !== "" && Number(calcAge) > -1) {
-        currentAge = Number(calcAge);
-      }
-      const ageToBeAdult = this.config[appConstants.CONFIG_KEYS.mosip_adult_age];
-      if (Number(this.currentAge) > -1 && Number(this.currentAge) <= Number(ageToBeAdult)) {
-        isChild = true;
-      }
-    }
-    let formIdentityData = {
-      "identity": {...identityFormData.identity,
-        "isChild": isChild,
-        "age": currentAge
-      }
-    };
-    console.log(formIdentityData);
-    //for each uiField in UI specs, check of any "visibleCondition" is given
-    //if yes, then evaluate it with json-rules-engine
-    this.uiFields.forEach((uiField) => {
-      //if no "visibleCondition" is given, then show the field
-      if (!uiField.visibleCondition || uiField.visibleCondition == "") {
-        uiField.isVisible = true;
-      } else {
-        const resetHiddenFieldFunc = this.resetHiddenField;
-        let visibilityRule = new Rule({
-          conditions: uiField.visibleCondition,
-          onSuccess() {
-            //in "visibleCondition" is statisfied then show the field
-            uiField.isVisible = true;
-          },
-          onFailure() {
-            //in "visibleCondition" is not statisfied then hide the field
-            uiField.isVisible = false;
-            resetHiddenFieldFunc(uiField);
-          },
-          event: {
-            type: "message",
-            params: {
-              data: "",
-            },
-          },
-        });
-        this.jsonRulesEngine.addRule(visibilityRule);
-        //evaluate the visibleCondition
-        this.jsonRulesEngine
-          .run(formIdentityData)
-          .then((results) => {
-            results.events.map((event) =>
-              console.log(
-                "jsonRulesEngine for visibleConditions run successfully",
-                event.params.data
-              )
-            );
-            this.jsonRulesEngine.removeRule(visibilityRule);
-          })
-          .catch((error) => {
-            console.log("err is", error);
-            this.jsonRulesEngine.removeRule(visibilityRule);
-          });
-      }
-    }, this.resetHiddenField);
-    this.processConditionalRequiredValidations(formIdentityData);
-    //}
-  }
-
-  /**
-   * This function will reset the value of the hidden field in the form.
-   * @param uiField
-   */
-  removeValidators = (uiField) => {
-    this.userForm.controls[`${uiField.id}`].clearValidators();
-    this.userForm.controls[`${uiField.id}`].updateValueAndValidity();
-    if (this.primaryLang !== this.secondaryLang) {
-      this.transUserForm.controls[`${uiField.id}`].clearValidators();
-      this.transUserForm.controls[`${uiField.id}`].updateValueAndValidity();
-    }
-  };
-
-  /**
-   * This function looks for "requiredCondition" attribute for each field in UI Specs.
-   * Using "json-rules-engine", these conditions are evaluated
-   * and fields are conditionally validated as required or not in the UI form.
-   */
-  processConditionalRequiredValidations(identityFormData) {
-    console.log("processing requiredCondition");
-    //for each uiField in UI specs, check of any "requiredCondition" is given
-    //if yes, then evaluate it with json-rules-engine
-    this.uiFields.forEach((uiField) => {
-      //if no "requiredCondition" is given, then nothing is to be done
-      if (uiField.requiredCondition && uiField.requiredCondition != "") {
-        const addValidatorsFunc = this.addRequiredValidator;
-        const removeValidatorFunc = this.removeValidators;
-        let requiredRule = new Rule({
-          conditions: uiField.requiredCondition,
-          onSuccess() {
-            //in "requiredCondition" is statisfied then validate the field as required
-            if (!uiField.required) {
-              uiField.required = true;
-              addValidatorsFunc(uiField);
-            }
-          },
-          onFailure() {
-            //in "requiredCondition" is not statisfied then validate the field as not required
-            uiField.required = false;
-            removeValidatorFunc(uiField);
-          },
-          event: {
-            type: "message",
-            params: {
-              data: "",
-            },
-          },
-        });
-        this.jsonRulesEngine.addRule(requiredRule);
-        //evaluate the visibleCondition
-        this.jsonRulesEngine
-          .run(identityFormData)
-          .then((results) => {
-            results.events.map((event) =>
-              console.log(
-                "jsonRulesEngine for requiredConditions run successfully",
-                event.params.data
-              )
-            );
-            this.jsonRulesEngine.removeRule(requiredRule);
-          })
-          .catch((error) => {
-            console.log("err is", error);
-            this.jsonRulesEngine.removeRule(requiredRule);
-          });
-      }
-    }, this);
+    this.setLocations();
+    this.setGender();
+    this.setResident();
   }
 
   /**
@@ -752,97 +390,26 @@ export class DemographicComponent
    */
   private async setLocations() {
     await this.getLocationMetadataHirearchy();
-    this.locationHeirarchies.forEach((locationHeirarchy) => {
-      this.loadLocationData(
-        this.uppermostLocationHierarchy,
-        locationHeirarchy[0]
-      );
-    }, this);
-  }
-  /**
-   * @description This is to reset the input values
-   * when the parent input value is changed
-   *
-   * @param fieldName location dropdown control Name
-   */
-  resetLocationFields(fieldName: string) {
-    if (this.isThisFieldInLocationHeirarchies(fieldName)) {
-      const locationFields = this.getLocationHierarchy(fieldName);
-      const index = locationFields.indexOf(fieldName);
-      for (let i = index + 1; i < locationFields.length; i++) {
-        this.userForm.controls[locationFields[i]].setValue("");
-        if (this.primaryLang !== this.secondaryLang) {
-          this.transUserForm.controls[locationFields[i]].setValue("");
-        }
-        this.userForm.controls[locationFields[i]].markAsUntouched();
-        if (this.primaryLang !== this.secondaryLang) {
-          this.transUserForm.controls[locationFields[i]].markAsUntouched();
-        }
-      }
+    this.selectedLocationCode = [
+      this.uppermostLocationHierarchy,
+      this.formControlValues.region,
+      this.formControlValues.prefecture,
+      this.formControlValues.subPrefectureOrCommune,
+      this.formControlValues.district,
+      this.formControlValues.sector
+    ];
+    if (!this.dataModification) {
+      this.locations = [this.regions];
     }
-  }
 
-  /**
-   * @description This is get the location the input values
-   *
-   * @param fieldName location dropdown control Name
-   * @param locationCode location code of parent location
-   */
-  loadLocationData(locationCode: string, fieldName: string) {
-    if (fieldName && fieldName.length > 0) {
-      this.dataStorageService
-        .getLocationImmediateHierearchy(this.primaryLang, locationCode)
-        .subscribe(
-          (response) => {
-            if (response[appConstants.RESPONSE]) {
-              response[appConstants.RESPONSE][
-                appConstants.DEMOGRAPHIC_RESPONSE_KEYS.locations
-              ].forEach((element) => {
-                let codeValueModal: CodeValueModal = {
-                  valueCode: element.code,
-                  valueName: element.name,
-                  languageCode: this.primaryLang,
-                };
-                if (this.primarydropDownFields[`${fieldName}`]) {
-                  this.primarydropDownFields[`${fieldName}`].push(
-                    codeValueModal
-                  );
-                }
-              });
-            }
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
-      if (this.primaryLang !== this.secondaryLang) {
-        this.dataStorageService
-          .getLocationImmediateHierearchy(this.secondaryLang, locationCode)
-          .subscribe(
-            (response) => {
-              if (response[appConstants.RESPONSE]) {
-                response[appConstants.RESPONSE][
-                  appConstants.DEMOGRAPHIC_RESPONSE_KEYS.locations
-                ].forEach((element) => {
-                  let codeValueModal: CodeValueModal = {
-                    valueCode: element.code,
-                    valueName: element.name,
-                    languageCode: this.secondaryLang,
-                  };
-                  if (this.secondaryDropDownLables[`${fieldName}`]) {
-                    this.secondaryDropDownLables[`${fieldName}`].push(
-                      codeValueModal
-                    );
-                  }
-                });
-              }
-            },
-            (error) => {
-              console.log(error);
-            }
-          );
-      }
+    for (let index = 0; index < this.locations.length; index++) {
+      const parentLocationCode = this.selectedLocationCode[index];
+      const currentLocationCode = this.selectedLocationCode[index + 1];
+      const elements = this.locations[index];
+      const language = this.primaryLang;
+      await this.getLocationImmediateHierearchy(language, parentLocationCode, elements, currentLocationCode);
     }
+    this.dataIncomingSuccessful = true;
   }
 
   /**
@@ -853,76 +420,7 @@ export class DemographicComponent
    */
   private async setGender() {
     await this.getGenderDetails();
-    await this.filterOnLangCode(
-      this.primaryLang,
-      appConstants.controlTypeGender,
-      this.genders
-    );
-    if (this.primaryLang !== this.secondaryLang) {
-      await this.filterOnLangCode(
-        this.secondaryLang,
-        appConstants.controlTypeGender,
-        this.genders
-      );
-    }
-  }
-
-  private async setDynamicFieldValues() {
-    await this.getDynamicFieldValues();
-    // if (this.primaryLang !== this.secondaryLang) {
-    //   await this.getDynamicFieldValues(this.secondaryLang);
-    // }
-  }
-
-  getDynamicFieldValues(pageNo = 0) {
-    let pageNumber;
-    if (pageNo > 0) {
-      pageNumber = 0;
-    } else {
-      pageNumber = pageNo;
-    }
-    return new Promise((resolve) => {
-      this.dataStorageService
-        .getDynamicFieldsandValuesForAllLang(pageNumber)
-        .subscribe((response) => {
-          //console.log(response);
-          let dynamicField = response[appConstants.RESPONSE]["data"];
-          this.dynamicFields.forEach((field) => {
-            //console.log(field);
-            dynamicField.forEach((res) => {
-              //console.log(res);
-              if (field.id === res.name && res.langCode === this.primaryLang) {
-                //console.log(res["fieldVal"]);
-                this.filterOnLangCode(
-                  this.primaryLang,
-                  res.name,
-                  res["fieldVal"]
-                );
-                //console.log(this.primarydropDownFields);
-              }
-              if (
-                field.id === res.name &&
-                res.langCode === this.secondaryLang
-              ) {
-                this.filterOnLangCode(
-                  this.secondaryLang,
-                  res.name,
-                  res["fieldVal"]
-                );
-              }
-            });
-          });
-          let totalPages = response[appConstants.RESPONSE]["totalPages"];
-          if (totalPages) {
-            totalPages = Number(totalPages);
-          }
-          pageNumber = pageNumber + 1;
-          if (totalPages > pageNumber) {
-            this.getDynamicFieldValues(pageNumber);
-          }
-        });
-      resolve(true);
-    });
+    // this.filterOnLangCode(this.primaryLang, this.primaryGender, this.genders);
   }
 
   /**
@@ -933,18 +431,6 @@ export class DemographicComponent
    */
   private async setResident() {
     await this.getResidentDetails();
-    await this.filterOnLangCode(
-      this.primaryLang,
-      appConstants.controlTypeResidenceStatus,
-      this.residenceStatus
-    );
-    if (this.primaryLang !== this.secondaryLang) {
-      await this.filterOnLangCode(
-        this.secondaryLang,
-        appConstants.controlTypeResidenceStatus,
-        this.residenceStatus
-      );
-    }
   }
 
   /**
@@ -952,123 +438,57 @@ export class DemographicComponent
    *
    * @memberof DemographicComponent
    */
-  async setFormControlValues() {
+  setFormControlValues() {
     if (this.primaryLang === this.secondaryLang) {
       this.languages.pop();
       this.isReadOnly = true;
     }
     if (!this.dataModification) {
-      this.uiFields.forEach((control) => {
-        this.userForm.controls[control.id].setValue("");
-        if (this.primaryLang !== this.secondaryLang) {
-          this.transUserForm.controls[control.id].setValue("");
-        }
-      });
+      this.formControlValues = {
+        firstName: '',
+        lastName: '',
+        gender: '',
+        residenceStatus: '',
+        date: '',
+        month: '',
+        year: '',
+        dateOfBirth: '',
+        age: '',
+        additionalAddressDetails: '',
+        region: '',
+        prefecture: '',
+        subPrefectureOrCommune: '',
+        district: '',
+        sector: '',
+        email: '',
+        phone: '',
+      };
     } else {
-      let index = 0;
-      let secondaryIndex = 1;
-      this.loggerService.info("user", this.user);
-      console.log("user", this.user);
-      if (this.user.request === undefined) {
-        await this.getUserInfo(this.preRegId);
-      }
-      if (
-        this.user.request.demographicDetails.identity.fullName[0].language !==
-        this.primaryLang
-      ) {
-        index = 1;
-        secondaryIndex = 0;
-      }
-      if (this.primaryLang === this.secondaryLang) {
-        index = 0;
-        secondaryIndex = 0;
-      }
-      this.uiFields.forEach((control) => {
-         if (this.user.request.demographicDetails.identity[control.id]) {
-        if (
-          (control.controlType !== "dropdown" && control.controlType !== "button") &&
-          !appConstants.TRANSLITERATE_FIELDS.includes(control.id)
-        ) {
-          if (control.id === "dateOfBirth") {
-            this.setDateOfBirth();
-          } else {
-            if(typeof(this.user.request.demographicDetails.identity[`${control.id}`]) == "object"){
-              this.userForm.controls[`${control.id}`].setValue(
-                this.user.request.demographicDetails.identity[`${control.id}`][0].value
-              ); 
-              if (this.primaryLang !== this.secondaryLang) {
-                  this.transUserForm.controls[`${control.id}`].setValue(
-                    this.user.request.demographicDetails.identity[
-                      `${control.id}`
-                    ][1].value
-                  );
-                }
-            }else{
-              this.userForm.controls[`${control.id}`].setValue(
-                this.user.request.demographicDetails.identity[`${control.id}`]
-              );         
-            if (this.primaryLang !== this.secondaryLang) {
-              this.transUserForm.controls[`${control.id}`].setValue(
-                this.user.request.demographicDetails.identity[`${control.id}`]
-              );
-            }
-          }
-         }
-        } else if (appConstants.TRANSLITERATE_FIELDS.includes(control.id)) {
-          this.userForm.controls[`${control.id}`].setValue(
-            this.user.request.demographicDetails.identity[control.id][index]
-              .value
-          );
-          if (this.primaryLang !== this.secondaryLang) {
-            this.transUserForm.controls[`${control.id}`].setValue(
-              this.user.request.demographicDetails.identity[control.id][
-                secondaryIndex
-              ].value
-            );
-          }
-        } else if (control.controlType === "dropdown" || control.controlType === "button") {
-          if (this.isThisFieldInLocationHeirarchies(control.id)) {
-            this.dropdownApiCall(control);
-            if (control.type === "string") {
-              this.userForm.controls[`${control.id}`].setValue(
-                this.user.request.demographicDetails.identity[`${control.id}`]
-              );
-              if (this.primaryLang !== this.secondaryLang) {
-                this.transUserForm.controls[`${control.id}`].setValue(
-                  this.user.request.demographicDetails.identity[`${control.id}`]
-                );
-              }
-            } else if(control.type === 'simpleType') {
-              this.userForm.controls[`${control.id}`].setValue(
-                this.user.request.demographicDetails.identity[control.id][index]
-                  .value
-              );
-              if (this.primaryLang !== this.secondaryLang) {
-                this.transUserForm.controls[`${control.id}`].setValue(
-                  this.user.request.demographicDetails.identity[control.id][
-                    secondaryIndex
-                  ].value
-                );
-              }
-            }
-          } else {
-            this.userForm.controls[`${control.id}`].setValue(
-              this.user.request.demographicDetails.identity[control.id][index]
-                .value
-            );
-            if (this.primaryLang !== this.secondaryLang) {
-              this.transUserForm.controls[`${control.id}`].setValue(
-                this.user.request.demographicDetails.identity[control.id][
-                  secondaryIndex
-                ].value
-              );
-            }
-          }
-        }
-         }
-      });
+      this.loggerService.info('user', this.user);
+
+      const dob = this.user.request.demographicDetails.identity.dateOfBirth;
+      this.formControlValues = {
+        firstName: this.user.request.demographicDetails.identity.firstName[0].value,
+        lastName: this.user.request.demographicDetails.identity.lastName[0].value,
+        gender: this.user.request.demographicDetails.identity.gender[0].value,
+        residenceStatus: this.user.request.demographicDetails.identity.residenceStatus[0].value,
+        date: this.user.request.demographicDetails.identity.dateOfBirth.split('/')[2],
+        month: this.user.request.demographicDetails.identity.dateOfBirth.split('/')[1],
+        year: this.user.request.demographicDetails.identity.dateOfBirth.split('/')[0],
+        dateOfBirth: dob,
+        age: this.calculateAge(new Date(new Date(dob))).toString(),
+        additionalAddressDetails: this.user.request.demographicDetails.identity.additionalAddressDetails,
+        region: this.user.request.demographicDetails.identity.region[0].value,
+        prefecture: this.user.request.demographicDetails.identity.prefecture[0].value,
+        subPrefectureOrCommune: this.user.request.demographicDetails.identity.subPrefectureOrCommune[0].value,
+        district: this.user.request.demographicDetails.identity.district[0].value,
+        sector: this.user.request.demographicDetails.identity.sector[0].value,
+        email: this.user.request.demographicDetails.identity.email,
+        phone: this.user.request.demographicDetails.identity.phone,
+      };
     }
   }
+
   /**
    * @description This will get the gender details from the master data.
    *
@@ -1077,22 +497,19 @@ export class DemographicComponent
    * @memberof DemographicComponent
    */
   private getGenderDetails() {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       this.subscriptions.push(
         this.dataStorageService.getGenderDetails().subscribe(
-          (response) => {
+          response => {
             if (response[appConstants.RESPONSE]) {
-              this.genders =
-                response[appConstants.RESPONSE][
-                  appConstants.DEMOGRAPHIC_RESPONSE_KEYS.genderTypes
-                ];
+              this.genders = response[appConstants.RESPONSE][appConstants.DEMOGRAPHIC_RESPONSE_KEYS.genderTypes];
               resolve(true);
             } else {
-              this.onError(this.errorlabels.error, "");
+              this.onError(this.errorlabels.error, '');
             }
           },
-          (error) => {
-            this.loggerService.error("Unable to fetch gender");
+          error => {
+            this.loggerService.error('Unable to fetch gender');
             this.onError(this.errorlabels.error, error);
           }
         )
@@ -1101,176 +518,32 @@ export class DemographicComponent
   }
 
   /**
-   * @description This will get the residenceStatus
-   * details from the master data.
+   * @description This will get the residenceStatus details from the master data.
    *
    * @private
    * @returns
    * @memberof DemographicComponent
    */
   private getResidentDetails() {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       this.subscriptions.push(
         this.dataStorageService.getResidentDetails().subscribe(
-          (response) => {
+          response => {
             if (response[appConstants.RESPONSE]) {
               this.residenceStatus =
-                response[appConstants.RESPONSE][
-                  appConstants.DEMOGRAPHIC_RESPONSE_KEYS.residentTypes
-                ];
+                response[appConstants.RESPONSE][appConstants.DEMOGRAPHIC_RESPONSE_KEYS.residentTypes];
               resolve(true);
             } else {
-              this.onError(this.errorlabels.error, "");
+              this.onError(this.errorlabels.error, '');
             }
           },
-          (error) => {
-            this.loggerService.error("Unable to fetch Resident types");
+          error => {
+            this.loggerService.error('Unable to fetch Resident types');
             this.onError(this.errorlabels.error, error);
           }
         )
       );
     });
-  }
-
-  setDateOfBirth() {
-    this.date = this.user.request.demographicDetails.identity[
-      "dateOfBirth"
-    ].split("/")[2];
-    this.month = this.user.request.demographicDetails.identity[
-      "dateOfBirth"
-    ].split("/")[1];
-    this.year = this.user.request.demographicDetails.identity[
-      "dateOfBirth"
-    ].split("/")[0];
-    this.currentAge = this.calculateAge(
-      this.user.request.demographicDetails.identity["dateOfBirth"]
-    ).toString();
-
-    this.userForm.controls[`dateOfBirth`].setValue(
-      this.user.request.demographicDetails.identity["dateOfBirth"]
-    );
-    if (this.primaryLang !== this.secondaryLang) {
-      this.transUserForm.controls[`dateOfBirth`].setValue(
-        this.user.request.demographicDetails.identity["dateOfBirth"]
-      );
-    }
-  }
-  /**
-   * @description This is called when age is changed and the date of birth will get calculated.
-   *
-   * @memberof DemographicComponent
-   */
-  onAgeChange() {
-    this.defaultDay = this.config[
-      appConstants.CONFIG_KEYS.mosip_default_dob_day
-    ];
-    this.defaultMonth = this.config[
-      appConstants.CONFIG_KEYS.mosip_default_dob_month
-    ];
-    this.agePattern = this.config[
-      appConstants.CONFIG_KEYS.mosip_id_validation_identity_age
-    ];
-    const ageRegex = new RegExp(this.agePattern);
-    if (this.age.nativeElement.value) {
-      if (ageRegex.test(this.age.nativeElement.value)) {
-        this.currentAge = this.age.nativeElement.value;
-        const now = new Date();
-        const calulatedYear = now.getFullYear() - Number(this.currentAge);
-        this.dd.nativeElement.value = this.defaultDay;
-        this.mm.nativeElement.value = this.defaultMonth;
-        this.yyyy.nativeElement.value = calulatedYear;
-        this.date = this.defaultDay;
-        this.month = this.defaultMonth;
-        this.year = calulatedYear.toString();
-        this.userForm.controls["dateOfBirth"].setValue(
-          calulatedYear + "/" + this.defaultMonth + "/" + this.defaultDay
-        );
-        if (this.primaryLang !== this.secondaryLang) {
-          this.transUserForm.controls["dateOfBirth"].setValue(
-            calulatedYear + "/" + this.defaultMonth + "/" + this.defaultDay
-          );
-        }
-        // this.userForm.controls["dateOfBirth"].setErrors(null);
-        if (this.dataModification) {
-          this.hasDobChanged();
-        }
-        console.log(this.userForm);
-      } else {
-        this.dd.nativeElement.value = "";
-        this.mm.nativeElement.value = "";
-        this.yyyy.nativeElement.value = "";
-        this.date = "";
-        this.month = "";
-        this.year = "";
-        this.userForm.controls["dateOfBirth"].markAsTouched();
-        this.userForm.controls["dateOfBirth"].setErrors({
-          incorrect: true,
-        });
-      }
-    }
-  }
-
-  /**
-   * @description This is called whenever there is a change in Date of birth field and accordingly age
-   * will get calculate.
-   *
-   * @memberof DemographicComponent
-   */
-  onDOBChange() {
-    this.date = this.dd.nativeElement.value;
-    this.month = this.mm.nativeElement.value;
-    this.year = this.yyyy.nativeElement.value;
-    if (this.date !== "" && this.month !== "" && this.year !== "") {
-      const newDate = this.year + "/" + this.month + "/" + this.date;
-      console.log(newDate);
-      if (moment(newDate, "YYYY/MM/DD", true).isValid()) {
-        this.currentAge = this.calculateAge(newDate).toString();
-        this.age.nativeElement.value = this.currentAge;
-        this.userForm.controls["dateOfBirth"].setValue(newDate);
-        if (this.primaryLang !== this.secondaryLang) {
-          this.transUserForm.controls["dateOfBirth"].setValue(newDate);
-        }
-        if (this.dataModification) {
-          this.hasDobChanged();
-        }
-      } else {
-        this.userForm.controls["dateOfBirth"].markAsTouched();
-        this.userForm.controls["dateOfBirth"].setErrors({
-          incorrect: true,
-        });
-        this.currentAge = "";
-        this.age.nativeElement.value = "";
-      }
-    }
-  }
-
-  /**
-   * @description This method calculates the age for the given date.
-   *
-   * @param {Date} bDay
-   * @returns
-   * @memberof DemographicComponent
-   */
-
-  calculateAge(bDay) {
-    const now = new Date();
-    const born = new Date(bDay);
-    const years = Math.floor(
-      (now.getTime() - born.getTime()) / (365.25 * 24 * 60 * 60 * 1000)
-    );
-    if (years > 150) {
-      this.userForm.controls["dateOfBirth"].markAsTouched();
-      this.userForm.controls["dateOfBirth"].setErrors({
-        incorrect: true,
-      });
-      this.yyyy.nativeElement.value = "";
-      this.date = "";
-      this.month = "";
-      this.year = "";
-      return "";
-    } else {
-      return years;
-    }
   }
 
   /**
@@ -1282,43 +555,32 @@ export class DemographicComponent
    * @param {*} entityArray
    * @memberof DemographicComponent
    */
-  private filterOnLangCode(langCode: string, field: string, entityArray: any) {
-    return new Promise((resolve, reject) => {
-      if (entityArray) {
-        //console.log(entityArray);
-        entityArray.filter((element: any) => {
-          //console.log(element);
-          if (element.langCode === langCode) {
-            let codeValue: CodeValueModal;
-            if (element.genderName) {
-              codeValue = {
-                valueCode: element.code,
-                valueName: element.genderName,
-                languageCode: element.langCode,
-              };
-            } else if (element.name) {
-              codeValue = {
-                valueCode: element.code,
-                valueName: element.name,
-                languageCode: element.langCode,
-              };
-            } else {
-              codeValue = {
-                valueCode: element.code,
-                valueName: element.value,
-                languageCode: element.langCode,
-              };
-            }
-            if (langCode === this.primaryLang) {
-              this.primarydropDownFields[field].push(codeValue);
-            } else {
-              this.secondaryDropDownLables[field].push(codeValue);
-            }
-            resolve(true);
+  private filterOnLangCode(langCode: string, genderEntity = [], entityArray: any) {
+    if (entityArray) {
+      entityArray.filter((element: any) => {
+        if (element.langCode === langCode) genderEntity.push(element);
+      });
+      if (this.formControlValues.gender) {
+        genderEntity.filter(element => {
+          if (element.code === this.formControlValues.gender) {
+            const codeValue: CodeValueModal = {
+              valueCode: element.code,
+              valueName: element.genderName,
+              languageCode: element.langCode
+            };
+            this.addCodeValue(codeValue);
+          }
+          if (element.code === this.formControlValues.residenceStatus) {
+            const codeValue: CodeValueModal = {
+              valueCode: element.code,
+              valueName: element.name,
+              languageCode: element.langCode
+            };
+            this.addCodeValue(codeValue);
           }
         });
       }
-    });
+    }
   }
 
   /**
@@ -1328,11 +590,140 @@ export class DemographicComponent
    * @memberof DemographicComponent
    */
   getLocationMetadataHirearchy() {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       const uppermostLocationHierarchy = this.dataStorageService.getLocationMetadataHirearchy();
       this.uppermostLocationHierarchy = uppermostLocationHierarchy;
       resolve(this.uppermostLocationHierarchy);
     });
+  }
+
+  /**
+   * @description This method get the next set of locations hierarchy for the selected location
+   *
+   * @param {MatSelectChange} event
+   * @param {CodeValueModal[][]} nextHierarchies
+   * @param {CodeValueModal[][]} currentLocationHierarchies
+   * @param {string} [formControlName]
+   * @memberof DemographicComponent
+   */
+  async onLocationSelect(
+    event: MatSelectChange,
+    nextHierarchies: CodeValueModal[],
+    currentLocationHierarchies: CodeValueModal[],
+    formControlName?: string
+  ) {
+    if (nextHierarchies) {
+      const element = nextHierarchies;
+      const languageCode = this.primaryLang;
+      let hierarchyIndex = this.locationHierarchy.indexOf(formControlName);
+      if(hierarchyIndex !== -1){
+        for(let i=hierarchyIndex;i<this.locationHierarchy.length;i++){
+          this.userForm.controls[this.locationHierarchy[i]].setValue("");
+        }
+      }
+      this.getLocationImmediateHierearchy(languageCode, event.value, element);
+    } else {
+      this.dataIncomingSuccessful = true;
+    }
+
+    if (currentLocationHierarchies) {
+      const currentLocationHierarchy = currentLocationHierarchies;
+      currentLocationHierarchy.filter(currentLocationHierarchy => {
+        if (currentLocationHierarchy.valueCode === event.value) {
+          this.addCodeValue(currentLocationHierarchy);
+        }
+      });
+    }
+  }
+
+  /**
+   * @description This method push to the CodeValueModal array
+   *
+   * @param {CodeValueModal} element
+   * @memberof DemographicComponent
+   */
+  addCodeValue(element: CodeValueModal) {
+    this.codeValue.push({
+      valueCode: element.valueCode,
+      valueName: element.valueName,
+      languageCode: element.languageCode
+    });
+  }
+
+  /**
+   * @description This method returns the next immediate location hierarchy for the selected location.
+   *
+   * @param {string} languageCode
+   * @param {string} parentLocationCode
+   * @param {CodeValueModal[]} childLocations
+   * @param {string} [currentLocationCode]
+   * @returns
+   * @memberof DemographicComponent
+   */
+  getLocationImmediateHierearchy(
+    languageCode: string,
+    parentLocationCode: string,
+    childLocations: CodeValueModal[],
+    currentLocationCode?: string
+  ) {
+    childLocations.length = 0;
+    return new Promise(resolve => {
+      if (!this.hierarchyAvailable) {
+        this.onLocationNotAvailable(childLocations, this.defaultLocation, this.defaultLocation, languageCode);
+        return resolve(true);
+      }
+      this.subscriptions.push(
+        this.dataStorageService.getLocationImmediateHierearchy(languageCode, parentLocationCode).subscribe(
+          response => {
+            if (response[appConstants.RESPONSE]) {
+              response[appConstants.RESPONSE][appConstants.DEMOGRAPHIC_RESPONSE_KEYS.locations].forEach(element => {
+                let codeValueModal: CodeValueModal = {
+                  valueCode: element.code,
+                  valueName: element.name,
+                  languageCode: languageCode
+                };
+                childLocations.push(codeValueModal);
+                if (currentLocationCode && codeValueModal.valueCode === currentLocationCode) {
+                  this.addCodeValue(codeValueModal);
+                }
+              });
+              return resolve(true);
+            }
+            // if no location hiererchy available
+            else if (
+              response[appConstants.NESTED_ERROR] &&
+              response[appConstants.NESTED_ERROR][0][appConstants.ERROR_CODE] ===
+                appConstants.ERROR_CODES.noLocationAvailable
+            ) {
+              this.hierarchyAvailable = false;
+              this.onLocationNotAvailable(childLocations, this.defaultLocation, this.defaultLocation, languageCode);
+              return resolve(true);
+            } else {
+              this.onError(this.errorlabels.error, '');
+            }
+          },
+          error => {
+            this.onError(this.errorlabels.error, error);
+            this.loggerService.error('Unable to fetch Below Hierearchy');
+          }
+        )
+      );
+    });
+  }
+
+  private onLocationNotAvailable(
+    childLocations: CodeValueModal[],
+    valueCode: string,
+    valueName: string,
+    languageCode: string
+  ) {
+    let codeValueModal: CodeValueModal = {
+      valueCode: valueCode,
+      valueName: valueName,
+      languageCode: languageCode
+    };
+    childLocations.push(codeValueModal);
+    this.addCodeValue(codeValueModal);
   }
 
   /**
@@ -1341,59 +732,155 @@ export class DemographicComponent
    * @memberof DemographicComponent
    */
   onBack() {
-    let url = "";
-    url = Utils.getURL(this.router.url, "dashboard", 2);
+    let url = '';
+    url = Utils.getURL(this.router.url, 'dashboard', 2);
     this.router.navigate([url]);
   }
 
   /**
-   * @description This method is to format the date event to yyyy/mm/dd format
+   * @description On change of natioanlity, this is called.
    *
-   * @param event date event
+   * @param {*} entity
+   * @param {MatButtonToggleChange} [event]
+   * @memberof DemographicComponent
    */
-  dateEvent(event) {
-    const date = new Date(event.value);
-    const year = date.getFullYear();
-    let month = date.getMonth() + 1;
-    const datee = date.getDate();
-
-    let monthOfYear = "";
-    let dateOfMonth = "";
-    if (month < 10) {
-      monthOfYear = "0" + month;
-    } else {
-      monthOfYear = month.toString();
+  onGenderChange(entity: any, event?: MatButtonToggleChange) {
+    if (event) {
+      entity.filter((element: any) => {
+        if (event.value === element.code) {
+          const codeValue: CodeValueModal = {
+            languageCode: element.langCode,
+            valueCode: element.code,
+            valueName: element.genderName
+          };
+          this.addCodeValue(codeValue);
+        }
+      });
     }
+  }
 
-    if (datee < 10) {
-      dateOfMonth = "0" + datee;
-    } else {
-      dateOfMonth = datee.toString();
-    }
-
-    const formattedDate = `${year}/${monthOfYear}/${dateOfMonth}`;
-    this.userForm.controls["dateOfBirth"].setValue(formattedDate);
-    if (this.primaryLang !== this.secondaryLang) {
-      this.transUserForm.controls["dateOfBirth"].setValue(formattedDate);
-    }
-    if (this.dataModification) {
-      this.hasDobChanged();
+  onResidenceStatusChange(entity: any, event?: MatButtonToggleChange) {
+    if (event) {
+      entity.filter((element: any) => {
+        if (event.value === element.code) {
+          const codeValue: CodeValueModal = {
+            languageCode: element.langCode,
+            valueCode: element.code,
+            valueName: element.name
+          };
+          this.addCodeValue(codeValue);
+        }
+      });
     }
   }
 
   /**
-   * @description To mark a input as readonly or not
+   * @description This is called when age is changed and the date of birth will get calculated.
    *
-   *
-   * @param field Input control name
+   * @memberof DemographicComponent
    */
+  onAgeChange() {
+    this.defaultDay = "01";
+    this.defaultMonth = "01";
+    const age = this.age.nativeElement.value;
+    if(isNaN(age))
+    {
+      this.userForm.controls[this.formControlNames.age].patchValue('');
+        return;
+    }
+    
+    const ageRegex = new RegExp(this.agePattern);
+    if (age && age != this.oldAge)
+      if (ageRegex.test(age)) {
+        const now = new Date();
+        const calulatedYear = now.getFullYear() - age;
+        this.userForm.controls[this.formControlNames.date].patchValue(this.defaultDay);
+        this.userForm.controls[this.formControlNames.month].patchValue(this.defaultMonth);
+        this.userForm.controls[this.formControlNames.year].patchValue(calulatedYear);
+        this.userForm.controls[this.formControlNames.dateOfBirth].patchValue(
+          calulatedYear + '/' + this.defaultMonth + '/' + this.defaultDay
+        );
+        this.userForm.controls[this.formControlNames.dateOfBirth].setErrors(null);
+      } else {
+        this.oldAge = age;
+        this.userForm.controls[this.formControlNames.date].patchValue('');
+        this.userForm.controls[this.formControlNames.month].patchValue('');
+        this.userForm.controls[this.formControlNames.year].patchValue('');
+      }
+  }
 
-  getReadOnlyfields(field: string) {
-    const transliterate = [...appConstants.TRANSLITERATE_FIELDS];
-    if (transliterate.includes(field)) {
-      return false;
+  /**
+   * @description This is called whenever there is a change in Date of birth field and accordingly age
+   * will get calculate.
+   *
+   * @memberof DemographicComponent
+   */
+  onDOBChange() {
+    const date = this.dd.nativeElement.value;
+    const month = this.mm.nativeElement.value;
+    const year = this.yyyy.nativeElement.value;
+    if(isNaN(date))
+    {
+      this.userForm.controls[this.formControlNames.date].patchValue('');
+      return;
+    }
+    if(isNaN(month))
+    {
+      this.userForm.controls[this.formControlNames.month].patchValue('');
+      return;
+    }
+    if(isNaN(year))
+    {
+      this.userForm.controls[this.formControlNames.year].patchValue('');
+      return;
+    }
+    
+    
+  
+    const newDate = year + '/' + month + '/' + date;
+    const dobRegex = new RegExp(this.DOB_PATTERN);
+    if (dobRegex.test(newDate)) {
+      const dateform = new Date(newDate);
+      this.userForm.controls[this.formControlNames.dateOfBirth].patchValue(newDate);
+      this.userForm.controls[this.formControlNames.age].patchValue(this.calculateAge(dateform));
+    } else if (date && month && year) {
+      this.userForm.controls[this.formControlNames.dateOfBirth].markAsTouched();
+      this.userForm.controls[this.formControlNames.dateOfBirth].setErrors({
+        incorrect: true
+      });
+      this.userForm.controls[this.formControlNames.age].patchValue('');
+    }
+  }
+
+  /**
+   * @description This method calculates the age for the given date.
+   *
+   * @param {Date} bDay
+   * @returns
+   * @memberof DemographicComponent
+   */
+  calculateAge(bDay: Date) {
+    const now = new Date();
+    const born = new Date(bDay);
+    const years = Math.floor((now.getTime() - born.getTime()) / (365.25 * 24 * 60 * 60 * 1000));
+
+    if (this.dataModification) {
+      this.oldAge = years;
+      return years;
+    }
+    if (years > 150) {
+      this.userForm.controls[this.formControlNames.dateOfBirth].markAsTouched();
+      this.userForm.controls[this.formControlNames.dateOfBirth].setErrors({
+        incorrect: true
+      });
+      this.userForm.controls[this.formControlNames.year].setErrors(null);
+      return '';
     } else {
-      return true;
+      this.userForm.controls[this.formControlNames.dateOfBirth].markAsUntouched();
+      this.userForm.controls[this.formControlNames.dateOfBirth].setErrors(null);
+      this.userForm.controls[this.formControlNames.year].setErrors(null);
+      this.oldAge = years;
+      return years;
     }
   }
 
@@ -1404,40 +891,37 @@ export class DemographicComponent
    * @param {*} toControl
    * @memberof DemographicComponent
    */
-
-  onTransliteration(fromControl: any, toControl: any) {
-    if (this.userForm.controls[`${fromControl}`].value) {
+  onTransliteration(fromControl: FormControl, toControl: any) {
+    if (fromControl.value) {
       const request: any = {
         from_field_lang: this.primaryLang,
-        from_field_value: this.userForm.controls[`${fromControl}`].value,
+        from_field_value: fromControl.value,
         to_field_lang: this.secondaryLang,
+        to_field_value: ''
       };
+
       if (this.primaryLang === this.secondaryLang) {
-        this.transUserForm.controls[toControl].patchValue(
-          this.userForm.controls[`${fromControl}`].value
-        );
+        this.transUserForm.controls[toControl].patchValue(fromControl.value);
         return;
       }
 
       this.subscriptions.push(
         this.dataStorageService.getTransliteration(request).subscribe(
-          (response) => {
+          response => {
             if (response[appConstants.RESPONSE])
-              this.transUserForm.controls[`${toControl}`].patchValue(
-                response[appConstants.RESPONSE].to_field_value
-              );
+              this.transUserForm.controls[toControl].patchValue(response[appConstants.RESPONSE].to_field_value);
             else {
-              this.onError(this.errorlabels.error, "");
+              this.onError(this.errorlabels.error, '');
             }
           },
-          (error) => {
+          error => {
             this.onError(this.errorlabels.error, error);
             this.loggerService.error(error);
           }
         )
       );
     } else {
-      this.transUserForm.controls[`${toControl}`].patchValue("");
+      this.transUserForm.controls[toControl].patchValue('');
     }
   }
 
@@ -1450,7 +934,7 @@ export class DemographicComponent
    * @memberof DemographicComponent
    */
   private noWhitespaceValidator(control: FormControl) {
-    const isWhitespace = (control.value || "").trim().length === 0;
+    const isWhitespace = (control.value || '').trim().length === 0;
     const isValid = !isWhitespace;
     return isValid ? null : { whitespace: true };
   }
@@ -1460,43 +944,38 @@ export class DemographicComponent
    *
    * @memberof DemographicComponent
    */
-  onSubmit() {
-    this.uiFields.forEach((element) => {
-      this.userForm.controls[`${element.id}`].markAsTouched();
-      if (this.primaryLang !== this.secondaryLang) {
-        this.transUserForm.controls[`${element.id}`].markAsTouched();
-      }
-    });
-    if (this.userForm.valid) {
-      const identity = this.createIdentityJSONDynamic(false);
+  onSubmit(e: Event) {
+
+
+    this.markFormGroupTouched(this.userForm);
+    if (this.userForm.valid && this.dataIncomingSuccessful) {
+      const identity = this.createIdentityJSONDynamic();
       const request = this.createRequestJSON(identity);
-      //console.log(request);
       const responseJSON = this.createResponseJSON(identity);
-      //console.log(responseJSON);
       this.dataUploadComplete = false;
       if (this.dataModification) {
         this.subscriptions.push(
-          this.dataStorageService.updateUser(request, this.preRegId).subscribe(
-            (response) => {
+          this.dataStorageService.updateUser(request, this.user.preRegId).subscribe(
+            response => {
               if (
-                (response[appConstants.NESTED_ERROR] === null &&
-                  response[appConstants.RESPONSE] === null) ||
+                (response[appConstants.NESTED_ERROR] === null && response[appConstants.RESPONSE] === null) ||
                 response[appConstants.NESTED_ERROR] !== null
               ) {
-                let message = "";
+                let message = '';
                 if (
-                  response[appConstants.NESTED_ERROR][0][
-                    appConstants.ERROR_CODE
-                  ] === appConstants.ERROR_CODES.invalidPin
+                  response[appConstants.NESTED_ERROR][0][appConstants.ERROR_CODE] ===
+                  appConstants.ERROR_CODES.invalidPin
                 ) {
                   message = this.formValidation(response);
                 } else message = this.errorlabels.error;
-                this.onError(message, "");
+                this.onError(message, '');
                 return;
+              } else {
+                this.onModification(responseJSON);
               }
               this.onSubmission();
             },
-            (error) => {
+            error => {
               this.loggerService.error(error);
               this.onError(this.errorlabels.error, error);
             }
@@ -1505,32 +984,28 @@ export class DemographicComponent
       } else {
         this.subscriptions.push(
           this.dataStorageService.addUser(request).subscribe(
-            (response) => {
+            response => {
               if (
-                (response[appConstants.NESTED_ERROR] === null &&
-                  response[appConstants.RESPONSE] === null) ||
+                (response[appConstants.NESTED_ERROR] === null && response[appConstants.RESPONSE] === null) ||
                 response[appConstants.NESTED_ERROR] !== null
               ) {
                 this.loggerService.error(JSON.stringify(response));
-                let message = "";
+                let message = '';
                 if (
                   response[appConstants.NESTED_ERROR] &&
-                  response[appConstants.NESTED_ERROR][0][
-                    appConstants.ERROR_CODE
-                  ] === appConstants.ERROR_CODES.invalidPin
+                  response[appConstants.NESTED_ERROR][0][appConstants.ERROR_CODE] ===
+                    appConstants.ERROR_CODES.invalidPin
                 ) {
-                  console.log(response);
                   message = this.formValidation(response);
                 } else message = this.errorlabels.error;
-                this.onError(message, "");
+                this.onError(message, '');
                 return;
               } else {
-                this.preRegId =
-                  response[appConstants.RESPONSE].preRegistrationId;
+                this.onAddition(response, responseJSON);
               }
               this.onSubmission();
             },
-            (error) => {
+            error => {
               this.loggerService.error(error);
               this.onError(this.errorlabels.error, error);
             }
@@ -1541,13 +1016,55 @@ export class DemographicComponent
   }
 
   formValidation(response: any) {
-    const str = response[appConstants.NESTED_ERROR][0]["message"];
-    const attr = str.substring(str.lastIndexOf("/") + 1);
+    const str = response[appConstants.NESTED_ERROR][0]['message'];
+    const attr = str.substring(str.lastIndexOf('/') + 1);
     let message = this.errorlabels[attr];
-    this.userForm.controls[attr].setErrors({
-      incorrect: true,
+    this.userForm.controls[this.formControlNames[attr]].setErrors({
+      incorrect: true
     });
     return message;
+  }
+
+  /**
+   * @description This is called when user chooses to modify the data.
+   *
+   * @private
+   * @param {ResponseModel} request
+   * @memberof DemographicComponent
+   */
+  private onModification(request: ResponseModel) {
+    this.regService.updateUser(
+      this.step,
+      new UserModel(this.preRegId, request, this.regService.getUserFiles(this.step), this.codeValue)
+    );
+    this.bookingService.updateNameList(this.step, {
+      fullName: this.userForm.controls[this.formControlNames.firstName].value+" "+this.userForm.controls[this.formControlNames.lastName].value,
+      preRegId: this.preRegId,
+      regDto: this.bookingService.getNameList()[0].regDto,
+      firstName: this.userForm.controls[this.formControlNames.firstName].value,
+      lastName: this.userForm.controls[this.formControlNames.lastName].value,
+      location: this.userForm.controls[this.formControlNames.prefecture].value,
+    });
+  }
+
+  /**
+   * @description This is called when user creates a new application.
+   *
+   * @private
+   * @param {*} response
+   * @param {ResponseModel} request
+   * @memberof DemographicComponent
+   */
+  private onAddition(response: any, request: ResponseModel) {
+    this.preRegId = response[appConstants.RESPONSE][appConstants.DEMOGRAPHIC_RESPONSE_KEYS.preRegistrationId];
+    this.regService.addUser(new UserModel(this.preRegId, request, this.files, this.codeValue));
+    this.bookingService.addNameList({
+      fullName: this.userForm.controls[this.formControlNames.firstName].value+" "+this.userForm.controls[this.formControlNames.lastName].value,
+      preRegId: this.preRegId,
+      firstName: this.userForm.controls[this.formControlNames.firstName].value,
+      lastName: this.userForm.controls[this.formControlNames.lastName].value,
+      location: this.userForm.controls[this.formControlNames.prefecture].value,
+    });
   }
 
   /**
@@ -1557,18 +1074,16 @@ export class DemographicComponent
    */
   onSubmission() {
     this.canDeactivateFlag = false;
+    this.loggerService.info('regService.getUsers', this.regService.getUsers());
     this.checked = true;
     this.dataUploadComplete = true;
-    let url = "";
-    if (localStorage.getItem("modifyUserFromPreview") === "true") {
-      url = Utils.getURL(this.router.url, "summary");
-      localStorage.setItem("modifyUserFromPreview", "false");
-      this.router.navigateByUrl(url + `/${this.preRegId}/preview`);
+    let url = '';
+    if (this.message['modifyUserFromPreview'] === 'true') {
+      url = Utils.getURL(this.router.url, 'summary/preview');
     } else {
-      url = Utils.getURL(this.router.url, "file-upload");
-      localStorage.removeItem("addingUserFromPreview");
-      this.router.navigate([url, this.preRegId]);
+      url = Utils.getURL(this.router.url, 'file-upload');
     }
+    this.router.navigate([url]);
   }
 
   /**
@@ -1579,33 +1094,16 @@ export class DemographicComponent
    * @param {IdentityModel} identity
    * @memberof DemographicComponent
    */
-  private createAttributeArray(element: string, identity) {
+  private createAttributeArray(element: string, identity: IdentityModel) {
     let attr: any;
-    if (typeof identity[element] === "object") {
-      let forms = [];
-      let formControlNames = "";
-      const transliterateField = [...appConstants.TRANSLITERATE_FIELDS];
-      if (transliterateField.includes(element)) {
-        forms = ["userForm", "transUserForm"];
-        formControlNames = element;
-      } else {
-        forms = ["userForm", "userForm"];
-        formControlNames = element;
-      }
+    if (typeof identity[element] === 'object') {
       attr = [];
-      for (let index = 0; index < this.languages.length; index++) {
-        const languageCode = this.languages[index];
-        const form = forms[index];
-        const controlName = formControlNames;
-        attr.push(
-          new AttributeModel(
-            languageCode,
-            this[form].controls[`${controlName}`].value
-          )
-        );
-      }
-    } else if (typeof identity[element] === "string") {
-      attr = this.userForm.controls[`${element}`].value;
+      const languageCode = this.primaryLang;
+      const form = 'userForm';
+      const controlName = element;
+      attr.push(new AttributeModel(languageCode, this[form].controls[this.formControlNames[controlName]].value));
+    } else if (typeof identity[element] === 'string' && this.userForm.controls[this.formControlNames[element]].value) {
+      attr = this.userForm.controls[this.formControlNames[element]].value;
     }
     identity[element] = attr;
   }
@@ -1618,7 +1116,7 @@ export class DemographicComponent
    * @memberof DemographicComponent
    */
   private markFormGroupTouched(formGroup: FormGroup) {
-    (<any>Object).values(formGroup.controls).forEach((control) => {
+    (<any>Object).values(formGroup.controls).forEach(control => {
       control.markAsTouched();
       if (control.controls) {
         this.markFormGroupTouched(control);
@@ -1633,79 +1131,14 @@ export class DemographicComponent
    * @returns
    * @memberof DemographicComponent
    */
-  private createIdentityJSONDynamic(includingBlankFields: boolean) {
-    const identityObj = {};
-    const newIdentityObj = {};
-    this.identityData.forEach((field) => {
-      if (
-        field.inputRequired === true &&
-        !(field.controlType === "fileupload")
-      ) {
-        if (!field.inputRequired) {
-          identityObj[field.id] = "";
-          newIdentityObj[field.id] = "";
-        } else {
-          if (field.type === "simpleType") {
-            identityObj[field.id] = [];
-          } else if (field.type === "string") {
-            identityObj[field.id] = "";
-          }
-        }
-      } else {
-        if (field.id == appConstants.IDSchemaVersionLabel) {
-          if (field.type === "string") {
-            identityObj[field.id] = this.config[
-              appConstants.CONFIG_KEYS.mosip_idschema_version
-            ];
-          } else if (field.type === "number") {
-            identityObj[field.id] = Number(
-              this.config[appConstants.CONFIG_KEYS.mosip_idschema_version]
-            );
-          }
-        }
-      }
-    });
-
-    let keyArr: any[] = Object.keys(identityObj);
-    for (let index = 0; index < keyArr.length; index++) {
+  private createIdentityJSONDynamic() {
+    const identity = new IdentityModel(this.config[appConstants.CONFIG_KEYS.mosip_idschema_version], [], [], '', [], [], '', [], [], [], [], [], '', '');
+    let keyArr: any[] = Object.keys(this.formControlNames);
+    for (let index = 0; index < keyArr.length - 4; index++) {
       const element = keyArr[index];
-      if (element != appConstants.IDSchemaVersionLabel) {
-        this.createAttributeArray(element, identityObj);
-      }
+      this.createAttributeArray(element, identity);
     }
-    let identityRequest = { identity: identityObj };
-    if (!includingBlankFields) {
-      //now remove the blank fields from the identityObj
-      for (let index = 0; index < keyArr.length; index++) {
-        const element = keyArr[index];
-        if (element == appConstants.IDSchemaVersionLabel) {
-          newIdentityObj[element] = identityObj[element];
-        } else if (typeof identityObj[element] === "object") {
-          let elementValue = identityObj[element];
-          if (elementValue && elementValue.length > 0) {
-            if (
-              elementValue[0].value !== "" &&
-              elementValue[0].value !== null &&
-              elementValue[0].value !== undefined
-            ) {
-              newIdentityObj[element] = elementValue;
-            }
-          }
-        } else if (typeof identityObj[element] === "string") {
-          let elementValue = identityObj[element];
-          if (
-            elementValue !== "" &&
-            elementValue !== null &&
-            elementValue !== undefined
-          ) {
-            newIdentityObj[element] = elementValue;
-          }
-        }
-      }
-      identityRequest = { identity: newIdentityObj };
-    }
-    console.log(identityRequest);
-    return identityRequest;
+    return identity;
   }
 
   /**
@@ -1716,16 +1149,16 @@ export class DemographicComponent
    * @returns
    * @memberof DemographicComponent
    */
-  private createRequestJSON(identity) {
+  private createRequestJSON(identity: IdentityModel) {
     let langCode = this.primaryLang;
-    if (this.user.request) {
+    if (this.user) {
       langCode = this.user.request.langCode;
     }
-    const request = {
+    const req: RequestModel = {
       langCode: langCode,
-      demographicDetails: identity,
+      demographicDetails: new DemoIdentityModel(identity)
     };
-    return request;
+    return req;
   }
 
   /**
@@ -1736,48 +1169,16 @@ export class DemographicComponent
    * @returns
    * @memberof DemographicComponent
    */
-  private createResponseJSON(identity) {
-    let preRegistrationId = "";
-    let createdBy = this.loginId;
-    let createdDateTime = Utils.getCurrentDate();
-    let updatedDateTime = "";
+  private createResponseJSON(identity: IdentityModel) {
     let langCode = this.primaryLang;
-    if (this.user.request) {
-      preRegistrationId = this.preRegId;
-      createdBy = this.user.request.createdBy;
-      createdDateTime = this.user.request.createdDateTime;
-      updatedDateTime = Utils.getCurrentDate();
+    if (this.user) {
       langCode = this.user.request.langCode;
     }
-    const req = {
-      preRegistrationId: this.preRegId,
-      createdBy: createdBy,
-      createdDateTime: createdDateTime,
-      updatedDateTime: updatedDateTime,
+    const req: ResponseModel = {
       langCode: langCode,
-      demographicDetails: identity,
+      demographicDetails: new DemoIdentityModel(identity)
     };
     return req;
-  }
-
-  hasDobChanged() {
-    const currentDob = this.user.request.demographicDetails.identity
-      .dateOfBirth;
-    const changedDob = this.userForm.controls["dateOfBirth"].value;
-    const currentDobYears = this.calculateAge(currentDob);
-    const changedDobYears = this.calculateAge(changedDob);
-    const ageToBeAdult = this.config[appConstants.CONFIG_KEYS.mosip_adult_age];
-    if (this.showPreviewButton) {
-      if (
-        (currentDobYears < ageToBeAdult && changedDobYears < ageToBeAdult) ||
-        (currentDobYears > ageToBeAdult && changedDobYears > ageToBeAdult)
-      ) {
-        this.showPreviewButton = true;
-      } else {
-        this.showPreviewButton = false;
-        localStorage.setItem("modifyUserFromPreview", "false");
-      }
-    }
   }
 
   /**
@@ -1790,25 +1191,26 @@ export class DemographicComponent
     this.dataUploadComplete = true;
     this.hasError = true;
     this.titleOnError = this.errorlabels.errorLabel;
+    // this.errorService.onError(this.titleOnError, message, error, this.errorlabels);
+
     if (
       error &&
       error[appConstants.ERROR] &&
       error[appConstants.ERROR][appConstants.NESTED_ERROR] &&
-      error[appConstants.ERROR][appConstants.NESTED_ERROR][0].errorCode ===
-        appConstants.ERROR_CODES.tokenExpired
+      error[appConstants.ERROR][appConstants.NESTED_ERROR][0].errorCode === appConstants.ERROR_CODES.tokenExpired
     ) {
       message = this.errorlabels.tokenExpiredLogout;
-      this.titleOnError = "";
+      this.titleOnError = '';
     }
     const body = {
-      case: "ERROR",
+      case: 'ERROR',
       title: this.titleOnError,
       message: message,
-      yesButtonText: this.errorlabels.button_ok,
+      yesButtonText: this.errorlabels.button_ok
     };
     this.dialog.open(DialougComponent, {
-      width: "250px",
-      data: body,
+      width: '250px',
+      data: body
     });
   }
 
@@ -1843,17 +1245,30 @@ export class DemographicComponent
   }
 
   scrollUp(ele: HTMLElement) {
-    ele.scrollIntoView({ behavior: "smooth" });
+    ele.scrollIntoView({ behavior: 'smooth' });
   }
 
-  @HostListener("blur", ["$event"])
-  @HostListener("focusout", ["$event"])
+  @HostListener('blur', ['$event'])
+  @HostListener('focusout', ['$event'])
   private _hideKeyboard() {
     if (this.matKeyboardService.isOpened) {
       this.matKeyboardService.dismiss();
     }
   }
+
   ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
+
+  onEnterDown(event: any) {
+     $('input').keydown( function(e) {
+      var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;
+      if(key == 13) {
+        e.preventDefault();
+        var inputs = $(this).closest('form').find('.tabulation');
+        inputs.eq( inputs.index(this)+ 1 ).focus();
+      }
+    });
+  }
+ 
 }

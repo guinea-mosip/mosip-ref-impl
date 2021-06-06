@@ -1,70 +1,66 @@
-import { Injectable } from "@angular/core";
-import { Router } from "@angular/router";
-import { UserIdleService } from "angular-user-idle";
-import { DataStorageService } from "../core/services/data-storage.service";
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserIdleService } from 'angular-user-idle';
+import { DataStorageService } from '../core/services/data-storage.service';
+import { BehaviorSubject } from 'rxjs';
+import * as appConstants from "../app.constants";
+import {AppConfigService} from "../app-config.service";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root'
 })
 export class AuthService {
-  cookieName = "Authorization";
-  isCaptchaSuccess: boolean = false;
+  myProp = new BehaviorSubject<boolean>(false);
   constructor(
     private router: Router,
+    private httpClient: HttpClient,
+    private appConfigService: AppConfigService,
     private dataStorageService: DataStorageService,
     private userIdle: UserIdleService
   ) {}
 
+  myProp$ = this.myProp.asObservable();
   token: string;
-  primaryLang: string = 'eng';
-  secondaryLang: string;
+  BASE_URL = this.appConfigService.getConfig()['BASE_URL'];
+  PRE_REG_URL = this.appConfigService.getConfig()['PRE_REG_URL'];
 
-  getPrimaryLang() {
-    return this.primaryLang;
+  getLogin(){
+    let that=this;
+    return new Promise(resolve => {
+      const url = this.BASE_URL + appConstants.APPEND_URL.gender;
+      this.httpClient.get(url, {observe: 'response'}).subscribe(
+        response => {
+          that.setToken();
+          resolve(true);
+        },
+        error => {
+          console.log(error);
+          that.removeToken();
+          resolve(false);
+        }
+      );
+    });
   }
 
   setToken() {
-    this.token = this.getCookie();
+    this.token = 'settingToken';
+    this.myProp.next(true);
   }
 
   removeToken() {
     this.token = null;
+    this.myProp.next(false);
   }
-
-  getCookie() {
-    const name = this.cookieName;
-    var match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
-    if (match) return match[2];
-  }
-
-  setCaptchaAuthenticate(isSuccess:boolean){
-   this.isCaptchaSuccess = isSuccess;
-  }
-   
-  isCaptchaAuthenticated(){
-    return this.isCaptchaSuccess;
-  }
-
 
   isAuthenticated() {
-    if (
-      localStorage.getItem("loggedIn") === "true" &&
-      (this.token !== null || this.token !== undefined)
-    ) {
-      return true;
-    } else {
-      return false;
-    }
+    return this.token != null;
   }
 
   onLogout() {
-    localStorage.setItem("loggedIn", "false");
-    localStorage.setItem("loggedOut", "true");
     this.removeToken();
-    localStorage.removeItem("config");
-    this.setCaptchaAuthenticate(false);
     this.dataStorageService.onLogout().subscribe();
-    this.router.navigate(["/"]);
+    this.router.navigate(['/login']);
     this.userIdle.stopWatching();
   }
 }

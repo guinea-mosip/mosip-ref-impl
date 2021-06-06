@@ -1,0 +1,377 @@
+.breadcrumb {
+    margin-top: 5px;
+    font-size: 12px;
+}
+
+.header-container {
+    display: flex;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.header-text {
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: -117px;
+}
+
+.wuri-card {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-left: -15px;
+    margin-right: -15px;
+    font-family: Arial, Roboto, "Helvetica Neue", sans-serif;
+    font-size: 12px;
+    padding: 15px;
+    color: #020F59;
+}
+
+.container {
+    color: #020F59;
+    border: solid #020F59 1px;
+    border-radius: 30px;
+    padding-left: 50px;
+    /*box-shadow: 0px 3px 6px darkgrey;*/
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 10px;
+}
+
+.form {
+    position: relative;
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    max-width: 100%;
+}
+
+.header {
+    position: relative;
+    display: block;
+    width: 100%;
+    background: #fff;
+    text-decoration: none;
+    outline: none;
+    line-height: 44px;
+    white-space: nowrap;
+    padding: 0 20px 0 60px;
+    border-bottom:1px solid #BCE0FD;
+    border-top: 1px solid #BCE0FD;
+    font-weight: bold;
+    font-size: 20px;
+}
+.left-h {
+    width: 50%;
+    font-size: 15px;
+    color: #020F59;
+    font-weight: unset;
+}
+
+.right-h {
+
+}
+.active {
+    color: #020F59;
+}
+
+
+
+.adresse .email .telephone {
+    display: block;
+    margin-top: 30px;
+    font-size: 14px;
+}
+
+.contact-title {
+    margin-top: -15px;
+    margin-bottom: 5px;
+}
+
+.submit_buttona {
+    background-color: #BCE0FD;
+    border: none;
+    color: #020F59 !important;
+    text-align: center;
+    text-decoration: none;
+    font-size: 0.8rem;
+    cursor: pointer;
+    text-transform: capitalize;
+    font-weight: bold;
+    width: 150px;
+    height: 45px;
+    border-radius: 5px 5px;
+    padding-right: 5px;
+}
+
+.submit_button {
+    min-width: 158px;
+    min-height: 50px;
+    padding: 0px 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: 4px;
+}
+
+.btn_axn-pri[disabled]{
+    background: #BCE0FD;
+}
+
+.capt2 {
+    position: absolute;
+    z-index: 30;
+    display: block;
+}
+
+.mycaptcha {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.extra-label{
+    font-size: 15px;
+}
+
+.center-block {
+    display: block;
+    justify-content: normal;
+    width: 360px;
+}
+
+.center-block-cent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-us{
+    height: 700px;
+    overflow-y: auto;
+}
+.contact {
+    position: relative;
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    max-width: 100%;
+}
+
+.address_wording {
+    display: block;
+}
+
+.mat-select-object {
+    border: 1px solid #BCE0FD;
+    height: 35px;
+}
+
+.espace{
+    margin-left: 1.3em;
+}
+
+.space{
+    margin-left: 5.5em;
+}
+
+textarea {
+    border-radius: 2px;
+    height: 85px;
+    border: solid 1px #BCE0FD !important;
+}
+
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-infix{
+    width: 360px;
+}
+
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-infix mat-select{
+    border-bottom: none !important;
+    margin-bottom: -8px;
+}
+
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-infix textarea{
+    border-bottom: none !important;
+    margin-bottom: -8px;
+}
+
+::ng-deep .mat-select-value-text {
+    position: absolute;
+    padding-top: 7px;
+    padding-left: 5px;
+    text-transform: uppercase;
+}
+
+@media (max-width: 1280px) {
+    .title {
+        margin-left: 10%;
+    }
+}
+
+@media (max-width: 1285px) {
+    .title {
+        margin-left: 15%;
+    }
+}
+
+@media (max-width: 3000px) {
+    .title {
+        margin-left: 24.5%;
+    }
+}
+
+@media (max-width: 700px) {
+    .center-block {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .captcha-center {
+        position: relative;
+        display: inline-block;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin-left: 0px;
+        padding-left: 2px;
+    }
+
+    ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-infix{
+        width: 100%;
+    }
+
+    .mat-select-mobile {
+        width: 100%;
+    }
+
+    .form {
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+        color: #020F59;
+    }
+
+    .center-block2 {
+        display: flex;
+        justify-content: center;
+    }
+
+    .container {
+        margin-left: 4%;
+        margin-right: 4%;
+        padding-left: 0px;
+    }
+
+    .contact {
+        margin-top: 25px;
+    }
+
+    .telephone, .email, .adresse {
+        margin-top: 15px;
+    }
+
+    .telephone {
+        margin-top: 10px;
+    }
+    .title {
+        margin-left: -45px;
+    }
+
+    .right-h {
+        display: none;
+    }
+
+
+}
+
+.my-10 {
+    margin-top: 15px;
+}
+
+
+
+.mat-form-field-wrapper {
+    padding-bottom: 0em;
+}
+
+.mat-form-field-infix {
+    border-bottom: none;
+}
+
+.label-object {
+    margin-top: -6px;
+}
+
+
+::ng-deep .mat-form-field-label{
+    text-overflow: initial !important;
+    overflow: initial !important;
+    white-space: initial !important;
+    padding-top: 5px;
+    padding-left: 5px;
+}
+.mat-drawer-content {
+    position: relative;
+    z-index: 1;
+    display: flow-root !important;
+    height: 100%;
+    width: 100% !important;
+    overflow-x: hidden !important;
+}
+
+mat-form-field {
+    margin-top: 8px;
+}
+
+mat-error {
+    margin-left: 5px;
+}
+
+
+.mat-option-text-contact-us {
+    color: #020F59;
+}
+
+.acceuil {
+    font-weight: normal;
+}
+
+.header-contact {
+    display: inline-block;
+}
+
+.mat-error-captcha {
+    font-size: 11px;
+
+}
+
+.mat-error-local {
+    font-size: 11px;
+    margin-top: 3px;
+    margin-left: 3px;
+}
+
+.maz {
+    text-transform: uppercase;
+}
+
+.padding-text-area {
+    padding-left: 2.5px;
+}
+
+.g-recaptcha {
+    transform:scale(1);
+    -webkit-transform:scal(1);
+    transform-origin:0 0;
+    -webkit-transform-origin:0 0;
+}

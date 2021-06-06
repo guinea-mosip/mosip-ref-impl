@@ -32,7 +32,7 @@ export class CanDeactivateGuardService implements CanDeactivate<UnloadDeactivate
           .open(DialougComponent, { width: '250px', data: body })
           .beforeClosed()
           .subscribe(res => {
-            if (res === true) resolve(true);
+            if (res) resolve(true);
             else resolve(false);
           });
       });

@@ -1,21 +1,15 @@
 .mat-sidenav-container {
   height: 100%;
   background: white;
-  
 }
 .mat-sidenav {
   width: 180px;
 }
-.main {
-  position: relative;
-  margin-top: 68px;
-  z-index: 5;
-}
 .mat-toolbar {
   top: 0;
-  position: fixed;
-  z-index: 999;
-  background-color: #0b6a82;
+  position: sticky;
+  z-index: 2;
+  background-color: #020F59;
   border-color: #707070;
   border-width: 1px;
   overflow-x: hidden;
@@ -28,8 +22,15 @@
   vertical-align: middle;
   cursor: pointer;
   /* UX enhancement */
-  padding-left: 4%;
+  padding-left: 2rem;
   /* UX enhancement end */
+  
+}
+
+.logobiometrie{
+  vertical-align: middle;
+  cursor: pointer;
+  padding-left: 0%;  
 }
 
 .spacer {
@@ -41,7 +42,7 @@
   line-height: 1.42857143 !important;
   text-decoration: none;
   text-transform: uppercase;
-  font-family: Helvetica;
+  font-family: Helvetica;;
 }
 .list-item {
   display: inline-flex;
@@ -64,13 +65,23 @@
   text-transform: none !important;
 }
 
-@media (min-width: 670px) {
+@media (min-width: 790px) {
   .sidenav-button {
     display: none;
   }
 }
-@media (max-width: 670px) {
+@media (max-width: 790px) {
   .list-item {
     display: none;
   }
+}
+button.mat-raised-button.mat-primary{
+  width:354px ;
+  background-color: #020F59 !important;
+  line-height: 48px !important;
+  font-weight: bold;
+}
+
+.wuri-list-item { 
+  width: auto !important;
 }

@@ -4,18 +4,18 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ConfigService {
+  navigationType: string;
   configs = {};
 
   public setConfig(configJson: any) {
-    localStorage.setItem('config',JSON.stringify(configJson.response));
-
+    this.configs = configJson.response;
   }
 
   public getConfigByKey(key: string) {
-    return  {...JSON.parse(localStorage.getItem('config'))}[key];
+    return this.configs[key];
   }
 
   public getConfig() {
-    return {...JSON.parse(localStorage.getItem('config'))};
+    return { ...this.configs };
   }
 }

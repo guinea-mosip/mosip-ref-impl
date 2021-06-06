@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="21.412" height="20" viewBox="0 0 21.412 20">
+  <g id="Toggle_Yes" data-name="Toggle Yes" transform="translate(0.707)">
+    <g id="Group_89" data-name="Group 89">
+      <g id="Rectangle_698" data-name="Rectangle 698" transform="translate(0)" fill="#020f59" stroke="#bce0fd" stroke-width="1">
+        <rect width="20" height="20" stroke="none"/>
+        <rect x="0.5" y="0.5" width="19" height="19" fill="none"/>
+      </g>
+      <path id="Checkbox" d="M7.931,13.793,0,5.862,1.609,4.253,7.931,10.46,18.391,0,20,1.609Z" transform="translate(0 2)" fill="#fff" stroke="#bce0fd" stroke-width="1"/>
+    </g>
+  </g>
+</svg>

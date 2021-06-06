@@ -15,7 +15,6 @@ import LanguageFactory from 'src/assets/i18n';
 export class HeaderComponent implements OnInit, OnDestroy {
   flag = false;
   subscription: Subscription;
-  primaryLang:string;
   constructor(
     public authService: AuthService,
     private translate: TranslateService,
@@ -26,19 +25,22 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-   this.primaryLang = localStorage.getItem('langCode');
+    this.subscription = this.authService.myProp$.subscribe(res => {
+      this.flag = res;
+    });
   }
 
   onLogoClick() {
-    if (this.authService.isAuthenticated()) {
-      this.router.navigate([localStorage.getItem('langCode'),'dashboard']);
-    } else {
-      this.router.navigate(['/']);
-    }
+    this.router.navigate(['/']);
+    // if (this.authService.isAuthenticated()) {
+    //   this.router.navigate(['dashboard']);
+    // } else {
+    //   this.router.navigate(['/']);
+    // }
   }
 
   onHome() {
-    this.router.navigate([localStorage.getItem('langCode'),"dashboard"]);
+    this.router.navigate(['/']);
   }
 
   async doLogout() {
@@ -49,6 +51,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     let factory = new LanguageFactory(localStorage.getItem('langCode'));
     let response = factory.getCurrentlanguage();
     const secondaryLanguagelabels = response['login']['logout_msg'];
+    localStorage.removeItem('loggedOutLang');
+    localStorage.removeItem('loggedOut');
     const data = {
       case: 'MESSAGE',
       message: secondaryLanguagelabels
@@ -59,15 +63,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         data: data
       })
       .afterClosed()
-      .subscribe(response => {
-        if(response){
-          localStorage.removeItem('loggedOutLang');
-          localStorage.removeItem('loggedOut');
-          this.authService.onLogout();
-        }
-        
-      }
-        );
+      .subscribe(() => this.authService.onLogout());
   }
 
   ngOnDestroy() {

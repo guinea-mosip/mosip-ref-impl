@@ -1,0 +1,162 @@
+<div class="contact-us">
+    <mat-card>
+        <div class="header-container">
+            <span class="breadcrumb">Accueil/<strong>Contact</strong></span>
+            <span class="spacer"></span>
+            <span class="header-text">Contact <!--{{'faq.breadcrumb.getting_started' | translate}}--></span>
+            <span class="spacer"></span>
+        </div>
+    </mat-card>
+    <div class="container">
+        <div class="wuri-card">
+            <div class="form" style="font-size: 15px" #form>
+                <article>
+                    <form [formGroup]="userForm" class="user__form">
+                        <h4>Ecrivez-nous</h4>
+                        <div class="center-block">
+                            <mat-form-field class="mat-select-mobile">
+                                <mat-label class="label-object">{{'contactUs.objet' | translate}}<span class="mandatory">*</span></mat-label>
+                                <mat-select
+                                        class="mat-select-object"
+                                        placeholder="{{'contactUs.reason' | translate}}"
+                                        appearance="legacy"
+                                        name="fontStyle"
+                                        aria-label="Font Style"
+                                        (selectionChange)="onReasonChange(reasons, $event)"
+                                        [formControlName]="formControlNames.reason">
+                                    <mat-option class="mat-option-text-contact-us" *ngFor="let reason of reasons" [value]="reason.key">
+                                        <span >{{reason.key}}</span>
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf=" userForm.get(formControlNames.reason).touched &&
+            userForm.get(formControlNames.reason).invalid"> {{'contactUs.mandatoryObjet' | translate}}</mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="center-block">
+                            <mat-form-field style="margin-top: -5px" *ngIf="displayOtherReason" class="mat-select-mobile" (mouseleave)="onBlurOtherReason()" (keyup)="onWrittingReason()">
+                                <mat-label>{{'contactUs.otherReason' | translate}}<span class="mandatory">*</span></mat-label>
+                                <input
+                                        class="maz"
+                                        matInput
+                                        #otherReason
+                                        placeholder="{{'contactUs.otherReason' | translate}}"
+                                        [formControlName]="formControlNames.otherReason"/>
+                                <span class="mat-error mat-error-local" *ngIf="otherReasonError"> {{'contactUs.mandatoryMotif' | translate}}</span>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="center-block">
+                            <mat-form-field class="mat-select-mobile">
+                                <mat-label  class="label-indent-textarea">{{'contactUs.message' | translate}}<span class="mandatory">*</span></mat-label>
+                                <textarea
+                                        class="padding-text-area"
+                                        matInput
+                                        #message
+                                        rows="10"
+                                        placeholder="{{'contactUs.maxChars' | translate}}"
+                                        maxlength="250"
+                                        [formControlName]="formControlNames.message">
+                        </textarea>
+                                <mat-error *ngIf="!message.invalid"> {{'contactUs.mandatoryMsg' | translate}}</mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="center-block">
+                            <mat-form-field class="mat-select-mobile">
+                                <mat-label class="extra-label">{{'contactUs.fullName' | translate}}<span class="mandatory">* </span>
+                                </mat-label>
+                                <input
+                                        class="maz"
+                                        matInput
+                                        #name
+                                        placeholder="{{'contactUs.fullName' | translate}}"
+                                        [formControlName]="formControlNames.name" />
+                                <mat-error *ngIf="!name.invalid"> {{'contactUs.mandatoryName' | translate}}</mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="center-block ">
+                            <mat-form-field class="mat-select-mobile">
+                                <mat-label class="extra-label">{{'contactUs.email' | translate}}<span class="mandatory">* </span></mat-label>
+                                <input
+                                        class="maz"
+                                        #email
+                                        type="text"
+                                        matInput
+                                        placeholder="{{'contactUs.email' | translate}}"
+                                        [formControlName]="formControlNames.email"/>
+                                <mat-error *ngIf="!email.invalid && email.value==''"> {{'contactUs.mandatoryEmail' | translate}}</mat-error>
+                                <mat-error *ngIf="email.value !== ''  && !email.invalid"> {{'contactUs.mandatoryEmailInvalid' | translate}}</mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="center-block captcha-block">
+                            <div class="center-block-cent">
+                                        <re-captcha (resolved)="resolved($event)"
+                                                    [formControlName]="formControlNames.captcha"
+                                                    siteKey="6LfAI-oaAAAAAGZt74iV3sHyl9MxlGQUQu0FGOVt"
+                                                    class="mycaptcha g-recaptcha captcha-center"
+                                        >
+                                        </re-captcha>
+                            </div>
+                        </div>
+                        <div style="margin-top: -5px; display: block">
+                            <div class="center-block">
+                                <mat-error class="mat-error-captcha" *ngIf="captchaError.length > 0"> {{'contactUs.captcha_error' | translate}}</mat-error>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="center-block center-block2">
+                            <div class="center-block-cent">
+                                <button
+                                        [disabled]="!captchaValidated || !userForm.valid"
+                                        mat-raised-button
+                                        class="btn_axn-pri submit_button"
+                                        type="button"
+                                        (click)="onSubmit()">
+                                    {{'contactUs.send' | translate}}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </article>
+            </div>
+            <div class="contact">
+                <article>
+                    <div class="adresse">
+                        <p>
+                            <img src="assets/Envelope_ico.png" alt="adresse" width="40">
+                        </p>
+                        <h4 class="contact-title">{{'contactUs.title_address' | translate}}</h4>
+
+                        <span class="address_wording">{{'contactUs.title_adresse_body.a' | translate}}</span>
+                        <span class="address_wording">{{'contactUs.title_adresse_body.b' | translate}}</span>
+                        <span class="address_wording">{{'contactUs.title_adresse_body.c' | translate}}</span>
+                        <span class="address_wording">{{'contactUs.title_adresse_body.d' | translate}}</span>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="email">
+                        <p>
+                            <img src="assets/Email_ico.png" alt="email" width="40">
+                        </p>
+                        <h4 class="contact-title">{{'contactUs.title_email' | translate}}</h4>
+
+                        <a style="color: #020F59; text-underline: none" [href]="'mailto: contact@wuriguinee.com'">{{'contactUs.email_body' | translate}}</a>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="telephone">
+                        <p>
+                            <img src="assets/Phone_ico.png" alt="phone" width="42">
+                        </p>
+                        <h4 class="contact-title">{{'contactUs.title_telephone' | translate}}</h4>
+                        {{'contactUs.telephone_body' | translate}}
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+    <br>
+</div>

@@ -1,13 +1,13 @@
 {
-  "quick_guide": {
-    "breadcrumb": {
-      "home": "Accueil",
-      "getting_started": "Commencer"
-    },
-    "headerText": {
-      "line1": "Pour vous pré-inscrire à un ou plusieurs candidats, complétez les détails démographiques et téléchargez les documents requis. Pour prendre rendez-vous, choisissez votre centre d'inscription préféré, la date et l'heure. En cas de pré-inscription réussie, vous recevrez la notification sur votre identifiant de messagerie électronique ou votre numéro de téléphone.",
-      "line2": "Cliquez sur les sections suivantes pour plus d'informations sur comment remplir le formulaire de pré-inscription."
-    },
+	"quick_guide": {
+		"breadcrumb": {
+			"home": "Accueil",
+			"getting_started": "Guide d'utilisation"
+		},
+		"headerText": {
+			"line1": "Pour pré-enregistrer une ou plusieurs personnes, remplissez le formulaire des informations personnelles et téléchargez les justificatifs requis et/ou facultatifs. Pour prendre rendez-vous, choisissez votre centre d'enregistrement préférentiel, la date et le créneau. Une fois le pré-enregistrement réussi, vous recevrez une notification dans votre compte email ou votre numéro de téléphone portable.",
+			"line2": "Cliquez sur les sections suivantes pour plus d'informations sur comment remplir le formulaire de pré-enregistrement."
+		},
     "select_language": {
       "name": "Choisir la langue",
       "list": {
@@ -16,587 +16,643 @@
       },
       "note": "Remarque: lorsque vous vous trouvez dans la page Détails démographiques, les données sont affichées dans la langue de votre choix à gauche et les données dans la deuxième langue à droite de l'écran."
     },
-    "login": {
-      "name": "Login",
-      "list": {
-        "line1": "Sur la page de connexion, entrez votre identifiant de messagerie valide ou votre numéro de portable dans la zone de texte Identifiant de messagerie ou numéro de portable.",
-        "line2": "Cliquez sur Envoyer OTP pour recevoir un mot de passe à usage unique sur votre adresse électronique ou votre numéro de téléphone portable.",
-        "line3": "Entrez l'OTP dans la zone de texte Entrer l'OTP et cliquez sur Vérifier."
-      },
-      "note": "Remarque: Si vous n'avez pas reçu OTP, cliquez sur Renvoyer pour recevoir à nouveau un OTP. Entrez l'OTP nouvellement reçu.",
-      "line": "Lorsque votre OTP est vérifié, vous pouvez créer, afficher ou modifier votre application de pré-enregistrement."
-    },
-    "t&c": {
-      "name": "Accepter les termes et conditions",
-      "list": {
-        "line1": "Sur la page Données démographiques, il vous est conseillé de lire les conditions générales et de cocher la case correspondante. Cet accord vise à donner son consentement pour le stockage et le traitement de vos informations personnelles.",
-        "line2": "Cliquez sur Accepter pour accepter puis complétez les détails démographiques."
-      }
-    },
-    "demographic": {
-      "name": "Remplir les détails démographiques",
-      "list": {
-        "line1": "Remplissez tous vos détails démographiques, y compris Nom, Âge / Date de naissance, Sexe, Statut de résidence, Adresse, Numéro de téléphone portable, Email Id, etc.",
-        "line1_note": "Remarque: vous pouvez entrer votre âge ou votre date de naissance.",
-        "line2": "Vous pouvez également modifier ou vérifier vos données démographiques dans la deuxième langue à droite.",
-        "line3": "Une fois que vous avez rempli et vérifié vos informations démographiques, cliquez sur Continuer pour télécharger vos documents."
-      },
-      "line": "Les données de la page Détails démographiques sont affichées dans deux langues différentes, votre langue préférée à gauche et la deuxième langue à droite de l'écran."
-    },
-    "documents": {
-      "name": "Télécharger des documents",
-      "list": {
-        "line1": "Sur la page Télécharger des documents, sélectionnez le document (par exemple, Passeport, Numéro d'identité de référence, etc.) dans la liste déroulante des documents par catégorie de documents applicable.",
-        "line2": "Cliquez sur Parcourir pour ouvrir une fenêtre contextuelle afin de rechercher le dossier sur votre ordinateur ou lecteur amovible sur lequel vous avez enregistré le document numérisé.",
-        "line3": "Sélectionnez le fichier que vous souhaitez télécharger.",
-        "line4": "Une fois téléchargé avec succès, le document apparaîtra sur le côté droit. Vérifiez que vous avez téléchargé le document correct.",
-        "line5": "Répétez les étapes 1 à 4 pour télécharger le document pour chaque catégorie de document applicable.",
-        "line6": "Lors de l'ajout d'un demandeur, si le document de preuve d'adresse d'un demandeur nouvellement ajouté est identique à celui de l'utilisateur existant, qui a déjà téléchargé le document, cliquez sur l'option Identique et sélectionnez le nom du demandeur.",
-        "line7": "Une fois le téléchargement de tous les documents terminé, cliquez sur Continuer pour afficher un aperçu de votre application."
-      }
-    },
-    "preview": {
-      "name": "Prévisualiser les données",
-      "list": {
-        "line1": "Sur la page Aperçu, si vous souhaitez modifier vos détails démographiques (nom, âge, etc.), cliquez sur Modifier en haut à droite, à côté de la section Détails démographiques, pour accéder à la page Détails démographiques et modifier les détails si nécessaire.",
-        "line2": "Pour modifier vos documents téléchargés, cliquez sur Modifier en bas à droite de la section Documents pour accéder à la page Télécharger des documents et modifiez le document téléchargé selon vos besoins.",
-        "line3": "Si vous souhaitez ajouter un nouveau demandeur, cliquez sur Ajouter un demandeur.",
-        "line3_note": "Remarque: Lorsque vous cliquez sur l'option Ajouter un candidat, vous accédez à la page Données démographiques pour donner son consentement et continuer à fournir les données / documents démographiques requis.",
-        "line4": "Cliquez sur Réserver maintenant pour prendre rendez-vous."
-      }
-    },
-    "CenterSelection": {
-      "name": "Choisissez un centre d'inscription",
-      "list": {
-        "line1": "Sur la page Rendez-vous du livre, vous pouvez trouver un centre d’inscription via les trois options suivantes:",
-        "line1_note": "Remarque: les centres d'inscription recommandés sont automatiquement affichés en fonction de vos détails démographiques (code postal).",
-        "subList": {
-          "line1": "Cliquez sur Centres proches pour afficher les centres d'enregistrement en fonction de votre situation géographique.",
-          "line2": "Utilisez le champ de recherche pour trouver le centre d’enregistrement en fonction de vos critères de recherche.",
-          "line3": "Cliquez sur Centres recommandés pour afficher les centres d'enregistrement en fonction de vos informations démographiques. (Code postal)"
-        },
-        "line2": "La carte du centre d'inscription sélectionné sera affichée sur le côté droit de votre écran.",
-        "line3": "A l'aide de l'une des trois options, sélectionnez le centre d'inscription que vous souhaitez visiter, puis cliquez sur Continuer pour prendre un rendez-vous."
-      }
-    },
-    "Booking": {
-      "name": "Prenez rendez-vous",
-      "list": {
-        "line1": "Le système affiche la liste des jours calendaires disponibles avec le nombre de réservations disponibles. Sélectionnez votre date préférée.",
-        "line2": "La liste des créneaux horaires disponibles pour la date sélectionnée est classée entre matin et après-midi. Sélectionnez votre option préférée.",
-        "line3": "Sélectionnez votre créneau horaire préféré dans la liste.",
-        "line4": "Sélectionnez le nom du demandeur particulier pour prendre rendez-vous.",
-        "line4_note": "Remarque: une liste des noms de candidats est affichée en bas à droite.",
-        "line5": "Vérifiez le ou les créneaux horaires sélectionnés par rapport au nom du demandeur.",
-        "line6": "Cliquez sur Soumettre pour voir l'accusé de réception de votre demande."
-      }
-    },
-    "Acknowledgement": {
-      "name": "Voir accusé de réception",
-      "list": {
-        "line1": "Après avoir complété avec succès la demande de pré-inscription, vous recevrez un accusé de réception.",
-        "line2": "Vous pouvez imprimer, télécharger, envoyer par email ou par SMS votre accusé de réception.",
-        "subList": {
-          "line1": "Pour imprimer votre accusé de réception, cliquez sur Imprimer.",
-          "line2": "Pour télécharger votre accusé de réception, cliquez sur Télécharger le PDF.",
-          "line3": "Pour ajouter le ou les destinataires supplémentaires à recevoir l'accusé de réception de votre application, procédez comme suit:",
-          "subList": {
-            "line1": "Cliquez sur Envoyer un e-mail / SMS.",
-            "line2": "Entrez le numéro de téléphone portable dans la zone de texte Entrer le numéro de téléphone portable et / ou entrez l'ID de courrier électronique dans la zone de texte Entrer l'ID de courrier électronique.",
-            "line3": "Cliquez sur Envoyer pour recevoir l'accusé de réception sur votre adresse électronique ou votre numéro de téléphone portable."
-          }
-        }
-      }
-    },
-    "status": {
-      "name": "Statut Explication",
-      "headers": {
-        "status": "Statut",
-        "explanation": "Explication"
-      },
-      "status": {
-        "pendingAppointment": "Rendez-vous en attente",
-        "booked": "Réservé",
-        "expired": "Expiré"
-      },
-      "explanation": {
-        "pendingAppointment": {
-          "line1": "Rempli seulement les détails démographiques",
-          "line1_action": "Action: téléchargez vos documents et prenez rendez-vous.",
-          "line2": "2. Données démographiques renseignées et documents téléchargés",
-          "line2_action": "Action: Prendre rendez-vous"
-        },
-        "booked": {
-          "line1": "Données démographiques renseignées, documents téléchargés et rendez-vous pris",
-          "line1_action": "Action: Rendez-vous au centre d’inscription à la date et à l’heure de votre rendez-vous."
-        },
-        "expired": {
-          "line1": "La date de rendez-vous est passée"
-        }
-      }
-    },
-    "addApplicant": {
-      "name": "Ajouter un nouveau candidat",
-      "line": "Dans la page Vos applications, cliquez sur Créer une nouvelle application pour générer une nouvelle application pour le nouveau demandeur."
-    },
-    "modify": {
-      "name": "Modifier les données",
-      "list": {
-        "line1": "Sur la page Vos applications, cliquez sur Modifier les informations pour accéder à la page Détails démographiques.",
-        "line2": "Sur la page Données démographiques, vous pouvez modifier les informations si nécessaire, puis cliquez sur Continuer pour accéder à la page Télécharger un document.",
-        "line3": "Sur la page Télécharger un document, vous pouvez modifier les documents si nécessaire."
-      }
-    },
-    "rebook": {
-      "name": "Réserver un rendez-vous",
-      "list": {
-        "line1": "Sur la page Vos applications, cochez la case correspondant au demandeur concerné.",
-        "line2": "Cliquez sur Réserver / Modifier un rendez-vous pour réserver un rendez-vous.",
-        "line3": "Pour plus d'informations sur la prise d'un rendez-vous, voir la section Réserver un rendez-vous."
-      }
-    },
-    "cancelAppointment": {
-      "name": "Annuler un rendez-vous",
-      "list": {
-        "line1": "Sur la page Vos applications, cliquez sur l'icône de suppression en regard de la demande de pré-enregistrement d'un demandeur. Une fenêtre contextuelle apparaît à l'écran.",
-        "line2": "Sélectionnez l'option Annuler le rendez-vous et enregistrez les détails dans la fenêtre contextuelle.",
-        "line3": "Cliquez sur ENVOYER pour annuler un rendez-vous."
-      }
-    },
-    "discard": {
-      "name": "Jeter une application",
-      "list": {
-        "line1": "Sur la page Vos applications, cliquez sur l'icône de suppression en regard de la demande de pré-enregistrement d'un demandeur. Une fenêtre contextuelle apparaît à l'écran.",
-        "line2": "Sélectionnez l'option Supprimer toute l'application dans la fenêtre contextuelle.",
-        "line3": "Cliquez sur ENVOYER pour rejeter votre application."
-      }
-    },
-    "Logout": {
-      "name": "Connectez - Out",
-      "list": {
-        "line1": "Cliquez sur Déconnexion en haut à droite.",
-        "line2": "Cliquez sur OK pour vous déconnecter de l'application de pré-inscription."
-      },
-      "line": "Connectez-vous avec le même numéro de téléphone portable ou le même identifiant de messagerie pour accéder aux applications enregistrées."
-    }
-  },
-  "faq": {
-    "breadcrumb": {
-      "home": "Accueil",
-      "getting_started": "FAQ"
-    },
-    "answer": "Réponse",
-    "questions": [
-      {
-        "question": "Je n'ai pas de numéro de téléphone mobile ni d'identifiant email. Comment créer l'application de pré-inscription?",
-        "answer": "Vous pouvez utiliser le numéro de portable d'un ami ou d'un membre de la famille ou un identifiant de messagerie pour vous connecter à l'application de pré-inscription."
-      },
-      {
-        "question": "J'ai perdu le numéro de téléphone mobile / l'ID de messagerie électronique que j'ai utilisé pour créer l'application de pré-inscription. Que devrais-je faire?",
-        "answer": "Créez un nouveau compte en utilisant un nouveau numéro de mobile ou un nouvel identifiant de messagerie."
-      },
-      {
-        "question": "Que se passe-t-il lorsque je sélectionne la langue spécifique sur l'écran de connexion?",
-        "answer": "Sélectionnez la langue que vous pouvez facilement lire et écrire car le formulaire complet sera affiché dans la langue que vous avez choisie."
-      },
-      {
-        "question": "Que se passe-t-il si je ne dispose pas du (des) document (s) requis lors de la préparation de la demande de pré-inscription?",
-        "answer": "Remplissez les données démographiques et enregistrez l'application. Vous pouvez télécharger les documents ultérieurement."
-      },
-      {
-        "question": "Puis-je réserver un rendez-vous pour seulement deux personnes sur cinq dans la demande de pré-inscription?",
-        "answer": "Oui, vous pouvez prendre rendez-vous pour un nombre quelconque de personnes sur le total des candidats."
-      },
-      {
-        "question": "Que se passe-t-il si je manque une date de rendez-vous?",
-        "answer": "Essayez de ne pas manquer une date de rendez-vous. Si vous le manquez toujours, replanifiez le rendez-vous à l'aide de l'option «Modifier»."
-      },
-      {
-        "question": "J'ai pris rendez-vous le 10 février. Puis-je changer ma date de rendez-vous au 18 février?",
-        "answer": "Oui. Si votre rendez-vous a expiré, vous pouvez prendre un nouveau rendez-vous avec une date ultérieure."
-      },
-      {
-        "question": "J'ai pris rendez-vous au centre d'inscription de Casablanca. Puis-je changer mon centre d'enregistrement de rendez-vous à Rabat?",
-        "answer": "Non, mais vous pouvez annuler le rendez-vous en cours et prendre un nouveau rendez-vous à un nouvel emplacement de votre choix."
-      },
-      {
-        "question": "J'ai modifié mes informations après avoir reçu un accusé de réception. Dois-je télécharger ou imprimer à nouveau l'accusé de réception?",
-        "answer": "La page d'accusé de réception n'est qu'un document de référence permettant de mémoriser le lieu et l'heure du rendez-vous, etc. Au centre d'inscription, vos dernières informations seront automatiquement disponibles. Ainsi, il n’est pas officiellement nécessaire de réimprimer ou de télécharger"
-      },
-      {
-        "question": "J'ai reporté un rendez-vous après avoir reçu un accusé de réception. Dois-je télécharger ou imprimer à nouveau l'accusé de réception?",
-        "answer": "La page d'accusé de réception n'est qu'un document de référence permettant de mémoriser le lieu et l'heure du rendez-vous, etc. Vous pouvez réimprimer ou télécharger l'accusé de réception pour vous rappeler le moment de votre rendez-vous, mais cela n'est pas officiellement nécessaire."
-      },
-      {
-        "question": "Est-ce que quelqu'un d'autre peut soumettre une demande en mon nom pendant le processus d'inscription?",
-        "answer": "Non, le processus d'enregistrement nécessite une capture biométrique et photo. Par conséquent, vous devez être présent en personne au centre d'inscription."
-      },
-      {
-        "question": "Je reste loin de ma résidence permanente pendant deux ans. Quelle preuve de résidence dois-je fournir?",
-        "answer": "Le MdM décide de la pertinence de la question et des réponses"
-      },
-      {
-        "question": "Je n'ai pas de preuve de résidence pour mon adresse actuelle. Que devrais-je faire?",
-        "answer": "Le MdM décide de la pertinence de la question et des réponses"
-      },
-      {
-        "question": "Je n'ai aucun document. Que devrais-je faire?",
-        "answer": "Le MdM décide de la pertinence de la question et des réponses"
-      },
-      {
-        "question": "Combien de jours avant puis-je annuler ou réserver un rendez-vous?",
-        "answer": "Le MdM décide de la pertinence de la question et des réponses"
-      },
-      {
-        "question": "Dois-je porter des documents originaux ou des copies de documents certifiés lors de ma visite au centre d'inscription?",
-        "answer": "Le MdM décide de la pertinence de la question et des réponses"
-      }
-    ]
-  },
-  "header": {
-    "link_about": "Commencer",
-    "link_faq": "FAQ",
-    "link_contact": "CONTACT",
-    "link_applications": "Vos Applications",
-    "link_logout": "Connectez - Out",
-    "link_login": "S'IDENTIFIER"
-  },
-  "login": {
-    "text": "Étapes rapides et faciles",
-    "sub_text": "Pré-inscription pour",
-    "sub_text_UID": "Numéro d'identification unique",
-    "label_select": "Choisissez votre langue",
-    "label_email_num": "Email ID ou numéro de téléphone",
-    "label_otp": "Entrez OTP",
-    "action_send": "Envoyer OTP",
-    "action_resend": "Renvoyer",
-    "action_verify": "Vérifier",
-    "logout_msg": "Le demandeur doit se connecter avec le même téléphone portable / courriel pour accéder aux applications créées.",
-    "otp_valid_label": "valable",
-    "invalidEmail": "Identifiant email invalide entré",
-    "invalidMobile": "Numéro de téléphone invalide entré",
-    "invalidInput": "Identifiant email ou numéro de portable invalide entré"
-  },
-  "stepper": {
-    "link_demographic": "Détails démographiques",
-    "link_upload_doc": "Télécharger un document",
-    "link_book": "Rendez-vous du livre",
-    "link_confirm": "Confirmation"
-  },
-  "demographic": {
-    "title": "Détails démographiques",
-    "language": "français",
-    "label_name": "Nom complet",
-    "name_required": "Le nom complet est requis",
-    "label_age": "Âge",
-    "date_dd": "JJ",
-    "date_mm": "MM",
-    "date_yyyy": "AAAA",
-    "text_or": "OU",
-    "text_years": "Années",
-    "text_gender": "Le sexe",
-    "button_male": "Mâle",
-    "button_female": "Femelle",
-    "text_residence_status": "Statut de résidence",
-    "button_national": "nationale",
-    "button_foreigner": "Étranger",
-    "label_address1": "Adresse 1",
-    "label_address2": "Adresse Ligne 2",
-    "label_address3": "Adresse ligne 3",
-    "label_region": "Région",
-    "label_province": "Province",
-    "label_city": "Ville",
-    "label_zone": "Zone",
-    "label_mob_num": "Numéro de portable",
-    "label_postalCode": "code postal",
-    "label_alt_mob_num": "Numéro de téléphone alternatif (facultatif)",
-    "label_email_id": "Identifiant Email",
-    "label_pin": "Numéro d'identité de référence",
-    "action_back": "RETOUR",
-    "action_continue": "CONTINUER",
-    "action_preview": "APERÇU",
-    "consent": {
-      "title": "Termes et conditions",
-      "subtitle": "Votre accord",
-      "message": "Donner son ement pour le stockage et l'utilisation des informations personnelles telles qu'elles sont données",
-      "checkCondition": "Cliquez pour accepter les termes et conditions",
-      "acceptButton": "Acceptez",
-      "alertMessageFirst": "Vous serez déconnecté car vous n'acceptez pas les conditions générales",
-      "alertMessageSecond": "Vous serez redirigé vers votre page d'application parce que vous n'acceptez pas les conditions générales",
-      "alertMessageThird": "Vous serez redirigé vers la page de prévisualisation car vous n'acceptez pas les conditions générales."
-    },
-    "validation": {
-      "name_required": "Le nom complet est requis",
-      "age_validation": "L'âge devrait être inférieur à 150",
-      "gender_validation": "S'il vous plaît sélectionner le sexe",
-      "nationality_validation": "Veuillez sélectionner le statut de résidence",
-      "DOB_validation": "Entrez la date de naissance ou l'âge valide",
-      "date_required": "Entrez 2 chiffres pour la date",
-      "month_required": "Entrez 2 chiffres pour le mois",
-      "year_required": "Entrez 4 chiffres pour l'année",
-      "address_required": "L'adresse est obligatoire",
-      "region_required": "Veuillez sélectionner une région",
-      "province_required": "Veuillez sélectionner une province",
-      "city_required": "Veuillez sélectionner une ville",
-      "admin_required": "Veuillez sélectionner zone",
-      "postal_code_required": "Veuillez entrer un code postal valide",
-      "mobile_required": "Veuillez entrer un numéro de téléphone valide",
-      "email_required": "S'il vous plaît entrer email id valide",
-      "pin_required": "Veuillez entrer un numéro d’identité de référence valide"
-    }
-  },
-  "documents": {
-    "title_document": "Télécharger des documents",
-    "text_filetype": "Type de fichier autorisé ",
-    "text_filesize": "et taille de fichier autorisée",
-    "action_browse": "FEUILLETER",
-    "action_back": "RETOUR",
-    "action_skip": "SAUTER",
-    "action_continue": "CONTINUER",
-    "label_sameas": "Pareil que",
-    "text_or": "OU",
-    "action_view": "VUE",
-    "OR": "ou"
-  },
-  "acknowledgement": {
-    "title": "Rendez-vous confirmé",
-    "message": "L'identifiant de pré-enregistrement et les détails du rendez-vous ont été envoyés à l'identifiant et au numéro de téléphone de l'e-mail enregistré.",
-    "label_name": "prénom",
-    "label_pre_id": "ID de pré-inscription",
-    "label_reg_cntr": "Centre d'inscription",
-    "label_cntr_contact_number": "Numéro de contact du centre",
-    "label_appointment_date_time": "Date et heure du rendez-vous",
-    "container_guideline": "Directives importantes",
-    "action_send": "ENVOYER EMAIL / SMS",
-    "action_download": "TÉLÉCHARGER LE FICHIER PDF",
-    "action_print": "IMPRESSION"
-  },
-  "preview": {
-    "title_preview": "Aperçu",
-    "language": "français",
-    "subheading_information": "Informations personnelles",
-    "label_name": "Nom complet",
-    "label_age": "Âge",
-    "label_DOB": "DOB",
-    "text_years": "Années",
-    "text_gender": "Le sexe",
-    "text_resident_status": "Statut de résident",
-    "subheading_contact": "Détails du contact",
-    "label_address": "Adresse",
-    "label_region": "Région",
-    "label_province": "Province",
-    "label_city": "Ville",
-    "label_zone": "Zone",
-    "label_mob_num": "Numéro de portable",
-    "label_alt_mob_num": "Numéro de téléphone alternatif (facultatif)",
-    "label_email_id": "Identifiant Email",
-    "label_pin": "Numéro d'identité de référence",
-    "title_document": "Documents téléchargés",
-    "text_not_uploaded": "Non téléchargé",
-    "action_modify": "modifier",
-    "action_back": "RETOUR",
-    "action_add_applicant": "AJOUTER LE CANDIDAT",
-    "action_continue": "CONTINUER"
-  },
-  "message": {
-    "login": {
-      "msg1": "L'identifiant email n'est pas valide",
-      "msg2": "Le numéro de téléphone n'est pas valide",
-      "msg3": "OTP enter n'est pas valide",
-      "msg4": "Connexion réussie"
-    },
-    "demographicDetails": {
-      "msg1": "Black listed word entered"
-    },
-    "uploadDocuments": {
-      "error": "Erreur",
-      "msg1": "Document dépassant la taille autorisée",
-      "msg2": "Echec de l'analyse antivirus",
-      "msg3": "Type de fichier non supporté",
-      "msg4": "Le fichier est trop gros",
-      "msg5": "Le nom du fichier ne doit pas dépasser 50 caractères",
-      "msg6": "Mauvais type de fichier, veuillez télécharger à nouveau",
-      "msg7": "Le fichier n'a pas pu être téléchargé. Veuillez réessayer.",
-      "msg8": "Impossible de copier le document",
-      "msg9": "Les documents sont manquants",
-      "none": "aucun"
-    },
-    "appointmentCentreSearch": {
-      "msg1": "No result found",
-      "msg2": "Location not enable"
-    },
-    "bookAppointment": {
-      "msg1": "The Following User has not been selected any time slot",
-      "msg2": "(should provide User name) Do you want to continue Booking"
-    },
-    "cancelAppointment": {
-      "msg1": "Appointment for the selected application will be cancelled",
-      "msg2": "Appointment for the selected application has been successfully cancelled"
-    }
-  },
-  "dashboard": {
-    "title": "Vos applications",
-    "action_modify_information": "Modifier les informations",
-    "action_modify_appointment": "Réserver / modifier un rendez-vous",
-    "action_cre_application": "Créer une nouvelle application ",
-    "card": {
-      "text_app_id": "ID d'application",
-      "text_name": "prénom",
-      "text_appoinment_date": "Date de rendez-vous",
-      "text_status": "Statut",
-      "action_modify_information": "Modifier les informations",
-      "action_view_acknowledgement": "Voir accusé de réception"
-    },
-    "discard": {
-      "title_confirm": "Confirmer",
-      "title_success": "Succès",
-      "title_error": "Erreur",
-      "cancelAppointment": {
-        "msg_confirm": "Rendez-vous pour L'application sélectionnée sera annulée.",
-        "msg_deleted": "Le rendez-vous pour l'application sélectionnée a été annulé avec succès.",
-        "msg_could_not_deleted": "Rendez-vous pour L'application sélectionnée n'a pas pu être annulée"
-      },
-      "deletePreregistration": {
-        "msg_confirm": "L'application sélectionnée sera supprimée. Veuillez confirmer.",
-        "msg_deleted": "L'application sélectionnée a été supprimée avec succès",
-        "msg_could_not_deleted": "L'application sélectionnée n'a pas pu être supprimée"
-      },
-      "button_confirm": "Confirmer",
-      "button_cancel": "Annuler"
-    },
-    "status": {
-      "pendingAppointment": "Rendez-vous en attente",
-      "booked": "Réservé",
-      "expired": "Expiré"
-    },
-    "error": {
-      "error": "Erreur Interne du Serveur. Veuillez réessayer après un certain temps.",
-      "button_ok": "D'accord"
-    }
-  },
-  "timeSelection": {
-    "title_book": "Rendez-vous du livre",
-    "text_prev": "précédent",
-    "text_next": "Suivant",
-    "text_morning": "Matin",
-    "text_afternoon": "Après midi",
-    "text_available": "Candidats disponibles",
-    "text_availability": "Réservation disponible",
-    "text_slots": "fentes",
-    "action_done": "TERMINÉ",
-    "action_back": "RETOUR",
-    "action_bookLater": "RÉSERVER PLUS TARD",
-    "action_continue": "CONTINUER",
-    "booking": {
-      "title_success": "Succès",
-      "msg_success": "Réservation de rendez-vous terminée avec succès",
-      "title_failure": "Échec",
-      "msg_failure": "Rendez-vous de réservation a échoué",
-      "deletedApplicant1": [
-        "Vous n'avez sélectionné aucune plage horaire pour l'utilisateur suivant",
-        "Voulez-vous continuer à réserver"
-      ],
-      "yesButtonText": "Oui",
-      "noButtonText": "Non"
-    }
-  },
-  "appointmentCentreSearch": {
-    "title": "Rendez-vous du livre",
-    "text_recommended_centres": "Centres recommandés",
-    "text_finding_result": "trouver le résultat pour",
-    "text_nearBy": "Proche",
-    "acttion_back": "Retour",
-    "action_bookLater": "Réservez plus tard",
-    "action_continue": "Continuer"
-  },
-  "appointmentConfirmed": {
-    "title": "Rendez-vous confirmé",
-    "text_confirmation": "L'identifiant pré-enregistrement et les détails du rendez-vous ont été envoyés à l'identifiant et au numéro de téléphone de l'e-mail enregistré.",
-    "action_download": "TÉLÉCHARGER",
-    "action_print": "IMPRESSION"
-  },
-  "dialog": {
-    "title_applicant": "Envoyer une confirmation de rendez-vous",
-    "content_applicant": "Email / Numéro de téléphone",
-    "text_email": "Entrer l'identifiant email",
-    "text_mobile": "Entrez le numéro de téléphone",
-    "invalidApplicantNumber": "Numéro de portable invalide",
-    "invalidApplicantEmailId": "Identifiant email invalide",
-    "action_ok": "D'accord",
-    "title_discard": "Jeter",
-    "action_discard_app": "Jeter toute l'application",
-    "action_cancel": "Annuler un rendez-vous et sauvegarder les détails",
-    "action_submit": "Soumettre",
-    "action_dismiss": "D'accord",
-    "action_add": "Ajouter",
-    "action_close": "Fermer",
-    "action_add_to_slot": "Ajouter à la fente",
-    "navigation_alert": "Are you sure you would like to navigate away as data entered will not be saved. Please confirm(FRA)"
-  },
-  "centerSelection": {
-    "title": " Rendez-vous du livre ",
-    "action_nearBy": "Proche",
-    "display_recommended": "Centres recommandés",
-    "text_found": "A trouvé",
-    "text_centers": "centres",
-    "text_timing": "Timing",
-    "text_open": "Ouvrir",
-    "text_select": "Sélectionner les types d'emplacement",
-    "text_enter": "Entrer",
-    "text_search": "Chercher....",
-    "action_back": "Retour",
-    "action_book_later": "Réservez plus tard",
-    "action_continue": "CONTINUER",
-    "noResult_found": "Aucun résultat trouvé"
-  },
-  "autologout": {
-    "preview": "Vous serez expiré dans 60 secondes en raison de votre inactivité. Veuillez cliquer n'importe où pour réactiver votre session",
-    "post": "Vous avez été déconnecté pour cause d'inactivité."
-  },
-  "helpText": {
-    "applicationId": "ID d'application pour votre pré-inscription",
-    "status": {
-      "pendingAppointment": "Rendez-vous n'est pas encore réservé",
-      "booked": "Rendez-vous est réservé avec succès",
-      "expired": "La date de rendez-vous est passée"
-    },
-    "deleteIcon": "Vous pouvez soit rejeter la demande entière, soit annuler le rendez-vous et enregistrer les détails.",
-    "book/modify_appointment": "Vous devez cocher la case en regard de l'identifiant de pré-inscription pour qu'un ou plusieurs demandeurs puissent prendre un rendez-vous",
-    "bookAppointment": "Commencez par sélectionner le créneau horaire préféré, puis sélectionnez le demandeur applicable pour le créneau sélectionné. ",
-    "send_email/sms": "Vous pouvez ajouter le destinataire supplémentaire pour recevoir la ou les notifications.",
-    "modify_at_DemoPreview": "Cliquez sur Modifier pour corriger les détails démographiques",
-    "modify_at_DocumentPreview": "Cliquez sur Modifier pour corriger le document téléchargé.",
-    "same_as": "Si la preuve d'adresse est identique à celle du demandeur déjà rempli, vous pouvez utiliser l'option Même comme",
-    "add_applicant": "Cliquez sur Ajouter un demandeur pour ajouter un ou plusieurs candidats.",
-    "recommended_centers": "Liste du centre recommandé selon votre code postal",
-    "nearBy": "Centres d'inscription basés sur votre géolocalisation",
-    "magnifying_glass": "Recherche basée sur la sélection du menu déroulant.",
-    "preview_continue": "Téléchargez tous les fichiers pour continuer"
-  },
-  "error": {
-    "error": "Une erreur technique s'est produite et l'opération ne peut pas être terminée. Aucune donnée fournie ne peut être sauvegardée",
-    "button_ok": "D'accord",
-    "postalCode": "Le code PIN entré est invalide",
-    "email": "Le courriel entré est invalide",
-    "phone": "Le téléphone entré est invalide",
-    "dateOfBirth": "Date de naissance entrée est invalide",
-    "referenceIdentityNumber": "Le numéro d'identité de référence entré est invalide",
-    "tokenExpiredLogout": "Vous avez été déconnecté pour cause d'inactivité.",
-    "slotNotAvailable": "La réservation / re-réservation de rendez-vous ne peut être effectuée car le créneau demandé n'est pas disponible. Veuillez sélectionner un autre emplacement ou réessayer plus tard",
-    "timeExpired_1": "Un rendez-vous ne peut être replanifié dans ",
-    "timeExpired_2": " heures de réservation",
-    "errorLabel": "ERREUR",
-    "regCenterNotavailabe":"Le centre d'inscription n'est pas disponible.",
-    "centerDetailsNotAvailable":"Aucun créneau horaire, disponible La réservation / re-réservation de rendez-vous ne peut pas être effectuée. Veuillez réessayer plus tard."
-  },
-  "residentTypesMapping": {
-    "NFR": "Nationale",
-    "FR": "Étranger"
-  },
-  "sameAs": "Document téléchargé avec Identique à",
-  "DAYS": ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"],
+		"login": {
+			"name": "Se connecter",
+			"list": {
+				"line1": "Sur la page de connexion, entrez votre identifiant email valid ou votre numéro de portable dans la zone de texte adresse email ou numéro de portable.",
+				"line2": "Cliquez sur Recevoir sa clé OTP pour recevoir un mot de passe à usage unique dans votre compte email ou sur votre numéro de téléphone portable.",
+				"line3": "Entrez l'OTP dans la zone de texte prévue et cliquez sur Valider."
+			},
+			"note": "Remarque: Si vous n'avez pas reçu de clé OTP, cliquez sur Renvoyer la clé OTP pour recevoir à nouveau une clé OTP. Saisissez la clé OTP nouvellement reçue.",
+			"line": "Lorsque votre clé OTP est vérifiée, vous pouvez créer, afficher ou modifier votre demande de pré-enregistrement."
+		},
+		"t&c": {
+			"name": "Accepter les termes et conditions",
+			"list": {
+				"line1": "Sur la page Données démographiques (Informations Personnelles), il vous est conseillé de lire les conditions générales et de cocher la case correspondante. Cet accord vise à donner son consentement pour le stockage et le traitement de vos informations personnelles.",
+				"line2": "Cliquez sur Accepter pour accepter puis complétez le formulaire des informations personnelles."
+			}
+		},
+		"demographic": {
+			"name": "Remplir le formulaire des informations personnelles",
+			"list": {
+				"line1": "Saisissez toutes informations personnelles, y compris Nom, Âge/Date de naissance, Genre, Résidence, Adresse, Numéro de téléphone portable, Adresse E-mail, etc.",
+				"line1_note": "Remarque: vous pouvez entrer votre âge ou votre date de naissance.",
+                                "line2": "Vous pouvez également modifier ou vérifier vos données démographiques dans la deuxième langue à droite.",
+				"line3": "Une fois que vous avez saisi et vérifié vos informations personnelles, cliquez sur Suivant pour télécharger vos documents justificatifs."
+			},
+			"line": "Les données de la page Détails démographiques sont affichées dans deux langues différentes, votre langue préférée à gauche et la deuxième langue à droite de l'écran."
+		},
+		"documents": {
+			"name": "Justificatifs",
+			"list": {
+				"line1": "Sur la page Justificatifs, sélectionnez le document (par exemple, Passeport, Numéro d'identité de référence, etc.) dans la liste déroulante des documents par catégorie de documents.",
+				"line2": "Cliquez sur Parcourir [+] pour ouvrir une fenêtre et trouver le document numérisé.",
+				"line3": "Sélectionnez le fichier que vous souhaitez télécharger.",
+				"line4": "Une fois téléchargé avec succès, le document apparaîtra sur le côté droit. Vérifiez que vous avez téléchargé le bon document en cliquant sur l'icone de l'apercu.",
+				"line5": "Répétez les étapes 1 à 4 pour télécharger un document pour chaque catégorie applicable de justificatif.",
+				"line6": "Lors de l'ajout d'un demandeur, si le justificatif de domicile d'un demandeur nouvellement ajouté est identique à celui de l'utilisateur existant qui a déjà téléchargé le justificatif, cliquez sur l'option Identique et sélectionnez le nom du demandeur.",
+				"line7": "Une fois le téléchargement de tous les justificatifs terminé, cliquez sur Suivant pour afficher un aperçu de votre demande."
+			}
+		},
+		"preview": {
+			"name": "Aperçu des données",
+			"list": {
+				"line1": "Sur la page Aperçu, si vous souhaitez modifier vos détails démographiques (nom, âge, etc.), cliquez sur Modifier (icone crayon) à droite du nom de la section du formulaire pour accéder à la page modifier les détails si nécessaire.",
+				"line2": "Pour modifier vos documents téléchargés, cliquez sur Modifier (icone crayon) à droite de la section Justficatifs pour accéder à la page des justificatifs et modifiez le document fourni selon vos besoins.",
+				"line3": "Si vous souhaitez ajouter un nouveau demandeur, cliquez sur Ajouter un demandeur.",
+				"line3_note": "Remarque: Lorsque vous cliquez sur l'option Ajouter un demandeur, vous accédez à la page Informations Personnelles où il faut donner votre consentement pour continuer à fournir les données / justificatifs requis.",
+				"line4": "Cliquez sur Réserver maintenant pour prendre rendez-vous."
+			}
+		},
+		"CenterSelection": {
+			"name": "Choisir un centre d'enrôlement",
+			"list": {
+				"line1": "Sur la page Prendre Rendez-vous, vous pouvez trouver un centre d’enregistrement avec une des trois options suivantes:",
+				"line1_note": "Remarque: les centres d'enregistrement recommandés sont automatiquement affichés en fonction de vos détails démographiques (code postal).",
+				"subList": {
+					"line1": "Cliquez sur Centres à Proximité pour afficher les centres d'enregistrement en fonction de votre géo-location.",
+					"line2": "Utilisez le champ de recherche pour trouver le centre d’enregistrement en fonction de vos critères de recherche.",
+					"line3": "Cliquez sur Centres recommandés pour afficher les centres d'enregistrement en fonction de vos informations démographiques. (Code postal)"
+				},
+				"line2": "La carte du centre d'enregistrement sélectionné sera affichée sur le côté droit de votre écran.",
+				"line3": "A l'aide de l'une des trois options, sélectionnez le centre d'enregistrement que vous souhaitez visiter, puis cliquez sur Continuer pour prendre un rendez-vous."
+			}
+		},
+		"Booking": {
+			"name": "Prendre rendez-vous",
+			"list": {
+				"line1": "Le système affiche la liste des jours calendaires disponibles avec le nombre de créneaux horaires libres. Sélectionnez votre date préférée.",
+				"line2": "La liste des créneaux horaires disponibles pour la date sélectionnée est classée entre matin et après-midi. Sélectionnez votre option préférée.",
+				"line3": "Sélectionnez votre créneau horaire préféré dans la liste.",
+				"line4": "Sélectionnez le nom du demandeur pour qui vous voulez prendre rendez-vous.",
+				"line4_note": "Remarque: une liste des noms de candidats est affichée.",
+				"line5": "Vérifiez le ou les créneaux horaires sélectionnés par rapport au nom du demandeur.",
+				"line6": "Cliquez sur Suivant pour voir la confirmation de rendez-vous pour votre demande."
+			}
+		},
+		"Acknowledgement": {
+			"name": "Voir confirmation de rendez-vou",
+			"list": {
+				"line1": "Après avoir complété avec succès la demande de pré-enregistrement, vous recevrez une confirmation de rendez-vous.",
+				"line2": "Vous pouvez imprimer, télécharger, envoyer par e-mail ou par SMS votre confirmation de rendez-vous.",
+				"subList": {
+					"line1": "Pour imprimer votre confirmation de rendez-vous, cliquez sur Imprimer.",
+					"line2": "Pour télécharger votre confirmation de rendez-vous, cliquez sur Télécharger le PDF.",
+					"line3": "Pour ajouter un ou des destinataires supplémentaires de la confirmation de votre demande, procédez comme suit:",
+					"subList": {
+						"line1": "Cliquez sur Envoyer E-mail / SMS.",
+						"line2": "Entrez le numéro de téléphone portable et/ou l'adresse e-mail dans la zone de texte prévue.",
+						"line3": "Cliquez sur Envoyer pour recevoir la confirmation de rendez-vous dans votre compte e-mail ou sur votre numéro de téléphone portable."
+					}
+				}
+			}
+		},
+		"status": {
+			"name": "Explication du statut",
+			"headers": {
+				"status": "Statut",
+				"explanation": "Explication"
+			},
+			"status": {
+				"pendingAppointment": "Rendez-vous en attente",
+				"booked": "Réservé",
+				"expired": "Expiré"
+			},
+			"explanation": {
+				"pendingAppointment": {
+					"line1": "Seuls les détails démographiques (Informations Personnelles) ont été fournis",
+					"line1_action": "Action: Téléchargez vos justificatifs et prenez rendez-vous.",
+					"line2": "2. Données démographiques (Informations Personnelles) renseignées et documents téléchargés",
+					"line2_action": "Action: Prendre rendez-vous"
+				},
+				"booked": {
+					"line1": "Données démographiques (Informations Personnelles) renseignées, documents téléchargés et rendez-vous pris",
+					"line1_action": "Action: Rendez-vous au centre d’enregistrement à la date et à l’heure de votre rendez-vous."
+				},
+				"expired": {
+					"line1": "La date de rendez-vous est passée"
+				}
+			}
+		},
+		"addApplicant": {
+			"name": "Ajouter un nouveau demandeur",
+			"line": "Sur la page Dossiers, cliquez sur Créer une nouvelle demande pour générer une nouvelle demande pour un nouveau demandeur."
+		},
+		"modify": {
+			"name": "Modifier les données",
+			"list": {
+				"line1": "Sur la page Dossiers, cliquez sur Modifier les informations pour accéder à la page Informations Personnelles.",
+				"line2": "Sur la page Données démographiques (Informations Personnelles), vous pouvez modifier les informations si nécessaire, puis cliquer sur Suivant pour accéder à la page Justificatifs.",
+				"line3": "Sur la page Justificatifs, vous pouvez modifier les documents si nécessaire."
+			}
+		},
+		"rebook": {
+			"name": "Réserver un créneau horaire",
+			"list": {
+				"line1": "Sur la page Dossiers, cochez la case correspondant au demandeur concerné.",
+				"line2": "Cliquez sur Réserver / Déplacer un rendez-vous pour réserver un créneau horaire.",
+				"line3": "Pour plus d'informations sur la prise d'un rendez-vous, voir la section Prendre un rendez-vous."
+			}
+		},
+		"cancelAppointment": {
+			"name": "Annuler un rendez-vous",
+			"list": {
+				"line1": "Sur la page Dossiers, cliquez sur l'icône de suppression sur la demande de pré-enregistrement d'un demandeur. Une fenêtre contextuelle apparaît à l'écran.",
+				"line2": "Sélectionnez l'option Annuler le rendez-vous et enregistrez les détails dans la fenêtre contextuelle.",
+				"line3": "Cliquez sur ENVOYER pour annuler un rendez-vous."
+			}
+		},
+		"discard": {
+			"name": "Supprimer une demande",
+			"list": {
+				"line1": "Sur la page Dossiers, cliquez sur l'icône de suppression en regard de la demande de pré-enregistrement d'un demandeur. Une fenêtre contextuelle apparaît à l'écran.",
+				"line2": "Sélectionnez l'option Supprimer toute l'application dans la fenêtre contextuelle.",
+				"line3": "Cliquez sur ENVOYER pour rejeter votre application."
+			}
+		},
+		"Logout": {
+			"name": "Se Déconnecter",
+			"list": {
+				"line1": "Cliquez sur Se Déconnecter en haut à droite.",
+				"line2": "Cliquez sur OK pour vous déconnecter du site de pré-enregistrement."
+			},
+			"line": "Connectez-vous avec le même numéro de téléphone portable ou la même adresse email pour accéder aux demandes enregistrées."
+		}
+	},
+	"faq": {
+		"breadcrumb": {
+			"home": "Accueil",
+			"getting_started": "FAQ"
+		},
+		"answer": "Réponse",
+		"questions": [{
+				"question": "Je n'ai pas de numéro de téléphone mobile ni d'identifiant e-mail. Comment créer une demande pré-enregistrement?",
+				"answer": "Vous pouvez utiliser le numéro de portable d'un ami ou d'un membre de la famille ou un identifiant email pour vous connecter au site de pré-enregistrement."
+			},
+			{
+				"question": "J'ai perdu le numéro de téléphone mobile / l'adresse email que j'ai utilisé pour créer la demande de pré-enregistrement. Que devrais-je faire?",
+				"answer": "Créez un nouveau compte en utilisant un nouveau numéro de mobile ou un nouvel identifiant email."
+			},
+			{
+				"question": "Que se passe-t-il lorsque je sélectionne la langue spécifique sur l'écran de connexion?",
+				"answer": "Sélectionnez la langue que vous pouvez facilement lire et écrire car le formulaire complet sera affiché dans la langue que vous avez choisie."
+			},
+			{
+				"question": "Que se passe-t-il si je ne dispose pas du (des) justificatif(s) requis lors de la préparation de la demande de pré-enregistrement?",
+				"answer": "Remplissez les Données démographiques (Informations Personnelles) et enregistrez la demande. Vous pouvez télécharger les justificatifs ultérieurement."
+			},
+			{
+				"question": "Puis-je réserver un rendez-vous pour seulement deux personnes sur cinq dans la demande de pré-enregistrement?",
+				"answer": "Oui, vous pouvez prendre rendez-vous pour un nombre quelconque de personnes sur le nombre total des demandeurs."
+			},
+			{
+				"question": "Que se passe-t-il si je rate un rendez-vous?",
+				"answer": "Essayez de ne pas rater de rendez-vous. Si vous le ratez quand même, replanifiez le rendez-vous à l'aide de l'option «Modifier»."
+			},
+			{
+				"question": "J'ai pris rendez-vous le 10 février. Puis-je changer ma date de rendez-vous au 18 février?",
+				"answer": "Oui. Si votre rendez-vous a expiré, vous pouvez prendre un nouveau rendez-vous avec une date ultérieure."
+			},
+			{
+				"question": "J'ai pris rendez-vous au centre d'enregistrement de Coyah. Puis-je changer mon centre d'enregistrement de rendez-vous à Conakry?",
+				"answer": "Non, mais vous pouvez annuler le rendez-vous en cours et prendre un nouveau rendez-vous à un nouvel emplacement de votre choix."
+			},
+			{
+				"question": "J'ai modifié mes informations après avoir reçu une confirmation de rendez-vous. Dois-je télécharger ou imprimer à nouveau la confirmation de rendez-vous?",
+				"answer": "La page de confirmation de rendez-vous n'est qu'un document de référence permettant de mémoriser le lieu et l'heure du rendez-vous, etc. Au centre d'enregistrement, vos dernières informations seront automatiquement disponibles. Ainsi, il n’est pas officiellement nécessaire de réimprimer ou de télécharger"
+			},
+			{
+				"question": "J'ai reporté un rendez-vous après avoir reçu une confirmation de rendez-vous. Dois-je télécharger ou imprimer à nouveau la confirmation de rendez-vous?",
+				"answer": "La page de confirmation de rendez-vous n'est qu'un document de référence permettant de mémoriser le lieu et l'heure du rendez-vous, etc. Vous pouvez réimprimer ou télécharger la confirmation de rendez-vous pour vous rappeler le moment de votre rendez-vous, mais cela n'est pas officiellement nécessaire."
+			},
+			{
+				"question": "Est-ce que quelqu'un d'autre peut soumettre une demande en mon nom pendant le processus d'enregistrement?",
+				"answer": "Non, le processus d'enregistrement nécessite une capture biométrique et photo. Par conséquent, vous devez être présent en personne au centre d'enregistrement."
+			},
+			{
+				"question": "Je reste loin de ma résidence permanente pendant deux ans. Quelle preuve de résidence dois-je fournir?",
+				"answer": "Le MdM décide de la pertinence de la question et des réponses"
+			},
+			{
+				"question": "Je n'ai pas de preuve de résidence pour mon adresse actuelle. Que devrais-je faire?",
+				"answer": "Le MdM décide de la pertinence de la question et des réponses"
+			},
+			{
+				"question": "Je n'ai aucun document. Que devrais-je faire?",
+				"answer": "Le MdM décide de la pertinence de la question et des réponses"
+			},
+			{
+				"question": "Combien de jours avant puis-je annuler ou réserver un rendez-vous?",
+				"answer": "Le MdM décide de la pertinence de la question et des réponses"
+			},
+			{
+				"question": "Dois-je fournir des documents originaux ou des copies de documents certifiés lors de ma visite au centre d'enregistrement?",
+				"answer": "Le MdM décide de la pertinence de la question et des réponses"
+			}
+		]
+	},
+	"contactUs": {
+		"objet":"Objet du message",
+		"fullName":"Prénom(s) et Nom",
+		"email":"E-mail",
+		"reason":"Raison",
+		"otherReason":"Autre Motif",
+		"message":"Message",
+		"maxChars":"250 Caractères MAXIMUM",
+		"mandatoryObjet":"Objet du message requis",
+		"mandatoryMsg":"Message requis",
+		"mandatoryName":"Prénom et nom requis",
+		"mandatoryEmail":"Adresse email requise",
+		"mandatoryEmailInvalid":"Adresse email invalide",
+		"mandatoryMotif":"Le motif de votre message est requis",
+		"send":"Envoyer",
+		"writeUs": "Ecrivez-nous",
+		"title_address": "Adresse",
+		"title_adresse_body": {
+			"a": "Programme WURI Guinee",
+			"b": "Résidence Corail - Bureau A101",
+			"c": "Camayenne - Commune de Dixinn",
+			"d": "Conakry, République de Guinée"
+		},
+		"title_email": "Email",
+		"email_body": "contact@wuriguinee.com",
+		"title_telephone": "Téléphone",
+		"telephone_body": "+224 622 22 74 91",
+		"captcha_error": "Captcha invalide/expiré",
+		"confirmation_header_success": "Nous vous remercions!",
+		"confirmation_header_error": "Erreur technique",
+		"confirmation_body_success": "Votre demande a été transmise avec succès!",
+		"confirmation_body_error": "Cette action ne peut être effectuée pour le moment. Veuillez réessayer plus tard."
 
-  "recaptcha":{
-    "errorMessage":"Recaptcha a échoué. Veuillez réessayer"
-  }
+	},
+	"header": {
+		"link_about": "GUIDE D'UTILISATION",
+		"link_faq": "FAQ",
+		"link_contact": "CONTACT",
+		"link_contact_us": "CONTACT",
+		"link_applications": "DOSSIERS",
+		"link_logout": "SE DÉCONNECTER",
+		"link_login": "S'IDENTIFIER",
+		"consent_form":"FORMULAIRE DE CONSENTEMENT",
+		"application_form":"FORMULAIRE DE DEMANDE"
+	},
+	"login": {
+		"text": "S'identifier",
+		"sub_text": "pré-enregistrement pour",
+		"sub_text_UID": "Identifiant National Unique",
+		"label_select": "Choisissez votre langue",
+		"label_email_num": "E-mail ou Telephone Mobile",
+		"label_email_nummobile": "E-mail ou Mobile",
+		"label_otp": "Entrez votre clé d'identification OTP",
+		"label_otp_mobile": "Entrez la clé OTP",
+		"action_send": "RECEVOIR SA CLÉ OTP",
+		"action_resend": "RENVOYER LA CLÉ OTP",
+		"action_verify": "VALIDER",
+		"logout_msg": "Le demandeur doit se connecter avec le même numéro de téléphone portable / adresse e-mail pour accéder aux dossiers créés.",
+		"otp_valid_label": "valable",
+		"invalidEmail": "Adresse e-mail invalide",
+		"invalidMobile": "Numéro de téléphone invalide",
+		"invalidInput": "Adresse e-mail ou numéro de portable invalide"
+	},
+	"stepper": {
+		"link_demographic": "Informations Personnelles",
+		"link_upload_doc": "Justificatifs",
+		"link_book": "Rendez-vous",
+		"link_confirm": "Confirmation"
+	},
+	"demographic": {
+		"title": "Informations Personnelles",
+		"champs_oblig": " Champs obligatoires",
+		"language": "français",
+		"label_first_name": "Prénom(s) ",
+		"label_last_name": "Nom de Famille ",
+		"name_required": "Le nom complet est requis",
+		"label_age": "Âge",
+		"date_dd": "JJ",
+		"date_mm": "MM",
+		"date_yyyy": "AAAA",
+		"text_or": "OU",
+		"text_years": "Ans",
+		"text_gender": "Genre ",
+		"text_residence_status": "Statut de Résidence",
+		"text_date": "Date de Naissance",
+		"label_region": "Région ",
+		"label_prefecture": "Préfecture ",
+		"label_subprefectureOrCommune": "Sous-Préfecture/Commune ",
+		"label_district": "District ",
+		"label_sector": "Secteur ",
+		"label_additionalAddressDetails": "Complément d'Adresse",
+		"label_mob_num": "Numéro de Téléphone Portable",
+		"label_email_id": "E-mail",
+		"action_back": "Précédent",
+		"action_continue": "Suivant",
+		"action_preview": "APERÇU",
+		"personnal_infos_section_title": "Informations Personnelles",
+		"contact_section_title": "Contact",
+		"address_section_title": "Adresse",
+		"consent": {
+			"title": "Termes et conditions",
+			"subtitle": "Conditions générales",
+			"message": "Pour donner son consentement pour le stockage et l'utilisation des informations personnelles telles qu'elles sont données",
+			"checkCondition": "Cliquez pour accepter les termes et conditions",
+			"acceptButton": "Accepter",
+			"alertMessageFirst": "Vous serez déconnecté(e) car vous n'acceptez pas les conditions générales",
+			"alertMessageSecond": "Vous serez redirigé(e) vers votre page dossiers parce que vous n'acceptez pas les conditions générales",
+			"alertMessageThird": "Vous serez redirigé(e) vers la page \"Aperçu\" car vous n'acceptez pas les conditions générales."
+		},
+		"validation": {
+			"first_name_required": "Le nom complet est requis",
+			"last_name_required": "Le nom complet est requis",
+			"age_validation": "L'âge devrait être inférieur à 150",
+			"gender_validation": "Veuillez sélectionner le genre",
+			"nationality_validation": "Veuillez sélectionner le statut de Résidence",
+			"DOB_validation": "Entrez une date de naissance ou  un âge valide",
+			"date_required": "Entrez 2 chiffres pour la date",
+			"month_required": "Entrez 2 chiffres pour le mois",
+			"year_required": "Entrez 4 chiffres pour l'année",
+			"address_required": "L'adresse est requise",
+			"region_required": "Veuillez sélectionner une région",
+			"prefecture_required": "Veuillez sélectionner une préfecture",
+			"sub_prefecture_required": "Veuillez sélectionner une sous-préfecture",
+			"district_required": "Veuillez sélectionner un district",
+			"sector_required": "Veuillez sélectionner un secteur",
+			"admin_required": "Veuillez sélectionner une zone",
+			"postal_code_required": "Veuillez entrer un code postal valide",
+			"mobile_required": "Veuillez indiquer un numéro de téléphone portable valide",
+			"email_required": "Veuillez indiquer une adresse e-mail valide",
+			"pin_required": "Veuillez entrer un numéro d’identité de référence valide"
+		}
+	},
+	"documents": {
+		"title_document": "Justificatifs",
+		"text_filetype": "Formats de fichiers autorisés ",
+		"text_filesize": "et taille maximale autorisée",
+		"action_browse": "Parcourir",
+		"action_back": "Précédent",
+		"action_skip": "Réserver plus tard",
+		"action_continue": "Suivant",
+		"label_sameas": "Pareil que",
+		"text_or": "OU",
+		"action_view": "Aperçu",
+		"OR": "ou"
+	},
+	"acknowledgement": {
+		"title": "Confirmation de Rendez-vous",
+		"message": "Le numéro de demande et les détails du rendez-vous ont été envoyés à l'adresse e-mail et au numéro de téléphone portable enregistrés.",
+		"label_name": "Prénom(s)",
+		"label_lastname": "Nom",
+		"label_pre_id": "Numéro de Demande",
+		"label_reg_cntr": "Centre d'Enrôlement",
+		"label_cntr_contact_number": "No de Contact du Centre",
+		"label_appointment_date_time": "Date et Heure du Rendez-vous",
+		"container_guideline": "Consignes Importantes",
+		"action_send": "ENVOYER EMAIL / SMS",
+		"action_sendmobile": "EMAIL / SMS",
+		"action_download": "TÉLÉCHARGER LE FICHIER PDF",
+		"action_downloadmobile": "PDF",
+		"action_print": "IMPRESSION"
+	},
+	"preview": {
+		"title_preview": "Aperçu",
+		"language": "français",
+		"subheading_information": "Informations Personnelles",
+		"label_name": "Prénom(s)",
+		"label_names": "Nom",
+		"label_age": "Âge",
+		"label_DOB": "Date de Naissance",
+		"text_years": "Ans",
+		"text_gender": "Genre",
+		"text_resident_status": "Statut de Résidence",
+		"subheading_contact": "Contact",
+		"label_address": "Adresse",
+		"label_region": "Région",
+		"label_province": "Préfecture",
+		"label_subprefectureOrCommune": "Sous-Préfecture/Commune",
+		"label_city": "District",
+		"label_zone": "Secteur",
+		"label_additionalAddressDetails": "Complément d'Adresse",
+  
+		"label_mob_num": "Numéro de Portable",
+		"label_alt_mob_num": "Numéro de téléphone alternatif (facultatif)",
+		"label_email_id": "Adresse E-mail",
+		"label_pin": "Numéro d'identité de référence",
+		"title_document": "Documents Fournis",
+		"text_not_uploaded": "Non Fourni",
+		"action_modify": "Modifier",
+		"action_back": "Précédent",
+		"action_add_applicant": "Ajouter un Demandeur",
+		"action_continue": "Suivant"
+	},
+	"message": {
+		"login": {
+			"msg1": "L'adresse e-mail n'est pas valide",
+			"msg2": "Le numéro de téléphone n'est pas valide",
+			"msg3": "Le code OTP saisi n'est pas valide",
+			"msg4": "Connexion réussie"
+		},
+		"demographicDetails": {
+			"msg1": "Saisie d'un mot sur la liste des mots interdits"
+		},
+		"uploadDocuments": {
+			"error": "Erreur",
+			"msg1": "Document dépassant la taille autorisée",
+			"msg2": "Échec de l'analyse antivirus",
+			"msg3": "Type de fichier non pris en charge",
+			"msg4": "Le fichier est trop large",
+			"msg5": "Le nom du fichier ne doit pas dépasser 50 caractères",
+			"msg6": "Mauvais format de fichier. Veuillez télécharger le bon format de fichier",
+			"msg7": "Le fichier n'a pas pu être téléchargé. Veuillez réessayer.",
+			"msg8": "Impossible de copier le document",
+			"msg9": "Il manque des documents",
+			"none": "Aucun"
+		},
+		"appointmentCentreSearch": {
+			"msg1": "Aucun centre trouvé",
+			"msg2": "Localisation non activée"
+		},
+		"bookAppointment": {
+			"msg1": "L'utilisateur suivant n'a sélectionné aucun créneau horaire",
+			"msg2": "(should provide User name) Do you want to continue Booking"
+		},
+		"cancelAppointment": {
+			"msg1": "Le rendez-vous pour la demande selectionnée va être annulé",
+			"msg2": "L'annulation du rendez-vous pour cette demande a réussi "
+		}
+	},
+	"dashboard": {
+		"title": "Dossiers",
+		"action_modify_information": "Modifier les informations",
+		"action_modify_appointment": "Créer / Déplacer le Rendez-vous",
+		"action_cre_application": "Nouvelle ",
+		"action_cre2_application": "Demande ",
+		"card": {
+			"text_app_id": "No de Pré-enregistrement",
+			"text_name": "Prénom",
+			"text_lastname": "Nom",
+			"text_appoinment_date": "Rendez-vous",
+			"text_status": "Statut",
+			"action_modify_information": "Modifier les informations",
+			"action_view_acknowledgement": "Voir la confirmation"
+		},
+		"discard": {
+			"title_confirm": "Confirmer",
+			"title_success": "Succès",
+			"title_error": "Erreur",
+			"cancelAppointment": {
+				"msg_confirm": "le rendez-vous pour la demande sélectionnée sera annulé.",
+				"msg_deleted": "L'annulation du rendez-vous pour cette demande a réussi",
+				"msg_could_not_deleted": "le rendez-vous pour cette demande n'a pas pu être annulé"
+			},
+			"deletePreregistration": {
+				"msg_confirm": "La demande sélectionnée sera supprimée. Veuillez confirmer.",
+				"msg_deleted": "La demande sélectionnée a été supprimée",
+				"msg_could_not_deleted": "La demande sélectionnée n'a pas pu être supprimée"
+			},
+			"button_confirm": "Confirmer",
+			"button_cancel": "Annuler"
+		},
+		"status": {
+			"pendingAppointment": "En attente",
+			"booked": "Réservé",
+			"expired": "Expiré"
+		},
+		"error": {
+			"error": "Erreur Interne du Serveur. Veuillez réessayer après un certain temps.",
+			"button_ok": "OK"
+		}
+	},
+	"timeSelection": {
+		"title_book": "Prendre Rendez-vous",
+		"text_step1": "Etape 1: Inscrivez vous pour un rendez-vous en sélectionnant sur le calendrier une journée parmi les dates puis en cliquant sur le créneau que vous avez retenu",
+		"text_step2": "Etape 2: Ajoutez des demandeurs en cliquant sur le + dans la liste des demandeurs",
+		"text_prev": "Précédent",
+		"text_next": "Suivant",
+		"text_prevsmall": "Préc.",
+		"text_nextsmall": "Suiv.",
+		"text_morning": "Matin",
+		"text_afternoon": "Après midi",
+		"text_available": "Demandeurs Disponibles",
+		"text_availability": "Disponibilités",
+		"text_reserved": "Réservé(s)",
+		"text_slots": "créneaux",
+		"action_done": "TERMINÉ",
+		"action_back": "Précédent",
+		"action_bookLater": "Réserver plus tard",
+		"action_continue": "Suivant",
+		"applicant_available_list_empty": "Aucun demandeur disponible",
+		"applicant_selected_list_empty": "Aucun demandeur ajouté",
+		"booking": {
+			"title_success": "Succès",
+			"msg_success": "Prise de rendez-vous effectuée avec succès",
+			"title_failure": "Échec",
+			"msg_failure": "Votre prise de rendez-vous a échoué",
+			"deletedApplicant1": [
+				"Vous n'avez choisi aucun créneau horaire pour l'utilisateur suivant",
+				"Voulez-vous continuer la réservation"
+			],
+			"yesButtonText": "Oui",
+			"noButtonText": "Non"
+		}
+	},
+	"appointmentCentreSearch": {
+		"title": "Centres d'Enrôlement",
+		"text_recommended_centres": "Centres Recommandés",
+		"text_finding_result": "trouver le résultat pour",
+		"text_nearBy": "À Proximité",
+		"action_back": "Précédent",
+		"action_bookLater": "Réserver plus tard",
+		"action_continue": "Suivant"
+	},
+	"appointmentConfirmed": {
+		"title": "Confirmation de Rendez-vous",
+		"text_confirmation": "Le numéro de demande et les détails du rendez-vous ont été envoyés à l'adresse e-mail et au numéro de téléphone mobile enregistrés.",
+		"action_download": "Télécharger",
+		"action_print": "Imprimer"
+	},
+	"dialog": {
+		"title_applicant": "Envoyer une confirmation de rendez-vous",
+		"content_applicant": "Confirmation Email / SMS",
+		"text_email": "Saisissez votre adresse e-mail",
+		"text_emailmobile": "Adresse e-mail",
+		"text_mobile": "Saisissez votre numéro de téléphone mobile",
+		"text_mobilem": "Téléphone mobile",
+		"invalidApplicantNumber": "Numéro de portable invalide",
+		"invalidApplicantEmailId": "Adresse e-mail invalide",
+		"action_ok": "OK",
+		"title_discard": "Annuler",
+		"action_discard_app": "Supprimer toute la demande",
+		"action_cancel": "Annuler le rendez-vous et préserver les informations personnelles",
+		"action_submit": "Valider",
+		"action_dismiss": "OK",
+		"action_add": "Ajouter",
+		"action_close": "Fermer",
+		"action_add_to_slot": "Ajouter au créneau",
+		"navigation_alert": "Êtes-vous sûr de vouloir quitter cette page. Les informations renseignées ne seront pas enregistrées. Veuillez confirmer."
+	},
+	"centerSelection": {
+		"title": " Centres d'Enregistrement ",
+		"action_nearBy": "A Proximité",
+		"display_recommended": "Recommandés",
+		"text_found": "",
+		"text_centers": "",
+		"text_timing": "Horaires",
+		"text_open": "Ouvert",
+		"text_select": "Critère",
+		"text_enter": "Entrer",
+		"text_horaire": "Ouvert du lundi au vendredi de 9h à 17h",
+		"text_search": "Recherche",
+		"action_back": "Précédent",
+		"action_book_later": "Réserver plus tard",
+		"action_continue": "Suivant",
+		"noResult_found": "Aucun résultat trouvé"
+	},
+	"autologout": {
+		"preview": "Vous session va expiré dans 60 secondes en raison de votre inactivité. Veuillez cliquer n'importe où pour réactiver votre session",
+		"post": "Vous avez été déconnecté pour cause d'inactivité."
+	},
+	"helpText": {
+		"applicationId": "Numéro de pré-enregistrement",
+		"status": {
+			"pendingAppointment": "Le rendez-vous n'est pas encore réservé",
+			"booked": "Le rendez-vous est réservé avec succès",
+			"expired": "La date de rendez-vous est passée"
+		},
+		"info":"40 caractères permis",
+		"deleteIcon": "Vous pouvez entièrement supprimer la demande ou simplement annuler le rendez-vous en préservant les données personnelles fournies. Supprimer la demande annulera le rendez-vous. Anuulez seulement le rendez-vous préservera les données personnelles fournies.",
+		"book/modify_appointment": "Vous devez cocher la case près du libelle du No de demande pour qu'un ou plusieurs demandeurs puissent prendre un rendez-vous",
+		"bookAppointment": "Inscrivez-vous pour un rendez-vous en sélectionnant sur le calendrier une journée parmi les dates, puis en cliquant sur le créneau que vous avez retenu. ",
+		"send_email/sms": "Vous pouvez ajouter un destinataire supplémentaire pour recevoir les notifications.",
+		"modify_at_DemoPreview": "Cliquez sur Modifier pour corriger les informations personnelles",
+		"modify_at_DocumentPreview": "Cliquez sur Modifier pour corriger le document téléchargé.",
+		"same_as": "Si le justificatif de domicile est identique à celui du demandeur déjà rempli, vous pouvez utiliser l'option Idem Que",
+		"add_applicant": "Cliquez sur Ajouter un demandeur pour ajouter un ou plusieurs demandeurs.",
+		"recommended_centers": "Liste des centres recommandés selon votre préfecture",
+		"nearBy": "Centres d'enregistrement basés sur votre géolocalisation",
+		"magnifying_glass": "Recherche basée sur la sélection du menu déroulant.",
+		"preview_continue": "Téléchargez tous les fichiers pour continuer",
+		"etape1":"Ajoutez des demandeurs en cliquant sur le + dans la liste des demandeurs",
+		"etape2":"Supprimez des demandeurs en cliquant sur le - dans la liste ci dessous"
+	},
+	"error": {
+		"error": "Une erreur technique est survenue et l'opération ne peut s'achever. Aucune donnée saisie ne peut être sauvegardée",
+		"button_ok": "OK",
+		"postalCode": "Le code PIN saisi est invalide",
+		"email": "L'addresse e-mail saisie est invalide",
+		"phone": "Le téléphone saisi est invalide",
+		"dateOfBirth": "La date de naissance saisie est invalide",
+		"referenceIdentityNumber": "Le numéro d'identité de référence entré est invalide",
+		"tokenExpiredLogout": "Vous avez été déconnecté pour cause d'inactivité.",
+		"slotNotAvailable": "Votre rendez-vous ne peut-être pris car le créneau demandé n'est pas libre. Veuillez sélectionner un autre créneau ou ré-essayer plus tard",
+		"timeExpired_1": "Un rendez-vous ne peut être déplacé moins de ",
+		"timeExpired_2": " heures avant le rendez-vous",
+		"errorLabel": "Erreur"
+	},
+	"residentTypesMapping": {
+		"NFR": "RESIDENT",
+		"FR": "NON RESIDENT"
+	},
+	"sameAs": "Document téléchargé avec Idem que",
+	"DAYS": ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"]
+
 }

@@ -1,18 +1,18 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, APP_INITIALIZER } from '@angular/core';
-import { NgxPrintModule } from 'ngx-print';
-import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {HttpClientModule} from '@angular/common/http';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {NgxPrintModule} from 'ngx-print';
+import {ConfigService} from 'src/app/core/services/config.service';
+import {AppConfigService} from './app-config.service';
 
-import { AppComponent } from './app.component';
-import { AppConfigService } from './app-config.service';
-import { BookingService } from './feature/booking/booking.service';
+import {AppRoutingModule} from './app-routing.module';
 
-import { AppRoutingModule } from './app-routing.module';
-import { CoreModule } from './core/core.module';
-import { AuthModule } from './auth/auth.module';
-import { SharedModule } from './shared/shared.module';
-import { ConfigService } from 'src/app/core/services/config.service';
+import {AppComponent} from './app.component';
+import {AuthModule} from './auth/auth.module';
+import {CoreModule} from './core/core.module';
+import {BookingService} from './feature/booking/booking.service';
+import {SharedModule} from './shared/shared.module';
 
 const appInitialization = (appConfig: AppConfigService) => {
   return () => {
@@ -30,7 +30,7 @@ const appInitialization = (appConfig: AppConfigService) => {
     CoreModule,
     AuthModule,
     SharedModule,
-    NgxPrintModule
+    NgxPrintModule,
   ],
   providers: [
     BookingService,

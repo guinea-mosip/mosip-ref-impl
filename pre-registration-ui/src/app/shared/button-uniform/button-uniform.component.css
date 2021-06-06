@@ -1,0 +1,16 @@
+button {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    margin-left: 2%;
+}
+
+.btn_axn-pri[disabled]{
+    background: #BCE0FD;
+}
+
+:host /deep/ .mat-raised-button {
+    padding: 0 1% ;
+}
+
+

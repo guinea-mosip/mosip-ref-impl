@@ -3,121 +3,68 @@
 </div>
 
 <div *ngIf="!showSpinner" class="wrapper">
+  <div class="logo_wrapper">
+    <mat-card>
+      <img class="positionimgbiom" src="assets/biometrie.png" alt="biometrie img">
+    </mat-card>
+  </div>
   <div class="form_wrapper">
     <div class="heading">
-      <span>{{ "login.text" | translate }}</span>
+      <span class="connexiontxt">{{ 'login.text' | translate }}</span>
     </div>
 
-    <div class="subHeading pinkText">
-      {{ "login.sub_text" | translate }}
-      <span class="boldText"> {{ "login.sub_text_UID" | translate }} </span>
-    </div>
-
-    <div
-      style="width: 38vw; max-width: 323px"
-      [ngClass]="
-        selectedLanguage !== 'Arabic'
-          ? 'form_fields_wrapper form_fields_padding'
-          : 'form_fields_wrapper'
-      "
-    >
-      <div>
-        <mat-form-field appearance="outline">
-          <mat-select
-            disableOptionCentering
-            panelClass="select-option"
-            [(ngModel)]="selectedLanguage"
-            (selectionChange)="changeLanguage()"
-            placeholder="Select your language"
-          >
-            <mat-option *ngFor="let lang of languages" [value]="lang">{{
-              lang
-            }}</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-
+    <div class="form_bdy">
       <div *ngIf="showContactDetails">
-        <div [dir]="textDir">
-          <mat-form-field appearance="outline">
-            <input
-              class="input_pri"
-              autofocus="autofocus"
-              matInput
-              [(ngModel)]="inputContactDetails"
-              placeholder="{{ 'login.label_email_num' | translate }}"
-              id="inputFieldContact"
-              required
-            />
+        
+          <mat-form-field appearance="outline">     
+            <input class="login-input" #loginP="matInput" matInput [(ngModel)]="inputContactDetails"
+              placeholder="{{ 'login.label_email_num' | translate }}" 
+              id="inputFieldContact" required />   
+              
+              <input class="login-mobile" autofocus="autofocus" matInput [(ngModel)]="inputContactDetails"
+                placeholder="{{ 'login.label_email_nummobile' | translate }}" 
+                id="inputFieldContacts" required />
           </mat-form-field>
-        </div>
+      
         <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
       </div>
-      <div *ngIf="enableCaptcha && showCaptcha">
-        <app-captcha [captchaSiteKey]="siteKey"></app-captcha>
-      </div>
-      <div *ngIf="captchaError" class="error" style="margin-left: 55px">
-        {{ "recaptcha.errorMessage" | translate }}
-      </div>
-      <div *ngIf="showOTP">
+
+      <div *ngIf="showOTP" class="login_input">
         <mat-form-field appearance="outline">
-          <input
-            autofocus="autofocus"
-            matInput
-            [(ngModel)]="inputOTP"
-            placeholder="{{ 'login.label_otp' | translate }}"
-            id="inputFieldOTP"
-            (input)="showVerifyBtn()"
-          />
+          <input autofocus="autofocus" matInput [(ngModel)]="inputOTP" placeholder="{{ 'login.label_otp' | translate }}"
+            id="inputFieldOTP" (input)="showVerifyBtn()" #inputFieldOTP/>
         </mat-form-field>
       </div>
+      <div *ngIf="showOTP" class="login_inputm">
+        <mat-form-field appearance="outline">
+        <input autofocus="autofocus" matInput [(ngModel)]="inputOTP" placeholder="{{ 'login.label_otp_mobile' | translate }}"
+          id="inputFieldOTPm" (input)="showVerifyBtn()" />
+      </mat-form-field>
+    </div>
 
-      <!-- class="pinkBg whiteText boldText" -->
       <div *ngIf="showSendOTP">
-        <button
-          mat-raised-button
-          class="btn_axn-pri"
-          [disabled]="
-            inputContactDetails.length > 0 &&
-            (enableSendOtp || authService.isCaptchaAuthenticated())
-              ? false
-              : true
-          "
-          (click)="submit()"
-        >
-          {{ "login.action_send" | translate }}
-        </button>
+
+        <app-button-uniform  [disabled]="inputContactDetails.length > 0 ? false : true" (click)="submit()" [text]="'login.action_send' | translate">
+        </app-button-uniform>
+
       </div>
 
       <div *ngIf="showVerify">
-        <button
-          mat-raised-button
-          class="btn_axn-pri"
-          [disabled]="disableVerify"
-          disabled="{{ disableBtn }}"
-          (click)="submit()"
-        >
-          {{ "login.action_verify" | translate }}
-        </button>
+        <app-button-uniform disable="{{disableBtn}}" [disabled]="disableVerify" (click)="submit()" [text]="'login.action_verify' | translate">
+        </app-button-uniform>
       </div>
 
       <div *ngIf="showResend">
-        <button
-          mat-raised-button
-          class="btn_axn-pri"
-          disabled="{{ disableBtn }}"
-          (click)="submit()"
-        >
-          {{ "login.action_resend" | translate }}
-        </button>
+
+        <app-button-uniform disable="{{disableBtn}}" (click)="submit()" [text]="'login.action_resend' | translate">
+        </app-button-uniform>
+
       </div>
 
       <div class="pinkText boldText" id="timer">
-        <span>{{ "login.otp_valid_label" | translate }}&nbsp;</span
-        ><span id="minutesSpan">{{ minutes }}</span
-        >:<span id="secondsSpan">{{ seconds }}</span>
+        <span>{{ 'login.otp_valid_label' | translate }}&nbsp;</span><span id="minutesSpan">{{ minutes }}</span>:<span
+          id="secondsSpan">{{ seconds }}</span>
       </div>
     </div>
   </div>
 </div>
-<app-footer></app-footer>

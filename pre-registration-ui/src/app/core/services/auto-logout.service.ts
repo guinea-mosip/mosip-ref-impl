@@ -7,6 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 import { ConfigService } from 'src/app/core/services/config.service';
 import * as appConstants from 'src/app/app.constants';
 import LanguageFactory from 'src/assets/i18n';
+import {AppConfigService} from "../../app-config.service";
 
 /**
  * @description This class is responsible for auto logging out user when he is inactive for a
@@ -28,7 +29,7 @@ export class AutoLogoutService {
   secondaryLanguagelabels: any;
   primaryLang = localStorage.getItem('langCode');
   secondaryLang = localStorage.getItem('secondaryLangCode');
-
+  DISABLE_AUTO_LOGOUT = this.appConfigService.getConfig()['DISABLE_AUTO_LOGOUT'];
   idle: number;
   timeout: number;
   ping: number;
@@ -39,7 +40,8 @@ export class AutoLogoutService {
     private userIdle: UserIdleService,
     private authService: AuthService,
     private dialog: MatDialog,
-    private configservice: ConfigService
+    private configservice: ConfigService,
+    private appConfigService: AppConfigService
   ) {}
 
   /**
@@ -98,6 +100,10 @@ export class AutoLogoutService {
    */
 
   public keepWatching() {
+    if (this.DISABLE_AUTO_LOGOUT){
+      console.warn("Auto logout is disabled");
+      return
+    }
     this.userIdle.startWatching();
     this.changeMessage({ timerFired: true });
 

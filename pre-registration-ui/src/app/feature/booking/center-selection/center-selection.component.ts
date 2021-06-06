@@ -1,37 +1,36 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
-import { MatDialog } from "@angular/material";
-import { DialougComponent } from "../../../shared/dialoug/dialoug.component";
-import { DataStorageService } from "src/app/core/services/data-storage.service";
-import { RegistrationCentre } from "./registration-center-details.model";
-import { Router, ActivatedRoute } from "@angular/router";
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { DialougComponent } from '../../../shared/dialoug/dialoug.component';
+import { DataStorageService } from 'src/app/core/services/data-storage.service';
+import {NESTED_ERROR, RESPONSE} from "./../../../app.constants";
+import {BookingInterface} from "./booking.model";
+import { RegistrationCentre } from './registration-center-details.model';
+import { Router, ActivatedRoute } from '@angular/router';
 
-import { UserModel } from "src/app/shared/models/demographic-model/user.modal";
-import { BookingService } from "../booking.service";
-import { TranslateService } from "@ngx-translate/core";
-import Utils from "src/app/app.util";
-import { ConfigService } from "src/app/core/services/config.service";
-import * as appConstants from "./../../../app.constants";
-import { BookingDeactivateGuardService } from "src/app/shared/can-deactivate-guard/booking-guard/booking-deactivate-guard.service";
-import LanguageFactory from "src/assets/i18n";
-import { Subscription } from "rxjs";
-import { resolve } from "url";
-
-import {PageEvent} from '@angular/material/paginator';
+import { UserModel } from 'src/app/shared/models/demographic-model/user.modal';
+import { BookingService } from '../booking.service';
+import { RegistrationService } from 'src/app/core/services/registration.service';
+import { TranslateService } from '@ngx-translate/core';
+import Utils from 'src/app/app.util';
+import { ConfigService } from 'src/app/core/services/config.service';
+import * as appConstants from './../../../app.constants';
+import { BookingDeactivateGuardService } from 'src/app/shared/can-deactivate-guard/booking-guard/booking-deactivate-guard.service';
+import LanguageFactory from 'src/assets/i18n';
+import { Subscription } from 'rxjs';
+import { NameList } from "../../../shared/models/demographic-model/name-list.modal";
 
 @Component({
-  selector: "app-center-selection",
-  templateUrl: "./center-selection.component.html",
-  styleUrls: ["./center-selection.component.css"],
+  selector: 'app-center-selection',
+  templateUrl: './center-selection.component.html',
+  styleUrls: ['./center-selection.component.css']
 })
-export class CenterSelectionComponent
-  extends BookingDeactivateGuardService
-  implements OnInit, OnDestroy {
+export class CenterSelectionComponent extends BookingDeactivateGuardService implements OnInit, OnDestroy {
   REGISTRATION_CENTRES: RegistrationCentre[] = [];
   searchClick: boolean = true;
   isWorkingDaysAvailable = false;
   canDeactivateFlag = true;
   locationTypes = [];
-  allLocationTypes = [];
+
   locationType = null;
   searchText = null;
   showTable = false;
@@ -43,208 +42,202 @@ export class CenterSelectionComponent
   errorlabels: any;
   step = 0;
   showDescription = false;
-  mapProvider = "OSM";
+  mapProvider = 'OSM';
   searchTextFlag = false;
-  displayMessage = "Showing nearby registration centers";
-  users: UserModel[] = [];
+  displayMessage = 'Showing nearby registration centers';
+  users: NameList[];
   subscriptions: Subscription[] = [];
-  primaryLang = localStorage.getItem("langCode");
+  primaryLang = localStorage.getItem('langCode');
   workingDays: string;
-  preRegId = [];
-  locationNames = [];
-  locationCodes = [];
-  // MatPaginator Inputs
-  totalItems = 0;
-  defaultPageSize = 10;
-  pageSize = this.defaultPageSize;
-  pageIndex = 0;
-  pageSizeOptions: number[] = [5, 10, 15, 20];
+  centerSelectedOption: string = '';
+  degreeTitleList = [];
+
+  toShow = 'autre';
+  communes = [];
+  sousPrefecture = [];
+
   constructor(
     public dialog: MatDialog,
     private service: BookingService,
     private dataService: DataStorageService,
     private router: Router,
     private route: ActivatedRoute,
+    private registrationService: RegistrationService,
     private translate: TranslateService,
-    private configService: ConfigService,
-    private activatedRoute: ActivatedRoute
+    private configService: ConfigService
   ) {
     super(dialog);
     this.translate.use(this.primaryLang);
   }
 
-  async ngOnInit() {
-    if (this.router.url.includes("multiappointment")) {
-      this.preRegId = [...JSON.parse(localStorage.getItem("multiappointment"))];
-    } else {
-      this.activatedRoute.params.subscribe((param) => {
-        this.preRegId = [param["appId"]];
-      });
-    }
-    await this.getUserInfo(this.preRegId);
+  ngOnInit() {
     this.REGISTRATION_CENTRES = [];
     this.selectedCentre = null;
-    const subs = this.dataService
-      .getLocationTypeData()
-      .subscribe((response) => {
-        //get all location types from db
-        this.allLocationTypes = response[appConstants.RESPONSE]["locations"];
-        console.log(`allLocationTypes: ${this.allLocationTypes}`);        
-        //get the recommended loc hierachy code to which booking centers are mapped
-        const recommendedLocCode = this.configService.getConfigByKey(
-          appConstants.CONFIG_KEYS.preregistration_recommended_centers_locCode
-        );
-        console.log(`recommendedLocCode: ${recommendedLocCode}`);
-        //now filter out only those hierachies which are higher than the recommended loc hierachy code
-        //ex: if locHierachy is ["Country","Region","Province","City","PostalCode"] and the
-        //recommended loc hierachy code is 3 for "City", then show only "Country","Region","Province"
-        //in the Search dropdown. There are no booking centers mapped to "PostalCode", so don't include it.
-        this.locationTypes = this.allLocationTypes.filter(
-          (locType) =>
-            locType.locationHierarchylevel <= Number(recommendedLocCode)
-        );
-        //sort the filtered array in ascending order of hierarchyLevel
-        this.locationTypes.sort(function (a, b) {
-          return a.locationHierarchylevel - b.locationHierarchylevel;
-        });
-        //console.log(this.locationTypes);
-        this.getRecommendedCenters();
-      });
+    const subs = this.dataService.getLocationTypeData().subscribe(response => {
+      const locationItems = response[appConstants.RESPONSE]['locations'];
+      this.filterLocations(locationItems);
+    });
     this.subscriptions.push(subs);
-    console.log(this.users);
-    //this.getRecommendedCenters();
+    this.users = this.service.getNameList();
+    this.getRecommendedCenters();
     this.getErrorLabels();
+    this.centerSelectedOption = 'Recommanded';
   }
-
-  getUserInfo(preRegId) {
-    return new Promise(async (resolve) => {
-      for (let i = 0; i < preRegId.length; i++) {
-        await this.getUserDetails(preRegId[i]).then((user) =>
-          this.users.push(user)
-        );
-      }
-      resolve();
-    });
+  educationLevelChangeAction(education) {
+    this.degreeTitleList = education.degreeTitleList;
   }
+  // educationList: any = [
+  //   {
+  //     'critere': 'REGION',
+  //     degreeTitleList: [
+  //       'BOKE', 'CONAKRY', 'KANKAN', 'KINDIA', 'LABE', 'MAMOU', 'NZEREKORE'
+  //     ]
+  //   },
+  //   {
+  //     'critere': 'PREFECTURE',
+  //     degreeTitleList: [
+  //       'BOKE', 'COYAH', 'DIXINN', 'DUBREKA', 'FORECARIAH', 'KALOUM', 'KANKAN', 'KOUROUSSA', 'LABE', 'MAMOU', 'NZEREKORE', 'SIGUIRI', 'TELIMELE'
+  //     ]
+  //   },
+  //   {
+  //     'critere': 'SOUS-PREFECTURE',
+  //     degreeTitleList: [
+  //       'CU-BOKE', 'CU-COYAH', 'DIXINN', 'CU-DUBREKA', 'CU-FORECARIAH', 'KALOUM', 'CU-KANKAN', 'CU-KOUROUSSA', 'CU-LABE', 'CU-MAMOU', 'CU-NZEREKORE', 'CU-SIGUIRI', 'CU-TELIMELE'
+  //     ]
+  //   },
+  // {
+  //     'critere': 'COMMMUNE',
+  //     degreeTitleList: [
+  //       'CU-BOKE', 'CU-COYAH', 'DIXINN', 'CU-DUBREKA', 'CU-FORECARIAH', 'KALOUM', 'CU-KANKAN', 'CU-KOUROUSSA', 'CU-LABE', 'CU-MAMOU', 'CU-NZEREKORE', 'CU-SIGUIRI', 'CU-TELIMELE'
+  //     ]
+  //   }
+  // ];
 
-  getUserDetails(prid) {
-    return new Promise((resolve) => {
-      this.dataService.getUser(prid.toString()).subscribe((response) => {
-        resolve(
-          new UserModel(
-            prid.toString(),
-            response[appConstants.RESPONSE],
-            undefined,
-            []
-          )
-        );
-      });
+  // Hack: for displaying SOUS-Prefecture and COMMUNE separately and retrieving PAYS option
+  filterLocations(locationItems: any) {
+    locationItems.forEach((locationType) => {
+
+      if (locationType.locationHierarchylevel === 0  // 0 => PAYS
+        || locationType.locationHierarchylevel === 4 // 4 => DISTRICT
+        || locationType.locationHierarchylevel === 5) // 5 => SECTEUR
+        return;
+
+      if (locationType.locationHierarchylevel === 3) // 3 => SOUS_PREFECTURE_OU_COMMUNE
+        locationType.locationHierarchyDescription = 'SOUS-PREFECTURE/COMMUNE';
+      else
+        locationType.locationHierarchyDescription = locationType.locationHierarchyName;
+
+      this.locationTypes.push(locationType);
     });
+
+    this.locationTypes.sort((a, b) => (a.locationHierarchylevel > b.locationHierarchylevel) ? 1 : ((b.locationHierarchylevel > a.locationHierarchylevel) ? -1 : 0));
   }
 
   getErrorLabels() {
     let factory = new LanguageFactory(this.primaryLang);
     let response = factory.getCurrentlanguage();
-    this.errorlabels = response["error"];
+    this.errorlabels = response['error'];
   }
 
-  async getRecommendedCenters() {
-    this.totalItems = 0;
-    console.log(this.users.length);
-    const locationHierarchy = JSON.parse(
-      localStorage.getItem("locationHierarchy")
-    );
-    const locationHierarchyLevel = this.configService.getConfigByKey(
-      appConstants.CONFIG_KEYS.preregistration_recommended_centers_locCode
-    );
-    let minusValue = this.allLocationTypes.length - locationHierarchy.length;
-     console.log(minusValue);
-    const locationType = locationHierarchy[Number(locationHierarchyLevel) - minusValue];
-    console.log(locationHierarchy);
-    console.log(locationHierarchyLevel + ">>>>" + locationType);
+  getRecommendedCenters() {
+    this.searchClick = true;
+    let locations = [];
+    let locationNames = [];
     this.users.forEach((user) => {
-      console.log(user);
-      if (
-        typeof user.request.demographicDetails.identity[locationType] ===
-        "object"
-      ) {
-        this.locationCodes.push(
-          user.request.demographicDetails.identity[locationType][0].value
-        );
-      } else if (
-        typeof user.request.demographicDetails.identity[locationType] ===
-        "string"
-      ) {
-        this.locationCodes.push(
-          user.request.demographicDetails.identity[locationType]
+      locations.push(user.location);
+    });
+    this.getPrefectures().then((res) => {
+      if (res && Array.isArray(res)) {
+        locationNames = res.reduce(function (acc, v) {
+          if (locations.indexOf(v.code) !== -1) {
+            acc.push(v.name);
+          }
+          return acc
+        }, []);
+
+        this.subscriptions.push(
+          this.dataService
+            /* leave it commented */
+            .recommendedCenters(
+              this.primaryLang,
+              this.configService.getConfigByKey(
+                appConstants.CONFIG_KEYS.preregistration_recommended_centers_locCode
+              ),
+              locationNames
+            )
+            // .getCenter()
+            .subscribe((response) => {
+              if (response[appConstants.RESPONSE]) {
+                console.log(response["response"]);
+                this.displayResults(response["response"]);
+              } else {
+                if (response["errors"] && response["errors"].length > 0) {
+                  let errStr = response["errors"].reduce(function (c, e) {
+                    return c + "\n" + e.message
+                  }, "");
+                  console.error(errStr);
+                } else {
+                  alert("error occured while getting recommended centers")
+                }
+              }
+            })
         );
       }
-    });
-    console.log(this.locationCodes);
-    await this.getLocationNamesByCodes();
-    this.getRecommendedCentersApiCall();
-  }
-
-  getLocationNamesByCodes() {
-    return new Promise((resolve) => {
-      this.locationCodes.forEach(async (pins,index) => {
-        await this.getLocationNames(pins);
-        if(index===this.locationCodes.length-1){
-          resolve(true);
-        }
-      });
+      else {
+        alert("No prefectures found")
+      }
     });
   }
 
-  getRecommendedCentersApiCall() {
-    this.REGISTRATION_CENTRES = [];
-    const subs = this.dataService
-      .recommendedCenters(
-        this.primaryLang,
-        this.configService.getConfigByKey(
-          appConstants.CONFIG_KEYS.preregistration_recommended_centers_locCode
-        ),
-        this.locationNames
-      )
-      .subscribe((response) => {
-        if (response[appConstants.RESPONSE]) {
-          this.displayResults(response["response"]);
-        } else {
-          this.displayMessageError(
-            "Error",
-            this.errorlabels.regCenterNotavailabe,
-            ""
-          );
-        }
-      });
-    this.subscriptions.push(subs);
-  }
-
-  getLocationNames(locationCode) {
-    return new Promise((resolve) => {
-      this.dataService
-        .getLocationInfoForLocCode(locationCode, this.primaryLang)
-        .subscribe((response) => {
-          console.log(response[appConstants.RESPONSE]);
-          if (response[appConstants.RESPONSE]) {
-            let locName = response[appConstants.RESPONSE]["name"];
-            console.log(locName);
-            this.locationNames.push(locName);
-            resolve(true);
+  private getPrefectures() {
+    return new Promise((resolve, reject) => {
+      this.subscriptions.push(
+        this.dataService.getLocationByHiererchy(
+          "prefecture"
+        ).subscribe(
+          response => {
+            if (response[appConstants.RESPONSE]) {
+              resolve(response[appConstants.RESPONSE][appConstants.DEMOGRAPHIC_RESPONSE_KEYS.locations]);
+            } else {
+              if (response["errors"] && response["errors"].length > 0) {
+                let errStr = response["errors"].reduce(function (c, e) {
+                  return c + "\n" + e.message
+                }, "");
+                alert(errStr)
+              } else {
+                alert("error occured while getting recommended centers")
+              }
+              reject()
+            }
+          },
+          error => {
+            reject();
           }
-        });
+        )
+      );
     });
   }
 
   setSearchClick(flag: boolean) {
     this.searchClick = flag;
+    this.setCenters();
   }
+
+  setCenters() {
+    this.dataService.getCenterByLocattionType(this.locationType.locationHierarchylevel).subscribe(ret => {
+      const dtl = ret[this.locationType.locationHierarchylevel];
+      this.degreeTitleList = dtl.degreeTitleList;
+    })
+
+    console.log(this.degreeTitleList === this.communes);
+  }
+
   onSubmit() {
     this.searchTextFlag = true;
     if (this.searchText.length !== 0 || this.searchText !== null) {
       this.displayMessage = `Searching results for ${this.searchText} ....`;
     } else {
-      this.displayMessage = "";
+      this.displayMessage = '';
     }
   }
   setStep(index: number) {
@@ -259,46 +252,25 @@ export class CenterSelectionComponent
   prevStep() {
     this.step--;
   }
-  resetPagination() {
-    console.log("resetPagination");
-    this.totalItems = 0;
-    this.pageSize = this.defaultPageSize;
-    this.pageIndex = 0;
-    this.getRecommendedCenters();
-  }
 
-  showResults(pageEvent) {
+  showResults() {
     this.REGISTRATION_CENTRES = [];
     if (this.locationType !== null && this.searchText !== null) {
       this.showMap = false;
-      if (pageEvent) {
-        this.pageSize = pageEvent.pageSize;
-        this.pageIndex = pageEvent.pageIndex;
-      }
       const subs = this.dataService
-        .getRegistrationCentersByNamePageWise(
-          this.locationType.locationHierarchylevel,
-          this.searchText,
-          this.pageIndex,
-          this.pageSize
-        )
+        .getRegistrationCentersByName(this.locationType.locationHierarchylevel, this.searchText)
         .subscribe(
-          (response) => {
-            console.log(response);
+          response => {
             if (response[appConstants.RESPONSE]) {
-              this.totalItems = response[appConstants.RESPONSE].totalItems;
               this.displayResults(response[appConstants.RESPONSE]);
-              this.showMessage = false;
             } else {
-              this.totalItems = 0;
               this.showMessage = true;
               this.selectedCentre = null;
             }
           },
-          (error) => {
+          error => {
             this.showMessage = true;
-            this.totalItems = 0;
-            this.displayMessageError("Error", this.errorlabels.error, error);
+            this.displayMessageError('Error', this.errorlabels.error, error);
           }
         );
       this.subscriptions.push(subs);
@@ -307,10 +279,7 @@ export class CenterSelectionComponent
 
   plotOnMap() {
     this.showMap = true;
-    this.service.changeCoordinates([
-      Number(this.selectedCentre.longitude),
-      Number(this.selectedCentre.latitude),
-    ]);
+    this.service.changeCoordinates([Number(this.selectedCentre.longitude), Number(this.selectedCentre.latitude)]);
   }
 
   selectedRow(row) {
@@ -321,32 +290,34 @@ export class CenterSelectionComponent
       this.plotOnMap();
     }
   }
+  pos:number;
 
   getLocation() {
+    this.searchClick = true;
     this.REGISTRATION_CENTRES = [];
     if (navigator.geolocation) {
       this.showMap = false;
-      navigator.geolocation.getCurrentPosition((position) => {
-        const subs = this.dataService
-          .getNearbyRegistrationCenters(position.coords)
-          .subscribe(
-            (response) => {
-              if (
-                response[appConstants.NESTED_ERROR].length === 0 &&
-                response[appConstants.RESPONSE]["registrationCenters"]
-                  .length !== 0
-              ) {
-                this.displayResults(response[appConstants.RESPONSE]);
-              } else {
-                this.showMessage = true;
-                this.selectedCentre = null;
-              }
-            },
-            (error) => {
+      navigator.geolocation.getCurrentPosition(position => {
+        console.log(position);
+        const subs = this.dataService.getNearbyRegistrationCenters(position.coords).subscribe(
+            (resp: BookingInterface) => {
+
+            if (
+                resp.errors === null &&
+                resp.response.registrationCenters.length !== 0
+            ) {
+              console.log("Inside condition", resp);
+              this.displayResults(resp.response);
+            } else {
               this.showMessage = true;
-              this.displayMessageError("Error", this.errorlabels.error, error);
             }
-          );
+          },
+          error => {
+            console.log(error);
+            this.showMessage = true;
+            this.displayMessageError('Error', this.errorlabels.error, error);
+          }
+        );
         this.subscriptions.push(subs);
       });
     } else {
@@ -354,20 +325,14 @@ export class CenterSelectionComponent
   }
 
   changeTimeFormat(time: string): string | Number {
-    let inputTime = time.split(":");
+    let inputTime = time.split(':');
     let formattedTime: any;
-    if (Number(inputTime[0]) < 12 && Number(inputTime[0]) > 0) {
+    if (Number(inputTime[0]) < 12) {
       formattedTime = inputTime[0];
-      formattedTime += ":" + inputTime[1] + " am";
-    } else if (Number(inputTime[0]) === 0) {
-      formattedTime = Number(inputTime[0]) + 12;
-      formattedTime += ":" + inputTime[1] + " am";
-    } else if (Number(inputTime[0]) === 12) {
-      formattedTime = inputTime[0];
-      formattedTime += ":" + inputTime[1] + " pm";
+      formattedTime += ':' + inputTime[1] + ' am';
     } else {
       formattedTime = Number(inputTime[0]) - 12;
-      formattedTime += ":" + inputTime[1] + " pm";
+      formattedTime += ':' + inputTime[1] + ' pm';
     }
 
     return formattedTime;
@@ -375,50 +340,53 @@ export class CenterSelectionComponent
 
   dispatchCenterCoordinatesList() {
     const coords = [];
-    this.REGISTRATION_CENTRES.forEach((centre) => {
+    this.REGISTRATION_CENTRES.forEach(centre => {
       const data = {
         id: centre.id,
         latitude: Number(centre.latitude),
-        longitude: Number(centre.longitude),
+        longitude: Number(centre.longitude)
       };
       coords.push(data);
     });
+
     this.service.listOfCenters(coords);
   }
 
   routeNext() {
-    this.canDeactivateFlag = false;
-    this.router.navigate(["../pick-time"], {
-      relativeTo: this.route,
-      queryParams: { regCenter: this.selectedCentre.id },
+    this.registrationService.setRegCenterId(this.selectedCentre.id);
+    this.users.forEach(user => {
+      this.service.updateRegistrationCenterData(user.preRegId, this.selectedCentre);
     });
+    this.canDeactivateFlag = false;
+    setTimeout(f => {
+      this.router.navigate(['../pick-time'], { relativeTo: this.route });
+    }, 500);
   }
 
   routeDashboard() {
     this.canDeactivateFlag = false;
-    this.router.navigate([`${this.primaryLang}/dashboard`]);
+    const url = Utils.getURL(this.router.url, '', 3);
+    setTimeout(f => {
+      this.router.navigateByUrl(url);
+    }, 500)
   }
 
   routeBack() {
-    if (
-      this.router.url.includes("multiappointment") ||
-      localStorage.getItem("modifyMultipleAppointment") === "true"
-    ) {
-      this.routeDashboard();
+    let url = '';
+    if (this.registrationService.getUsers().length === 0) {
+      url = Utils.getURL(this.router.url, '', 3);
     } else {
-      let url = "";
-      url = Utils.getURL(this.router.url, "summary", 3);
-      this.canDeactivateFlag = false;
-      this.router.navigateByUrl(url + `/${this.preRegId[0]}/preview`);
+      url = Utils.getURL(this.router.url, 'summary/preview', 2);
     }
+    this.canDeactivateFlag = false;
+    setTimeout(f => {
+      this.router.navigateByUrl(url);
+    }, 500)
   }
 
   async displayResults(response: any) {
-    if (response["registrationCenters"]) {
-      this.REGISTRATION_CENTRES = response["registrationCenters"];
-    } else if (response["data"]) {
-      this.REGISTRATION_CENTRES = response["data"];
-    }
+    this.REGISTRATION_CENTRES = response['registrationCenters'];
+    console.log(this.REGISTRATION_CENTRES);
     await this.getWorkingDays();
     this.showTable = true;
     if (this.REGISTRATION_CENTRES) {
@@ -428,27 +396,16 @@ export class CenterSelectionComponent
   }
 
   getWorkingDays() {
-    return new Promise((resolve) => {
-      this.REGISTRATION_CENTRES.forEach((center) => {
-        this.dataService
-          .getWorkingDays(center.id, this.primaryLang)
-          .subscribe((response) => {
-            center.workingDays = "";
-            if (response[appConstants.RESPONSE] && response[appConstants.RESPONSE]["workingdays"]) {
-              response[appConstants.RESPONSE]["workingdays"].forEach((day) => {
-                if (
-                  day.working === true ||
-                  ((day.working === null || day.working === undefined) &&
-                    day.globalWorking === true)
-                ) {
-                  center.workingDays = center.workingDays + day.name + ", ";
-                }
-              });
-            }
-            
-            this.isWorkingDaysAvailable = true;
-            resolve(true);
+    return new Promise(resolve => {
+      this.REGISTRATION_CENTRES.forEach(center => {
+        this.dataService.getWorkingDays(center.id, this.primaryLang).subscribe(response => {
+          response[appConstants.RESPONSE]['workingdays'].forEach(day => {
+            center.workingDays = center.workingDays === undefined ? '' : center.workingDays + day.name + ', ';
           });
+          center.workingDays = center.workingDays.substring(0, center.workingDays.length - 2);
+          this.isWorkingDaysAvailable = true;
+          resolve(true);
+        });
       });
     });
   }
@@ -457,44 +414,48 @@ export class CenterSelectionComponent
     if (
       error &&
       error[appConstants.ERROR] &&
-      error[appConstants.ERROR][appConstants.NESTED_ERROR][0].errorCode ===
-        appConstants.ERROR_CODES.tokenExpired
+      error[appConstants.ERROR][appConstants.NESTED_ERROR][0].errorCode === appConstants.ERROR_CODES.tokenExpired
     ) {
       message = this.errorlabels.tokenExpiredLogout;
-      title = "";
+      title = '';
     }
     const messageObj = {
-      case: "MESSAGE",
+      case: 'MESSAGE',
       title: title,
-      message: message,
+      message: message
     };
-    const dialogRef = this.openDialog(messageObj, "250px");
-    dialogRef.afterClosed().subscribe(() => {
-      if (messageObj.message === this.errorlabels.regCenterNotavailabe) {
-        this.canDeactivateFlag = false;
-        if (
-          this.router.url.includes("multiappointment") ||
-          localStorage.getItem("modifyMultipleAppointment") === "true"
-        ) {
-          this.routeDashboard();
-        } else {
-          localStorage.setItem("modifyUser", "true");
-          this.router.navigate([
-            `${this.primaryLang}/pre-registration/demographic/${this.preRegId[0]}`,
-          ]);
-        }
-      }
-    });
+    this.openDialog(messageObj, '250px');
   }
   openDialog(data, width) {
     const dialogRef = this.dialog.open(DialougComponent, {
       width: width,
-      data: data,
+      data: data
     });
     return dialogRef;
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+  }
+
+  //This function takes in latitude and longitude of two location and returns the distance between them as the crow flies (in km)
+  calcCrow(lat1P, lon1P, lat2P, lon2P) {
+    let R = 6371; // km
+    let dLat = this.toRad(lat2P-lat1P);
+    let dLon = this.toRad(lon2P-lon1P);
+    let lat1 = this.toRad(lat1P);
+    let lat2 = this.toRad(lat2P);
+
+    let a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+        Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2);
+    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    let d = R * c;
+    return d;
+  }
+
+  // Converts numeric degrees to radians
+  toRad(Value)
+  {
+    return Value * Math.PI / 180;
   }
 }

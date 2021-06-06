@@ -1,5 +1,6 @@
 export interface FormControlModal {
-  fullName: string;
+  firstName: string;
+  lastName: string;
   gender: string;
   age: string;
   residenceStatus: string;
@@ -7,20 +8,12 @@ export interface FormControlModal {
   date: string;
   month: string;
   year: string;
-  addressLine1: string;
-  addressLine2: string;
-  addressLine3: string;
+  additionalAddressDetails: string;
   region: string;
-  province: string;
-  city: string;
-  zone: string;
+  prefecture: string;
+  subPrefectureOrCommune: string;
+  district: string;
+  sector: string;
   email: string;
-  postalCode: string;
   phone: string;
-  referenceIdentityNumber: string;
-
-  fullNameSecondary: string;
-  addressLine1Secondary: string;
-  addressLine2Secondary: string;
-  addressLine3Secondary: string;
 }

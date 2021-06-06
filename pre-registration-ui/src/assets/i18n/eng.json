@@ -253,18 +253,29 @@
       }
     ]
   },
+  "contactUs": {
+		"fullName":"",
+		"email":" ",
+		"reason":" ",
+		"otherReason":"",
+		"message":" ",
+		"maxChars":" ",
+		"mandatoryField":" ",
+		"send":" "
+	},
   "header": {
     "link_about": "GETTING STARTED",
     "link_faq": "FAQ",
     "link_contact": "CONTACT",
+    "link_contact_us": "CONTACT US",
     "link_applications": "Your Applications",
     "link_logout": "Logout",
     "link_login": "LOGIN"
   },
   "login": {
-    "text": "Quick & Easy steps",
-    "sub_text": "Pre-register for",
-    "sub_text_UID": "Unique Identification Number",
+    "text": "Connexion",
+    "sub_text": "",
+    "sub_text_UID": "",
     "label_email_num": "Email ID or Phone Number",
     "label_otp": "Enter OTP",
     "action_send": "Send OTP",
@@ -556,7 +567,7 @@
       "booked": "Appointment is booked successfully",
       "expired": "Appointed date has passed"
     },
-    "deleteIcon": "You can either discard entire application or cancel the appointment and save the details.",
+    "deleteIcon": "You can either discard entire application or cancel the appointment and save the details,Discard entire application and cancels the appointment.Cancel appointment and save the details.",
     "book/modify_appointment": "You must tick the check box near to pre-registration id for one or multiple applicants to book/modify appointment",
     "bookAppointment": "First, select the preferred time slot as provided Then select the applicable applicant for the time slot selected.For multiple applications, repeat the same for the remaining applicant ",
     "send_email/sms": "You may add the additional recipient to receive the notification(s).",
@@ -581,18 +592,12 @@
     "slotNotAvailable": "Appointment booking/re-booking cannot be done as the requested slot is not available. Please select another slot or try again later",
     "timeExpired_1": "Appointment cannot be reschedule within ",
     "timeExpired_2": " hours of booking",
-    "errorLabel": "ERROR",
-    "regCenterNotavailabe":"Registration center is not available.",
-    "centerDetailsNotAvailable":"No Slots Available, Appointment booking/re-booking cannot be done. Please try again later."
+    "errorLabel": "ERROR"
   },
   "residentTypesMapping": {
     "NFR": "National",
     "FR": "Foreigner"
   },
   "sameAs": "Document Uploaded using Same As",
-  "DAYS": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-
-  "recaptcha":{
-    "errorMessage":"Recaptcha Failed. Please Re-try"
-  }
+  "DAYS": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 }
