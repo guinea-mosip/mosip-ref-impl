@@ -28,7 +28,7 @@ export class AuthService {
   getLogin(){
     let that=this;
     return new Promise(resolve => {
-      const url = this.BASE_URL + appConstants.APPEND_URL.gender;
+      const url = this.BASE_URL + this.PRE_REG_URL + appConstants.APPEND_URL.applicants;
       this.httpClient.get(url, {observe: 'response'}).subscribe(
         response => {
           that.setToken();
