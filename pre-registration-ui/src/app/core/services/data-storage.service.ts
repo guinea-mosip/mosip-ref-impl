@@ -291,8 +291,8 @@ export class DataStorageService {
 
   recommendedCenters(langCode: string, locationHierarchyCode: number, data: string[]) {
     let url =
-      this.BASE_URL +
-      appConstants.APPEND_URL.master_data + this.PRE_REG_URL + 'proxy' +
+      this.BASE_URL + this.PRE_REG_URL + 'proxy' +
+      appConstants.APPEND_URL.master_data +
       'registrationcenters/' +
       langCode +
       '/' +
@@ -327,7 +327,8 @@ export class DataStorageService {
   }
 
   getRegistrationCenterByIdAndLangCode(id: string, langCode: string) {
-    const url = this.BASE_URL + appConstants.APPEND_URL.master_data + 'registrationcenters/' + id + '/' + langCode;
+    const url = this.BASE_URL + this.PRE_REG_URL + 'proxy' +
+        appConstants.APPEND_URL.master_data + 'registrationcenters/' + id + '/' + langCode;
     return this.httpClient.get(url);
   }
 
