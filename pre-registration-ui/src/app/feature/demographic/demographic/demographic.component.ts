@@ -884,7 +884,6 @@ export class DemographicComponent extends FormDeactivateGuardService implements 
     // const newDate = year + '/' + month + '/' + date;
     const newDate = date + '/' + month + '/' +year;
     const dobRegex = new RegExp(this.DOB_PATTERN);
-    console.log(this.DOB_PATTERN);
     if (dobRegex.test(newDate)) {
       let dateParts = newDate.split("/");
       const dateform = new Date(+dateParts[2], Number(+dateParts[1] - 1), +dateParts[0]);
