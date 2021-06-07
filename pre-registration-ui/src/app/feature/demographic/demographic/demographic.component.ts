@@ -1180,7 +1180,7 @@ export class DemographicComponent extends FormDeactivateGuardService implements 
    * @memberof DemographicComponent
    */
   private createIdentityJSONDynamic() {
-    const identity = new IdentityModel(this.config[appConstants.CONFIG_KEYS.mosip_idschema_version], [], [], '', [], [], '', [], [], [], [], [], '', '');
+    const identity = new IdentityModel(Number(this.config[appConstants.CONFIG_KEYS.mosip_idschema_version]), [], [], '', [], [], '', [], [], [], [], [], '', '');
     let keyArr: any[] = Object.keys(this.formControlNames);
     for (let index = 0; index < keyArr.length - 4; index++) {
       const element = keyArr[index];
