@@ -789,9 +789,9 @@ export class DemographicComponent extends FormDeactivateGuardService implements 
       entity.filter((element: any) => {
         if (event.value === element.code) {
           const codeValue: CodeValueModal = {
-            languageCode: element.langCode,
+            languageCode: element.langCode ? element.langCode : "fra",
             valueCode: element.code,
-            valueName: element.genderName
+            valueName: element.value
           };
           this.addCodeValue(codeValue);
         }
@@ -804,9 +804,9 @@ export class DemographicComponent extends FormDeactivateGuardService implements 
       entity.filter((element: any) => {
         if (event.value === element.code) {
           const codeValue: CodeValueModal = {
-            languageCode: element.langCode,
+            languageCode: element.langCode ? element.langCode : "fra",
             valueCode: element.code,
-            valueName: element.name
+            valueName: element.value
           };
           this.addCodeValue(codeValue);
         }
@@ -837,8 +837,12 @@ export class DemographicComponent extends FormDeactivateGuardService implements 
         this.userForm.controls[this.formControlNames.date].patchValue(this.defaultDay);
         this.userForm.controls[this.formControlNames.month].patchValue(this.defaultMonth);
         this.userForm.controls[this.formControlNames.year].patchValue(calulatedYear);
+        /* Removed for 1.1.5 compatibility */
+        // this.userForm.controls[this.formControlNames.dateOfBirth].patchValue(
+        //   calulatedYear + '/' + this.defaultMonth + '/' + this.defaultDay
+        // );
         this.userForm.controls[this.formControlNames.dateOfBirth].patchValue(
-          calulatedYear + '/' + this.defaultMonth + '/' + this.defaultDay
+            this.defaultDay + '/' + this.defaultMonth + '/' + calulatedYear
         );
         this.userForm.controls[this.formControlNames.dateOfBirth].setErrors(null);
       } else {
@@ -874,13 +878,17 @@ export class DemographicComponent extends FormDeactivateGuardService implements 
       this.userForm.controls[this.formControlNames.year].patchValue('');
       return;
     }
-    
-    
-  
-    const newDate = year + '/' + month + '/' + date;
+
+
+    /* Removed for 1.1.5 compatibility */
+    // const newDate = year + '/' + month + '/' + date;
+    const newDate = date + '/' + month + '/' +year;
     const dobRegex = new RegExp(this.DOB_PATTERN);
+    console.log(this.DOB_PATTERN);
     if (dobRegex.test(newDate)) {
-      const dateform = new Date(newDate);
+      let dateParts = newDate.split("/");
+      const dateform = new Date(+dateParts[2], Number(+dateParts[1] - 1), +dateParts[0]);
+      // const dateform = new Date(newDate);
       this.userForm.controls[this.formControlNames.dateOfBirth].patchValue(newDate);
       this.userForm.controls[this.formControlNames.age].patchValue(this.calculateAge(dateform));
     } else if (date && month && year) {
