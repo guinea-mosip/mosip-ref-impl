@@ -351,9 +351,9 @@ export class FileUploadComponent implements OnInit, OnDestroy {
 
     DOBDTO.attribute = appConstants.APPLICANT_TYPE_ATTRIBUTES.dateofbirth;
     /* Added due to dateOfBirth dd/mm/yyyy */
-    let dateParts = DOB.split("/");
-    const dateform = dateParts[2]+"/"+dateParts[1] +"/"+ dateParts[0];
-    DOBDTO.value = dateform.replace(/\//g, '-') + 'T11:46:12.640Z';
+    // let dateParts = DOB.split("/");
+    // const dateform = dateParts[2]+"/"+dateParts[1] +"/"+ dateParts[0];
+    DOBDTO.value = DOB;
 
     requestArray.attributes.push(DOBDTO);
 
