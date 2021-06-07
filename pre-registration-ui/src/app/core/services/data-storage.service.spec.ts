@@ -26,7 +26,8 @@ describe('DataStorageService', () => {
       deleteFile: jasmine.createSpy('deleteFile').and.returnValue(of({ message: 'success' })),
       getUsers: jasmine.createSpy('getUsers').and.returnValue(of({ users: [{ userId: '12345' }] })),
       getUser: jasmine.createSpy('getUser').and.returnValue(of({ user: { userId: '12345' } })),
-      getGenderDetails: jasmine.createSpy('getGenderDetails').and.returnValue(of('male')),
+      /* Removed for 1.1.5 compatibility*/
+      // getGenderDetails: jasmine.createSpy('getGenderDetails').and.returnValue(of('male')),
       getTransliteration: jasmine.createSpy('getTransliteration').and.returnValue(of('bon voyage')),
       getUserDocuments: jasmine.createSpy('getUserDocuments').and.returnValue(of({ documents: ['hello.txt'] })),
       getLocationImmediateHierearchy: jasmine
@@ -167,13 +168,14 @@ describe('DataStorageService', () => {
     expect(response.user.userId).toBe('12345');
   });
 
-  it('getGenderDetails', () => {
-    let response = null;
-    service.getGenderDetails().subscribe(value => {
-      response = value;
-    });
-    expect(response).toBe('male');
-  });
+  /* Removed for 1.1.5 compatibility*/
+  // it('getGenderDetails', () => {
+  //   let response = null;
+  //   service.getGenderDetails().subscribe(value => {
+  //     response = value;
+  //   });
+  //   expect(response).toBe('male');
+  // });
 
   it('getTransliteration', () => {
     let response = null;

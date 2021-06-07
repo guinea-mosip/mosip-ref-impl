@@ -51,7 +51,8 @@ export const APPEND_URL = {
   send_notification: 'notify',
   master_data: '/masterdata/',
   auth: 'login/',
-  cancelAppointment: 'appointment/'
+  cancelAppointment: 'appointment/',
+  dynamicFields: 'dynamicfields'
 };
 
 export const PARAMS_KEYS = {

@@ -91,7 +91,8 @@ describe('Demographic Component', () => {
     getLocationImmediateHierearchy: jasmine
       .createSpy('getLocationImmediateHierearchy')
       .and.returnValue(of(locationData)),
-    getGenderDetails: jasmine.createSpy('getGenderDetails').and.returnValue(of(locationData))
+    /* Removed for 1.1.5 compatibility*/
+    // getGenderDetails: jasmine.createSpy('getGenderDetails').and.returnValue(of(locationData))
   };
 
   const regServiceStub = {

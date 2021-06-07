@@ -377,8 +377,7 @@ export class DemographicComponent extends FormDeactivateGuardService implements 
     });
 
     this.setLocations();
-    this.setGender();
-    this.setResident();
+    this.getDynamicFields();
   }
 
   /**
@@ -418,10 +417,10 @@ export class DemographicComponent extends FormDeactivateGuardService implements 
    * @private
    * @memberof DemographicComponent
    */
-  private async setGender() {
-    await this.getGenderDetails();
-    // this.filterOnLangCode(this.primaryLang, this.primaryGender, this.genders);
-  }
+  // private async setGender() {
+  //   await this.getGenderDetails();
+  //   // this.filterOnLangCode(this.primaryLang, this.primaryGender, this.genders);
+  // }
 
   /**
    * @description This is to get the list of gender available in the master data.
@@ -429,9 +428,9 @@ export class DemographicComponent extends FormDeactivateGuardService implements 
    * @private
    * @memberof DemographicComponent
    */
-  private async setResident() {
-    await this.getResidentDetails();
-  }
+  // private async setResident() {
+  //   await this.getResidentDetails();
+  // }
 
   /**
    * @description This set the initial values for the form attributes.
@@ -490,32 +489,72 @@ export class DemographicComponent extends FormDeactivateGuardService implements 
   }
 
   /**
+   * @description This will get the dynamic fields from the master data.
+   *
+   * @private
+   * @returns
+   * @memberof DemographicComponent
+   */
+  private getDynamicFields() {
+    return new Promise(resolve => {
+      this.subscriptions.push(
+          this.dataStorageService.getDynamicFields().subscribe(
+              response => {
+                if (response[appConstants.RESPONSE]) {
+                  let that = this;
+                  response[appConstants.RESPONSE]["data"].map(function(elem){
+                    switch(elem.name){
+                      case "gender":
+                        that.genders = elem.fieldVal;
+                        break;
+                      case "residenceStatus":
+                        that.residenceStatus = elem.fieldVal;
+                        break;
+                    }
+                  });
+                  resolve(true);
+                } else {
+                  this.onError(this.errorlabels.error, '');
+                }
+              },
+              error => {
+                this.loggerService.error('Unable to fetch dynamic fields');
+                this.onError(this.errorlabels.error, error);
+              }
+          )
+      );
+    });
+  }
+
+  /**
    * @description This will get the gender details from the master data.
    *
    * @private
    * @returns
    * @memberof DemographicComponent
    */
-  private getGenderDetails() {
-    return new Promise(resolve => {
-      this.subscriptions.push(
-        this.dataStorageService.getGenderDetails().subscribe(
-          response => {
-            if (response[appConstants.RESPONSE]) {
-              this.genders = response[appConstants.RESPONSE][appConstants.DEMOGRAPHIC_RESPONSE_KEYS.genderTypes];
-              resolve(true);
-            } else {
-              this.onError(this.errorlabels.error, '');
-            }
-          },
-          error => {
-            this.loggerService.error('Unable to fetch gender');
-            this.onError(this.errorlabels.error, error);
-          }
-        )
-      );
-    });
-  }
+  /* Removed for 1.1.5 compatibility*/
+  // private getGenderDetails() {
+  //   return new Promise(resolve => {
+  //     this.subscriptions.push(
+  //       this.dataStorageService.getGenderDetails().subscribe(
+  //         response => {
+  //           if (response[appConstants.RESPONSE]) {
+  //             this.genders = response[appConstants.RESPONSE][appConstants.DEMOGRAPHIC_RESPONSE_KEYS.genderTypes];
+  //             /* dynamic to gender fields converter */
+  //             resolve(true);
+  //           } else {
+  //             this.onError(this.errorlabels.error, '');
+  //           }
+  //         },
+  //         error => {
+  //           this.loggerService.error('Unable to fetch gender');
+  //           this.onError(this.errorlabels.error, error);
+  //         }
+  //       )
+  //     );
+  //   });
+  // }
 
   /**
    * @description This will get the residenceStatus details from the master data.
@@ -524,27 +563,28 @@ export class DemographicComponent extends FormDeactivateGuardService implements 
    * @returns
    * @memberof DemographicComponent
    */
-  private getResidentDetails() {
-    return new Promise(resolve => {
-      this.subscriptions.push(
-        this.dataStorageService.getResidentDetails().subscribe(
-          response => {
-            if (response[appConstants.RESPONSE]) {
-              this.residenceStatus =
-                response[appConstants.RESPONSE][appConstants.DEMOGRAPHIC_RESPONSE_KEYS.residentTypes];
-              resolve(true);
-            } else {
-              this.onError(this.errorlabels.error, '');
-            }
-          },
-          error => {
-            this.loggerService.error('Unable to fetch Resident types');
-            this.onError(this.errorlabels.error, error);
-          }
-        )
-      );
-    });
-  }
+  /* Removed for 1.1.5 compatibility*/
+  // private getResidentDetails() {
+  //   return new Promise(resolve => {
+  //     this.subscriptions.push(
+  //       this.dataStorageService.getResidentDetails().subscribe(
+  //         response => {
+  //           if (response[appConstants.RESPONSE]) {
+  //             this.residenceStatus =
+  //               response[appConstants.RESPONSE][appConstants.DEMOGRAPHIC_RESPONSE_KEYS.residentTypes];
+  //             resolve(true);
+  //           } else {
+  //             this.onError(this.errorlabels.error, '');
+  //           }
+  //         },
+  //         error => {
+  //           this.loggerService.error('Unable to fetch Resident types');
+  //           this.onError(this.errorlabels.error, error);
+  //         }
+  //       )
+  //     );
+  //   });
+  // }
 
   /**
    * @description This will filter the gender on the basis of langugae code.

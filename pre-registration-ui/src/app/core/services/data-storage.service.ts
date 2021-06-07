@@ -55,14 +55,14 @@ export class DataStorageService {
   }
 
   /**
-   * @description This methos returns the list of available genders
-   *
+   * @description This methos returns the list of dynamic fields
+   * Added as a part 1.1.5
    *
    * @returns an `Observable` of the body as an `Object`
    * @memberof DataStorageService
    */
-  getGenderDetails() {
-    const url = this.BASE_URL + this.PRE_REG_URL + '/proxy' + appConstants.APPEND_URL.gender;
+  getDynamicFields() {
+    const url = this.BASE_URL + this.PRE_REG_URL + 'proxy' + appConstants.APPEND_URL.master_data + appConstants.APPEND_URL.dynamicFields;
     return this.httpClient.get(url);
   }
 
@@ -73,10 +73,24 @@ export class DataStorageService {
    * @returns an `Observable` of the body as an `Object`
    * @memberof DataStorageService
    */
-  getResidentDetails() {
-    const url = this.BASE_URL + this.PRE_REG_URL + '/proxy' + appConstants.APPEND_URL.resident;
-    return this.httpClient.get(url);
-  }
+  /* Removed for 1.1.5 compatibility*/
+  // getGenderDetails() {
+  //   const url = this.BASE_URL + this.PRE_REG_URL + '/proxy' + appConstants.APPEND_URL.gender;
+  //   return this.httpClient.get(url);
+  // }
+
+  /**
+   * @description This methos returns the list of available genders
+   *
+   *
+   * @returns an `Observable` of the body as an `Object`
+   * @memberof DataStorageService
+   */
+  /* Removed for 1.1.5 compatibility*/
+  // getResidentDetails() {
+  //   const url = this.BASE_URL + this.PRE_REG_URL + '/proxy' + appConstants.APPEND_URL.resident;
+  //   return this.httpClient.get(url);
+  // }
 
   /**
    * @description This method is responsible for doing the transliteration for a given word.
@@ -210,7 +224,7 @@ export class DataStorageService {
    */
   getLocationImmediateHierearchy(lang: string, location: string) {
     const url =
-      this.BASE_URL  + this.PRE_REG_URL + '/proxy' +
+      this.BASE_URL  + this.PRE_REG_URL + 'proxy' +
       appConstants.APPEND_URL.master_data +
       appConstants.APPEND_URL.location_immediate_children +
       location +
@@ -278,7 +292,7 @@ export class DataStorageService {
   recommendedCenters(langCode: string, locationHierarchyCode: number, data: string[]) {
     let url =
       this.BASE_URL +
-      appConstants.APPEND_URL.master_data + this.PRE_REG_URL + '/proxy' +
+      appConstants.APPEND_URL.master_data + this.PRE_REG_URL + 'proxy' +
       'registrationcenters/' +
       langCode +
       '/' +
@@ -298,7 +312,7 @@ export class DataStorageService {
 
   getLocationByHiererchy(hiererchy: string) {
     let url =
-      this.BASE_URL + this.PRE_REG_URL + '/proxy' +
+      this.BASE_URL + this.PRE_REG_URL + 'proxy' +
       appConstants.APPEND_URL.master_data +
       'locations/locationhierarchy/' + hiererchy;
     return this.httpClient.get(url);
@@ -306,7 +320,7 @@ export class DataStorageService {
 
   getCenter() {
     let url =
-      this.BASE_URL + this.PRE_REG_URL + '/proxy' +
+      this.BASE_URL + this.PRE_REG_URL + 'proxy' +
       appConstants.APPEND_URL.master_data +
       'registrationcenters/';
     return this.httpClient.get(url);
@@ -319,7 +333,7 @@ export class DataStorageService {
 
   getGuidelineTemplate(templateType: string) {
     const url =
-      this.BASE_URL + this.PRE_REG_URL + '/proxy' +
+      this.BASE_URL + this.PRE_REG_URL + 'proxy' +
       appConstants.APPEND_URL.master_data +
       'templates/' +
       localStorage.getItem('langCode') +
@@ -330,7 +344,7 @@ export class DataStorageService {
 
   getApplicantType(docuemntCategoryDto) {
     return this.httpClient.post(
-      this.BASE_URL + this.PRE_REG_URL + '/proxy' +
+      this.BASE_URL + this.PRE_REG_URL + 'proxy' +
         appConstants.APPEND_URL.applicantType +
         appConstants.APPEND_URL.getApplicantType,
       docuemntCategoryDto
@@ -339,7 +353,7 @@ export class DataStorageService {
 
   getDocumentCategories(applicantCode) {
     const APPLICANT_VALID_DOCUMENTS_URL =
-      this.BASE_URL + this.PRE_REG_URL + '/proxy' +
+      this.BASE_URL + this.PRE_REG_URL + 'proxy' +
       appConstants.APPEND_URL.location +
       appConstants.APPEND_URL.validDocument +
       applicantCode +
@@ -388,7 +402,7 @@ export class DataStorageService {
    */
   getWorkingDays(registartionCenterId: string, langCode: string) {
     const url =
-      this.BASE_URL + this.PRE_REG_URL + '/proxy' +
+      this.BASE_URL + this.PRE_REG_URL + 'proxy' +
       appConstants.APPEND_URL.master_data +
       "workingdays/" +
       registartionCenterId +
