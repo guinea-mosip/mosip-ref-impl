@@ -187,7 +187,7 @@ export class DataStorageService {
 
   getLocationTypeData() {
     return this.httpClient.get(
-      this.BASE_URL + appConstants.APPEND_URL.master_data + '/proxy' +'locations/' + localStorage.getItem('langCode')
+      this.BASE_URL + this.PRE_REG_URL + 'proxy'  + appConstants.APPEND_URL.master_data + 'locations/' + localStorage.getItem('langCode')
     );
   }
 
