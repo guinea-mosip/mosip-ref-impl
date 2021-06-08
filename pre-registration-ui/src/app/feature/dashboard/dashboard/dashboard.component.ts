@@ -365,6 +365,18 @@ export class DashBoardComponent implements OnInit, OnDestroy {
     // let secondaryIndex = 1;
     let lang =
       applicantResponse['demographicMetadata'][appConstants.DASHBOARD_RESPONSE_KEYS.applicant.firstName][0]['language'];
+    let locationCode = null;
+    let locationData = applicantResponse['demographicMetadata'][appConstants.DASHBOARD_RESPONSE_KEYS.applicant.location];
+    if (locationData.constructor === "test".constructor) {
+      try {
+        let obj = JSON.parse(locationData);
+        if(obj[0]){
+          locationCode = obj[0].value;
+        }
+      } catch(e) {
+        console.error(e);
+      }
+    }
     const applicant: Applicant = {
       applicationID: applicantResponse[appConstants.DASHBOARD_RESPONSE_KEYS.applicant.preId],
       name:
@@ -391,9 +403,7 @@ export class DashBoardComponent implements OnInit, OnDestroy {
       status: applicantResponse[appConstants.DASHBOARD_RESPONSE_KEYS.applicant.statusCode],
       regDto: applicantResponse[appConstants.DASHBOARD_RESPONSE_KEYS.bookingRegistrationDTO.dto],
       nameInSecondaryLanguage:"",
-      location: applicantResponse['demographicMetadata'][appConstants.DASHBOARD_RESPONSE_KEYS.applicant.location][primaryIndex][
-        'value'
-        ]
+      location: locationCode
     };
 
     return applicant;

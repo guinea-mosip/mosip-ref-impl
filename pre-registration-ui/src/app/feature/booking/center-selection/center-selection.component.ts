@@ -144,7 +144,9 @@ export class CenterSelectionComponent extends BookingDeactivateGuardService impl
     let locations = [];
     let locationNames = [];
     this.users.forEach((user) => {
-      locations.push(user.location);
+      if(user.location){
+        locations.push(user.location);
+      }
     });
     this.getPrefectures().then((res) => {
       if (res && Array.isArray(res)) {
@@ -154,34 +156,35 @@ export class CenterSelectionComponent extends BookingDeactivateGuardService impl
           }
           return acc
         }, []);
-
-        this.subscriptions.push(
-          this.dataService
+        if(locationNames.length>0){
+          this.subscriptions.push(
+            this.dataService
             /* leave it commented */
-            .recommendedCenters(
-              this.primaryLang,
-              this.configService.getConfigByKey(
-                appConstants.CONFIG_KEYS.preregistration_recommended_centers_locCode
-              ),
-              locationNames
-            )
-            // .getCenter()
-            .subscribe((response) => {
-              if (response[appConstants.RESPONSE]) {
-                console.log(response["response"]);
-                this.displayResults(response["response"]);
-              } else {
-                if (response["errors"] && response["errors"].length > 0) {
-                  let errStr = response["errors"].reduce(function (c, e) {
-                    return c + "\n" + e.message
-                  }, "");
-                  console.error(errStr);
+              .recommendedCenters(
+                  this.primaryLang,
+                  this.configService.getConfigByKey(
+                      appConstants.CONFIG_KEYS.preregistration_recommended_centers_locCode
+                  ),
+                  locationNames
+              )
+              // .getCenter()
+              .subscribe((response) => {
+                if (response[appConstants.RESPONSE]) {
+                  console.log(response["response"]);
+                  this.displayResults(response["response"]);
                 } else {
-                  alert("error occured while getting recommended centers")
+                  if (response["errors"] && response["errors"].length > 0) {
+                    let errStr = response["errors"].reduce(function (c, e) {
+                      return c + "\n" + e.message
+                    }, "");
+                    console.error(errStr);
+                  } else {
+                    alert("error occured while getting recommended centers")
+                  }
                 }
-              }
-            })
-        );
+              })
+          );
+        }
       }
       else {
         alert("No prefectures found")
