@@ -102,8 +102,10 @@ export class DashBoardComponent implements OnInit, OnDestroy {
       await this.router.navigate(['/login']);
     } else {
       this.initUsers();
-      await this.getGenderDetails();
-      await this.getResidentDetails();
+      await this.getDynamicFields();
+      /* Removed for 1.1.5 compatibility*/
+      // await this.getGenderDetails();
+      // await this.getResidentDetails();
       const subs = this.autoLogout.currentMessageAutoLogout.subscribe(message => (this.message = message));
       this.subscriptions.push(subs);
       if (!this.message['timerFired']) {
@@ -136,27 +138,66 @@ export class DashBoardComponent implements OnInit, OnDestroy {
     });
   }
 
-  private getGenderDetails() {
+  /**
+   * @description This will get the dynamic fields from the master data.
+   *
+   * @private
+   * @returns
+   * @memberof DemographicComponent
+   */
+  private getDynamicFields() {
     return new Promise(resolve => {
       this.subscriptions.push(
-        this.dataStorageService.getGenderDetails().subscribe(
-          response => {
-            if (response[appConstants.RESPONSE]) {
-              this.regService.setGenderTypes(response[appConstants.RESPONSE][appConstants.DEMOGRAPHIC_RESPONSE_KEYS.genderTypes]);
-              resolve(true);
-            } else {
-              this.onError(new Error("not able to find response"));
-              resolve(true);
-            }
-          },
-          error => {
-            this.loggerService.error('Unable to fetch gender');
-            this.onError(error);
-          }
-        )
+          this.dataStorageService.getDynamicFields().subscribe(
+              response => {
+                if (response[appConstants.RESPONSE]) {
+                  let that = this;
+                  response[appConstants.RESPONSE]["data"].map(function(elem){
+                    switch(elem.name){
+                      case "gender":
+                        that.regService.setGenderTypes(elem.fieldVal);
+                        break;
+                      case "residenceStatus":
+                        that.regService.setIndividualTypes(elem.fieldVal);
+                        break;
+                    }
+                  });
+                  resolve(true);
+                } else {
+                  this.onError(new Error("not able to find response"));
+                }
+              },
+              error => {
+                this.loggerService.error('Unable to fetch dynamic fields');
+                this.onError(error);
+              }
+          )
       );
     });
   }
+
+  /* Removed for 1.1.5 compatibility*/
+  // private getGenderDetails() {
+  //   return new Promise(resolve => {
+  //     this.subscriptions.push(
+  //       this.dataStorageService.getGenderDetails().subscribe(
+  //         response => {
+  //           if (response[appConstants.RESPONSE]) {
+  //             this.regService.setGenderTypes(response[appConstants.RESPONSE][appConstants.DEMOGRAPHIC_RESPONSE_KEYS.genderTypes]);
+  //             resolve(true);
+  //           } else {
+  //             this.onError(new Error("not able to find response"));
+  //             resolve(true);
+  //           }
+  //         },
+  //         error => {
+  //           this.loggerService.error('Unable to fetch gender');
+  //           this.onError(error);
+  //         }
+  //       )
+  //     );
+  //   });
+  // }
 
   /**
    * @description This will get the residenceStatus details from the master data.
@@ -165,27 +206,28 @@ export class DashBoardComponent implements OnInit, OnDestroy {
    * @returns
    * @memberof DemographicComponent
    */
-  private getResidentDetails() {
-    return new Promise(resolve => {
-      this.subscriptions.push(
-        this.dataStorageService.getResidentDetails().subscribe(
-          response => {
-            if (response[appConstants.RESPONSE]) {
-              this.regService.setIndividualTypes(response[appConstants.RESPONSE][appConstants.DEMOGRAPHIC_RESPONSE_KEYS.residentTypes]);
-              resolve(true);
-            } else {
-              this.onError(new Error("not able to find response"));
-              resolve(true);
-            }
-          },
-          error => {
-            this.loggerService.error('Unable to fetch Resident types');
-            this.onError(error);
-          }
-        )
-      );
-    });
-  }
+  /* Removed for 1.1.5 compatibility*/
+  // private getResidentDetails() {
+  //   return new Promise(resolve => {
+  //     this.subscriptions.push(
+  //       this.dataStorageService.getResidentDetails().subscribe(
+  //         response => {
+  //           if (response[appConstants.RESPONSE]) {
+  //             this.regService.setIndividualTypes(response[appConstants.RESPONSE][appConstants.DEMOGRAPHIC_RESPONSE_KEYS.residentTypes]);
+  //             resolve(true);
+  //           } else {
+  //             this.onError(new Error("not able to find response"));
+  //             resolve(true);
+  //           }
+  //         },
+  //         error => {
+  //           this.loggerService.error('Unable to fetch Resident types');
+  //           this.onError(error);
+  //         }
+  //       )
+  //     );
+  //   });
+  // }
 
   /**
    * @description This is the intial set up for the dashboard component
@@ -323,6 +365,18 @@ export class DashBoardComponent implements OnInit, OnDestroy {
     // let secondaryIndex = 1;
     let lang =
       applicantResponse['demographicMetadata'][appConstants.DASHBOARD_RESPONSE_KEYS.applicant.firstName][0]['language'];
+    let locationCode = null;
+    let locationData = applicantResponse['demographicMetadata'][appConstants.DASHBOARD_RESPONSE_KEYS.applicant.location];
+    if (locationData.constructor === "test".constructor) {
+      try {
+        let obj = JSON.parse(locationData);
+        if(obj[0]){
+          locationCode = obj[0].value;
+        }
+      } catch(e) {
+        console.error(e);
+      }
+    }
     const applicant: Applicant = {
       applicationID: applicantResponse[appConstants.DASHBOARD_RESPONSE_KEYS.applicant.preId],
       name:
@@ -349,9 +403,7 @@ export class DashBoardComponent implements OnInit, OnDestroy {
       status: applicantResponse[appConstants.DASHBOARD_RESPONSE_KEYS.applicant.statusCode],
       regDto: applicantResponse[appConstants.DASHBOARD_RESPONSE_KEYS.bookingRegistrationDTO.dto],
       nameInSecondaryLanguage:"",
-      location: applicantResponse['demographicMetadata'][appConstants.DASHBOARD_RESPONSE_KEYS.applicant.location][primaryIndex][
-        'value'
-        ]
+      location: locationCode
     };
 
     return applicant;

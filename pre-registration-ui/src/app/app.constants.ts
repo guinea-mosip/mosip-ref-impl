@@ -30,11 +30,12 @@ export const APPEND_URL = {
   location_metadata: 'locations/locationhierarchy/',
   location_immediate_children: 'locations/immediatechildren/',
   applicants: 'applications',
-  location: 'v1/masterdata/',
-  gender: 'v1/masterdata/gendertypes',
-  resident: 'v1/masterdata/individualtypes',
+  location: '/masterdata/',
+  gender: '/masterdata/gendertypes',
+  resident: '/masterdata/individualtypes',
   transliteration: 'transliteration/transliterate',
-  applicantType: 'v1/masterdata/',
+  //applicantType: 'v1/applicanttype/',
+  applicantType: '/masterdata/',
   validDocument: 'applicanttype/',
   getApplicantType: 'getApplicantType',
   post_document: 'documents/',
@@ -48,9 +49,10 @@ export const APPEND_URL = {
   qr_code: 'qrCode/generate',
   notification: 'notification/',
   send_notification: 'notify',
-  master_data: 'v1/masterdata/',
+  master_data: '/masterdata/',
   auth: 'login/',
-  cancelAppointment: 'appointment/'
+  cancelAppointment: 'appointment/',
+  dynamicFields: 'dynamicfields'
 };
 
 export const PARAMS_KEYS = {
@@ -74,6 +76,7 @@ export const ERROR_CODES = {
   userBlocked: 'PRG_PAM_LGN_013',
   invalidPin: 'KER-IOV-004',
   tokenExpired: 'KER-ATH-401',
+  invalidateToken: 'PRG_PAM_LGN_003',
   slotNotAvailable: 'PRG_BOOK_RCI_002',
   timeExpired: 'PRG_BOOK_RCI_026'
 };

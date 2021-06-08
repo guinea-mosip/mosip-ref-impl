@@ -160,7 +160,7 @@
 
                                 >
                                 <mat-option *ngFor="let gender of genders" [value]="gender.code">
-                                    {{ gender.genderName }}
+                                    {{ gender.value }}
                                 </mat-option>
                             </mat-select>
                             <mat-error *ngIf=" userForm.get(formControlNames.gender).touched && userForm.get(formControlNames.gender).invalid">
@@ -187,7 +187,7 @@
 
                             >
                                 <mat-option *ngFor="let resident of residenceStatus" [value]="resident.code">
-                                    {{ resident.name }}
+                                    {{ resident.value }}
                                 </mat-option>
                             </mat-select>
                             <mat-error *ngIf="userForm.get(formControlNames.residenceStatus).touched &&

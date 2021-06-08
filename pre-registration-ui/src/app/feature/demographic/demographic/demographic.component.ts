@@ -377,8 +377,7 @@ export class DemographicComponent extends FormDeactivateGuardService implements 
     });
 
     this.setLocations();
-    this.setGender();
-    this.setResident();
+    this.getDynamicFields();
   }
 
   /**
@@ -418,10 +417,10 @@ export class DemographicComponent extends FormDeactivateGuardService implements 
    * @private
    * @memberof DemographicComponent
    */
-  private async setGender() {
-    await this.getGenderDetails();
-    // this.filterOnLangCode(this.primaryLang, this.primaryGender, this.genders);
-  }
+  // private async setGender() {
+  //   await this.getGenderDetails();
+  //   // this.filterOnLangCode(this.primaryLang, this.primaryGender, this.genders);
+  // }
 
   /**
    * @description This is to get the list of gender available in the master data.
@@ -429,9 +428,9 @@ export class DemographicComponent extends FormDeactivateGuardService implements 
    * @private
    * @memberof DemographicComponent
    */
-  private async setResident() {
-    await this.getResidentDetails();
-  }
+  // private async setResident() {
+  //   await this.getResidentDetails();
+  // }
 
   /**
    * @description This set the initial values for the form attributes.
@@ -490,32 +489,72 @@ export class DemographicComponent extends FormDeactivateGuardService implements 
   }
 
   /**
+   * @description This will get the dynamic fields from the master data.
+   *
+   * @private
+   * @returns
+   * @memberof DemographicComponent
+   */
+  private getDynamicFields() {
+    return new Promise(resolve => {
+      this.subscriptions.push(
+          this.dataStorageService.getDynamicFields().subscribe(
+              response => {
+                if (response[appConstants.RESPONSE]) {
+                  let that = this;
+                  response[appConstants.RESPONSE]["data"].map(function(elem){
+                    switch(elem.name){
+                      case "gender":
+                        that.genders = elem.fieldVal;
+                        break;
+                      case "residenceStatus":
+                        that.residenceStatus = elem.fieldVal;
+                        break;
+                    }
+                  });
+                  resolve(true);
+                } else {
+                  this.onError(this.errorlabels.error, '');
+                }
+              },
+              error => {
+                this.loggerService.error('Unable to fetch dynamic fields');
+                this.onError(this.errorlabels.error, error);
+              }
+          )
+      );
+    });
+  }
+
+  /**
    * @description This will get the gender details from the master data.
    *
    * @private
    * @returns
    * @memberof DemographicComponent
    */
-  private getGenderDetails() {
-    return new Promise(resolve => {
-      this.subscriptions.push(
-        this.dataStorageService.getGenderDetails().subscribe(
-          response => {
-            if (response[appConstants.RESPONSE]) {
-              this.genders = response[appConstants.RESPONSE][appConstants.DEMOGRAPHIC_RESPONSE_KEYS.genderTypes];
-              resolve(true);
-            } else {
-              this.onError(this.errorlabels.error, '');
-            }
-          },
-          error => {
-            this.loggerService.error('Unable to fetch gender');
-            this.onError(this.errorlabels.error, error);
-          }
-        )
-      );
-    });
-  }
+  /* Removed for 1.1.5 compatibility*/
+  // private getGenderDetails() {
+  //   return new Promise(resolve => {
+  //     this.subscriptions.push(
+  //       this.dataStorageService.getGenderDetails().subscribe(
+  //         response => {
+  //           if (response[appConstants.RESPONSE]) {
+  //             this.genders = response[appConstants.RESPONSE][appConstants.DEMOGRAPHIC_RESPONSE_KEYS.genderTypes];
+  //             /* dynamic to gender fields converter */
+  //             resolve(true);
+  //           } else {
+  //             this.onError(this.errorlabels.error, '');
+  //           }
+  //         },
+  //         error => {
+  //           this.loggerService.error('Unable to fetch gender');
+  //           this.onError(this.errorlabels.error, error);
+  //         }
+  //       )
+  //     );
+  //   });
+  // }
 
   /**
    * @description This will get the residenceStatus details from the master data.
@@ -524,27 +563,28 @@ export class DemographicComponent extends FormDeactivateGuardService implements 
    * @returns
    * @memberof DemographicComponent
    */
-  private getResidentDetails() {
-    return new Promise(resolve => {
-      this.subscriptions.push(
-        this.dataStorageService.getResidentDetails().subscribe(
-          response => {
-            if (response[appConstants.RESPONSE]) {
-              this.residenceStatus =
-                response[appConstants.RESPONSE][appConstants.DEMOGRAPHIC_RESPONSE_KEYS.residentTypes];
-              resolve(true);
-            } else {
-              this.onError(this.errorlabels.error, '');
-            }
-          },
-          error => {
-            this.loggerService.error('Unable to fetch Resident types');
-            this.onError(this.errorlabels.error, error);
-          }
-        )
-      );
-    });
-  }
+  /* Removed for 1.1.5 compatibility*/
+  // private getResidentDetails() {
+  //   return new Promise(resolve => {
+  //     this.subscriptions.push(
+  //       this.dataStorageService.getResidentDetails().subscribe(
+  //         response => {
+  //           if (response[appConstants.RESPONSE]) {
+  //             this.residenceStatus =
+  //               response[appConstants.RESPONSE][appConstants.DEMOGRAPHIC_RESPONSE_KEYS.residentTypes];
+  //             resolve(true);
+  //           } else {
+  //             this.onError(this.errorlabels.error, '');
+  //           }
+  //         },
+  //         error => {
+  //           this.loggerService.error('Unable to fetch Resident types');
+  //           this.onError(this.errorlabels.error, error);
+  //         }
+  //       )
+  //     );
+  //   });
+  // }
 
   /**
    * @description This will filter the gender on the basis of langugae code.
@@ -749,9 +789,9 @@ export class DemographicComponent extends FormDeactivateGuardService implements 
       entity.filter((element: any) => {
         if (event.value === element.code) {
           const codeValue: CodeValueModal = {
-            languageCode: element.langCode,
+            languageCode: element.langCode ? element.langCode : "fra",
             valueCode: element.code,
-            valueName: element.genderName
+            valueName: element.value
           };
           this.addCodeValue(codeValue);
         }
@@ -764,9 +804,9 @@ export class DemographicComponent extends FormDeactivateGuardService implements 
       entity.filter((element: any) => {
         if (event.value === element.code) {
           const codeValue: CodeValueModal = {
-            languageCode: element.langCode,
+            languageCode: element.langCode ? element.langCode : "fra",
             valueCode: element.code,
-            valueName: element.name
+            valueName: element.value
           };
           this.addCodeValue(codeValue);
         }
@@ -797,8 +837,12 @@ export class DemographicComponent extends FormDeactivateGuardService implements 
         this.userForm.controls[this.formControlNames.date].patchValue(this.defaultDay);
         this.userForm.controls[this.formControlNames.month].patchValue(this.defaultMonth);
         this.userForm.controls[this.formControlNames.year].patchValue(calulatedYear);
+        /* Removed for 1.1.5 compatibility */
+        // this.userForm.controls[this.formControlNames.dateOfBirth].patchValue(
+        //   calulatedYear + '/' + this.defaultMonth + '/' + this.defaultDay
+        // );
         this.userForm.controls[this.formControlNames.dateOfBirth].patchValue(
-          calulatedYear + '/' + this.defaultMonth + '/' + this.defaultDay
+            this.defaultDay + '/' + this.defaultMonth + '/' + calulatedYear
         );
         this.userForm.controls[this.formControlNames.dateOfBirth].setErrors(null);
       } else {
@@ -834,13 +878,16 @@ export class DemographicComponent extends FormDeactivateGuardService implements 
       this.userForm.controls[this.formControlNames.year].patchValue('');
       return;
     }
-    
-    
-  
-    const newDate = year + '/' + month + '/' + date;
+
+
+    /* Removed for 1.1.5 compatibility */
+    // const newDate = year + '/' + month + '/' + date;
+    const newDate = date + '/' + month + '/' +year;
     const dobRegex = new RegExp(this.DOB_PATTERN);
     if (dobRegex.test(newDate)) {
-      const dateform = new Date(newDate);
+      let dateParts = newDate.split("/");
+      const dateform = new Date(+dateParts[2], Number(+dateParts[1] - 1), +dateParts[0]);
+      // const dateform = new Date(newDate);
       this.userForm.controls[this.formControlNames.dateOfBirth].patchValue(newDate);
       this.userForm.controls[this.formControlNames.age].patchValue(this.calculateAge(dateform));
     } else if (date && month && year) {
@@ -1132,7 +1179,7 @@ export class DemographicComponent extends FormDeactivateGuardService implements 
    * @memberof DemographicComponent
    */
   private createIdentityJSONDynamic() {
-    const identity = new IdentityModel(this.config[appConstants.CONFIG_KEYS.mosip_idschema_version], [], [], '', [], [], '', [], [], [], [], [], '', '');
+    const identity = new IdentityModel(Number(this.config[appConstants.CONFIG_KEYS.mosip_idschema_version]), [], [], '', [], [], '', [], [], [], [], [], '', '');
     let keyArr: any[] = Object.keys(this.formControlNames);
     for (let index = 0; index < keyArr.length - 4; index++) {
       const element = keyArr[index];

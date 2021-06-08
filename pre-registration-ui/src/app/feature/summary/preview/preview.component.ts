@@ -85,7 +85,7 @@ export class PreviewComponent implements OnInit {
     const genders = this.registrationService.getGenderTypes();
     for (let i = 0; i < genders.length; i++) {
       if (genders[i]['code'] === code) {
-        return genders[i]['genderName']
+        return genders[i]['value']
       }
     }
     return '';
@@ -95,7 +95,7 @@ export class PreviewComponent implements OnInit {
     const ress = this.registrationService.getIndividualTypes();
     for (let i = 0; i < ress.length; i++) {
       if (ress[i]['code'] === code) {
-        return ress[i]['name']
+        return ress[i]['value']
       }
     }
     return '';
