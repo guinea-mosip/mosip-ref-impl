@@ -1,0 +1,118 @@
+.backgroundStyle {
+    -fx-background-color : white;
+}
+
+.anchorHeaderPane {
+-fx-background-color: #020F59;
+}
+
+.labelPlus{
+	-fx-background-color:#ffffff;
+	-fx-border-width: 0.0;
+	-fx-text-fill : #020F59;
+	-fx-font-size: 1em;
+	-fx-font-weight: bold;
+}
+
+.textfield{
+	-fx-border-color: #C9C9C9;
+	-fx-border-width: 0.0 0.0 1.0 0.0;
+	-fx-background-color: #FFFFFF;
+	-fx-prompt-text-fill: #020F59;
+	-fx-font-size: 0.9em;
+	-fx-text-fill : #020F59;
+	-fx-padding : -7.0px 0.0px -2.0px -2.0px;
+	-fx-border-insets : 5 -2 -5 44;
+}
+.textfield:focused{
+		-fx-border-color: #C9C9C9;
+	-fx-border-width: 0.0 0.0 1.0 0.0;
+	-fx-background-color: #FFFFFF;
+	-fx-prompt-text-fill: #020F59;
+	-fx-font-size: 0.9em;
+	-fx-text-fill : #020F59;
+	-fx-padding : -7.0px 0.0px -2.0px -2.0px;
+	-fx-border-insets : 5 -2 -5 44;
+}
+
+.rounded-corner{
+	-fx-background-color: white;
+	-fx-border-color:#020F59;
+	-fx-border-radius:45px;
+	-fx-border-width: 1;
+	}
+
+.rondis{
+    -fx-background-color: #020F59;
+    -fx-border-width: 0.0;
+    -fx-text-fill : #020F59;
+    -fx-font-size: 1em;
+    -fx-background-radius: 5em;
+    -fx-min-width: 13px;
+    -fx-min-height: 13px;
+    -fx-max-width: 13px;
+    -fx-max-height: 13px;
+}
+
+    .check-box {
+        /* default properties */
+        selected-box-color:  #020F59;
+        box-color: white;
+        mark-color:  #020F59;
+        	-fx-text-fill : #020F59;
+    }
+
+    .check-box:selected > .box {
+        /* background color for selected checkbox */
+        -fx-background-color: box-color;
+    }
+
+    .check-box > .box {
+        /* background color of unselected checkbox */
+        -fx-background-color: box-color;
+        -fx-border-color:    selected-box-color;
+    }
+
+    .combo-box{
+        -fx-border-color:#E6E6E6;
+        -fx-border-style:solid;
+        -fx-border-width:1;
+        -fx-text-fill: #020F59;
+    }
+    .combo-box .arrow{
+        -fx-background-color:#020F59;
+    }
+    .combo-box .arrow-button{
+        -fx-background-color:white;
+        -fx-border-style:none;
+    }
+    .combo-box .arrow-button{
+        -fx-background-color:white;
+    }
+    .combo-box .list-cell{
+        -fx-background-color:white;
+        -fx-text-fill: #020F59;
+    }
+    .combo-box .combo-box-popup .list-cell:hover {
+        -fx-text-fill: white ;
+        -fx-background-color: #020F59;
+    }
+
+    .buttons:hover{
+    	-fx-background-color:#FFFFFF;
+    	-fx-border-color:#020F59;
+    	-fx-text-fill: #020F59;
+    	-fx-font-size: 12px;
+    }
+
+    .buttons{
+    	-fx-background-color:#BCE0FD;
+    	-fx-text-fill: #020F59;
+    }
+
+
+    .buttons:pressed {
+    	-fx-background-color:#BCE0FD;
+    	-fx-border-color: #020F59;
+    	-fx-text-fill: #020F59;
+    }
