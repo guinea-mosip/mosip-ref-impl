@@ -169,6 +169,7 @@
 		<module>kernel-ref-idobjectvalidator</module>
 		<module>kernel-virusscanner-clamav</module>
 		<module>kernel-smsserviceprovider-msg91</module>
+		<module>kernel-smsserviceprovider-mtn</module>
 	</modules>
 
 	<dependencies>

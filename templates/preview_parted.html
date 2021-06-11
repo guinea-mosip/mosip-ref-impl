@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    body {
+      font-family: "Roboto";
+    }
+
+    table,
+    .head {
+      font-size: 13px;
+    }
+
+    .demoDiv {
+      width: 85%;
+      float: left;
+    }
+
+    .photoDiv {
+      position: absolute;
+      top: 20px;
+      right: 50px;
+    }
+
+    .form {
+      display: inline-block;
+    }
+
+    .section {
+      align: center;
+      padding: 30px;
+      width: 800px;
+      margin: auto;
+    }
+
+    .headings {
+      color: #020F59;
+      font-weight: bold;
+    }
+
+    p {
+      display: inline;
+    }
+
+    .dataTable {
+      word-wrap: break-word;
+      table-layout: fixed;
+      width: 70%;
+    }
+
+    .headerTable {
+      width: 90%;
+    }
+
+    .uinHeaderTable {
+      width: 100%;
+    }
+
+    h5 {
+      display: inline;
+      position: absolute;
+    }
+
+    .iris {
+      top: -15px;
+      left: 152px;
+    }
+
+    .irisWithoutException {
+      top: -15px;
+      left: 114px;
+    }
+
+    .tableWithoutException {
+      width: 50%;
+      text-align: center;
+      table-layout: fixed;
+      margin: 0 auto;
+    }
+
+    .biometricsTable {
+      width: 100%;
+      text-align: center;
+      table-layout: fixed;
+    }
+
+    .biometricsTable  td {
+      text-align: center;
+    }
+
+    .biometrics {
+      position: relative;
+    }
+
+    .leftLittle {
+      top: 15px;
+      left: 11px;
+      display: inline;
+      position: absolute;
+    }
+
+    .leftRing {
+      top: 3px;
+      left: 23px;
+    }
+
+    .leftMiddle {
+      top: -7px;
+      left: 37px;
+    }
+
+    .leftIndex {
+      top: 3px;
+      left: 54px;
+    }
+
+    .rightIndex {
+      top: 3px;
+      left: 26px;
+    }
+
+    .rightMiddle {
+      top: -7px;
+      left: 39px;
+    }
+
+    .rightRing {
+      top: 3px;
+      left: 55px;
+    }
+
+    .rightLittle {
+      top: 15px;
+      left: 68px;
+    }
+
+    .leftThumb {
+      top: -4px;
+      left: 24px;
+    }
+
+    .rightThumb {
+      top: -4px;
+      left: 54px;
+    }
+
+    .parentStyle {
+      top: -15px;
+      left: 152px;
+    }
+
+    .parentIris1 {
+      top: -15px;
+      left: 212px;
+    }
+
+    .parentIris2 {
+      top: -15px;
+      left: 214px;
+    }
+
+    li span {
+      color: black;
+      font-size: 12px;
+    }
+
+    li {
+      color: lightgrey
+    }
+
+    button {
+      float: right;
+      font-size: 12px;
+      border: none;
+      background-color: transparent;
+      outline: none;
+    }
+
+    button:active {
+      background-color: black;
+      color: white;
+    }
+
+    .modify {
+      float: right;
+    }
+
+    .bottom {
+      vertical-align: bottom;
+    }
+
+    .consent-block {
+      font-size: 13px;
+      border-radius: 8px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      border: 2px solid #E88E3F;
+      padding-top: -50px;
+      padding: 10px;
+    }
+
+    .consent-text {
+      margin-left: 7px;
+      margin-bottom: 4px;
+    }
+
+    input[type="radio"] {
+      display: none;
+    }
+
+    input[type="radio"]+label:before {
+      content: "";
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      padding: 3px;
+      margin-right: 5px;
+      background-clip: content-box;
+      border: 1px solid grey;
+      background-color: #fff;
+      border-radius: 50%;
+    }
+
+    input[type="radio"]:checked+label:before {
+      background-color: #FF4081;
+      border-color: #FF4081;
+    }
+
+    *,
+    *:before,
+    *:after {
+      box-sizing: border-box;
+    }
+
+    .consent-block label {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    table {
+      width: 100%
+    }
+
+    .demoTable {
+      width: 75%
+    }
+
+    table>tbody>tr>td {
+      width: 25%;
+      text-align: left;
+      padding: 2px
+    }
+
+    .panel {
+      border-width: 1px;
+      border-style: solid;
+      border-color: #020F59;
+      color: #020F59;
+      border-radius: 10px;
+      margin-bottom: 5px;
+    }
+
+    .layouts {
+      width: 100%;
+      display: block;
+      position: relative;
+      padding: 5px 15px;
+    }
+
+    .headingDetail {
+      color: #020F59;
+      font-size: 14px;
+      margin-bottom: 5px;
+      width: 100%;
+      display: block;
+    }
+
+    .tooltip {
+      position: relative;
+      display: inline-block
+    }
+
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 220px;
+      background-color: #020F59;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px 0;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      margin-left: -60px;
+      opacity: 0;
+      transition: opacity 0.3s
+    }
+
+    .tooltip .tooltiptext::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #555 transparent transparent transparent
+    }
+
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1
+    }
+
+    hr {
+      border-top: 1px solid #020F59;
+    }
+  </style>
+  <script>
+    function changeColour(element) {
+      var div = document.getElementById("radioId");
+      if (element.value == "yes") {
+        div.style = "border: 2px solid #68A933";
+      }
+      if (element.value == "no") {
+        div.style = "border: 2px solid #FF0000";
+      }
+    }
+    document.onreadystatechange = function() {
+      if (document.readyState === "complete") {
+        var body = document.getElementsByTagName("body")[0];
+        body.addEventListener("dragstart", function(event) {
+          event.preventDefault();
+        });
+        body.addEventListener("selectstart", function(event) {
+          event.preventDefault();
+        });
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <div class=section>
+    <div class=form>
+      <div class=panel>
+        <div class=layouts>
+          <table class=headerTable>
+            <tr>
+              <td class=bottom>
+                <p class=headings>${RIDPrimLabel}</p><br />${RID}
+              </td>
+              #if ( $UIN )
+              <td class=bottom>
+                <p class=headings>${UINPrimLabel}</p><br />${UIN}
+              </td>
+              #end
+              #if ( $PreRegID )
+              <td class=bottom>
+                <p class=headings>${PreRegIDPrimLabel}</p><br />${PreRegID}
+              </td>
+              #end
+              <td class=bottom>
+                <p class=headings>${DatePrimLabel}</p><br />${Date}
+              </td>
+            </tr>
+          </table>
+          <br />
+          #if ( $name )
+          <table class=headerTable>
+            <tr>
+              <td>
+                <p class=headings>${NamePrimLabel}</p><br />${NamePrimValue}
+              </td>
+            </tr>
+          </table>
+          #end
+        </div>
+      </div>
+
+      <div class=panel>
+        <!-- Demographic -->
+        <div class=layouts>
+          <div class="headingDetail"><b>${DemographicInfo}</b>
+            <div class="tooltip">
+              <img src=$ModifyImageSource border="0" width="15" height="15" style="margin-left: 5px" id="modifyDemographicInfo" />
+              <span class="tooltiptext">Cliquer ici pour modifier les informations personnelles</span>
+            </div>
+          </div>
+          <table class=demoTable>
+            #if( $demographics.get("firstName") )
+            <tr>
+              <td class="headings">$demographics.get("firstName").get("primaryLabel")</td>
+              <td>$demographics.get("firstName").get("primaryValue")</td>
+            </tr>
+            #end
+            #if( $demographics.get("lastName") )
+            <tr>
+              <td class="headings">$demographics.get("lastName").get("primaryLabel")</td>
+              <td>$demographics.get("lastName").get("primaryValue")</td>
+            </tr>
+            #end
+            #if( $demographics.get("gender") )
+            <tr>
+              <td class="headings">$demographics.get("gender").get("primaryLabel")</td>
+              <td>$demographics.get("gender").get("primaryValue")</td>
+            </tr>
+            #end
+            #if( $demographics.get("dateOfBirth") )
+            <tr>
+              <td class="headings">$demographics.get("dateOfBirth").get("primaryLabel")</td>
+              <td>$demographics.get("dateOfBirth").get("primaryValue")</td>
+            </tr>
+            #end
+            #if( $demographics.get("phone") )
+            <tr>
+              <td class="headings">$demographics.get("phone").get("primaryLabel")</td>
+              <td>$demographics.get("phone").get("primaryValue")</td>
+            </tr>
+            #end
+            #if( $demographics.get("email") )
+            <tr>
+              <td class="headings">$demographics.get("email").get("primaryLabel")</td>
+              <td>$demographics.get("email").get("primaryValue")</td>
+            </tr>
+            #end
+            #if( $demographics.get("residenceStatus") )
+            <tr>
+              <td class="headings">$demographics.get("residenceStatus").get("primaryLabel")</td>
+              <td>$demographics.get("residenceStatus").get("primaryValue")</td>
+            </tr>
+            #end
+          </table>
+          #if ( $ApplicantImageSource )
+          <div class="photoDiv">
+            <img src=${ApplicantImageSource} border=0 width=100 height=100 />
+          </div>
+          #end
+        </div>
+        <hr />
+        <!-- Address -->
+        <div class=layouts>
+          <div class="headingDetail"><b> Adresse</b>
+            <div class="tooltip">
+              <img src=$ModifyImageSource border="0" width="15" height="15" style="margin-left: 5px" id="modifyAddressInfo" />
+              <span class="tooltiptext">Cliquer ici pour modifier l’adresse</span>
+            </div>
+          </div>
+          <table>
+            #if( $demographics.get("region") )
+            <tr>
+              <td class="headings">$demographics.get("region").get("primaryLabel")</td>
+              <td>$demographics.get("region").get("primaryValue")</td>
+            </tr>
+            #end
+            #if( $demographics.get("prefecture") )
+            <tr>
+              <td class="headings">$demographics.get("prefecture").get("primaryLabel")</td>
+              <td>$demographics.get("prefecture").get("primaryValue")</td>
+            </tr>
+            #end
+            #if( $demographics.get("subPrefectureOrCommune") )
+            <tr>
+              <td class="headings">$demographics.get("subPrefectureOrCommune").get("primaryLabel")</td>
+              <td>$demographics.get("subPrefectureOrCommune").get("primaryValue")</td>
+            </tr>
+            #end
+            #if( $demographics.get("district") )
+            <tr>
+              <td class="headings">$demographics.get("district").get("primaryLabel")</td>
+              <td>$demographics.get("district").get("primaryValue")</td>
+            </tr>
+            #end
+            #if( $demographics.get("sector") )
+            <tr>
+              <td class="headings">$demographics.get("sector").get("primaryLabel")</td>
+              <td>$demographics.get("sector").get("primaryValue")</td>
+            </tr>
+            #end
+            #if( $demographics.get("additionalAddressDetails") )
+            <tr>
+              <td class="headings">$demographics.get("additionalAddressDetails").get("primaryLabel")</td>
+              <td>$demographics.get("additionalAddressDetails").get("primaryValue")</td>
+            </tr>
+            #end
+          </table>
+        </div>
+        <hr />
+        <!-- Parents -->
+        #if( $demographics.get("parentOrGuardianFirstName") )
+        <div class=layouts>
+          <div class="headingDetail"><b> Parents</b>
+            <div class="tooltip">
+              <img src=$ModifyImageSource border="0" width="15" height="15" style="margin-left: 5px" id="modifyGuardianInfo" />
+              <span class="tooltiptext">Informations du Parent / Tuteur</span>
+            </div>
+          </div>
+          <table class=demoTable>
+            #if( $demographics.get("parentOrGuardianFirstName") )
+            <tr>
+              <td class="headings">$demographics.get("parentOrGuardianFirstName").get("primaryLabel")</td>
+              <td>$demographics.get("parentOrGuardianFirstName").get("primaryValue")</td>
+            </tr>
+            #end
+            #if( $demographics.get("parentOrGuardianLastName") )
+            <tr>
+              <td class="headings">$demographics.get("parentOrGuardianLastName").get("primaryLabel")</td>
+              <td>$demographics.get("parentOrGuardianLastName").get("primaryValue")</td>
+            </tr>
+            #end
+            #if( $demographics.get("parentOrGuardianRID") )
+            <tr>
+              <td class="headings">$demographics.get("parentOrGuardianRID").get("primaryLabel")</td>
+              <td>$demographics.get("parentOrGuardianRID").get("primaryValue")</td>
+            </tr>
+            #end
+            #if( $demographics.get("parentOrGuardianUIN") )
+            <tr>
+              <td class="headings">$demographics.get("parentOrGuardianUIN").get("primaryLabel")</td>
+              <td>$demographics.get("parentOrGuardianUIN").get("primaryValue")</td>
+            </tr>
+            #end
+          </table>
+        </div>
+        <hr />
+        #end
+
+        <!-- Documents -->
+        <div class=layouts>
+          <div class="headingDetail"><b>Documents Fournis</b>
+            <div class="tooltip">
+              <img src=$ModifyImageSource border="0" width="15" height="15" style="margin-left: 5px" id="modifyDocuments" />
+              <span class="tooltiptext">Documents Fournis</span>
+            </div>
+          </div>
+          <table>
+            #foreach( $key in $documents.keySet() )
+            <tr>
+              <td class=headings>$documents.get($key).get("primaryLabel")</td>
+              <td>$documents.get($key).get("value")</td>
+            <tr>
+              #end
+          </table>
+        </div>
+        <hr />
+        <!-- Biometrics -->
+        #foreach( $key in $biometrics.keySet() )
+        <div class=layouts>
+          <div class="headingDetail"><b>$biometrics.get($key).get("primaryLabel")</b>
+            <div class="tooltip">
+              <img src=$ModifyImageSource border="0" width="15" height="15" style="margin-left: 5px" id="modifyBiometrics" />
+              <span class="tooltiptext">Cliquer ici pour modifier les données biométriques</span>
+            </div>
+            <p>Fingers ( $biometrics.get($key).get("FingerCount") ),Iris ( $biometrics.get($key).get("IrisCount") ),Face ( $biometrics.get($key).get("FaceCount") )</p>
+          </div>
+          <table class="biometricsTable">
+            <tr>
+              #if( $biometrics.get($key).get("CapturedLeftEye") )
+              <td>
+                <p class="headings">${LeftEyePrimLabel}</p>
+              </td>
+              #end
+              #if( $biometrics.get($key).get("CapturedRightEye") )
+              <td>
+                <p class="headings">${RightEyePrimLabel}</p>
+              </td>
+              #end
+            </tr>
+            <tr>
+              #if( $biometrics.get($key).get("CapturedLeftEye") )
+              <td>
+                <img src=$biometrics.get($key).get("CapturedLeftEye") border="0" width="85" height="80" />
+              </td>
+              #end
+              #if($biometrics.get($key).get("CapturedRightEye") )
+              <td>
+                <img src=$biometrics.get($key).get("CapturedRightEye") border="0" width="85" height="80" />
+              </td>
+              #end
+            </tr>
+          </table>
+
+          <table class="biometricsTable">
+            <tr>
+              #if( $biometrics.get($key).get("CapturedLeftSlap") )
+              <td>
+                <p class="headings">${LeftPalmPrimLabel}</p>
+              </td>
+              #end
+              #if( $biometrics.get($key).get("CapturedRightSlap") )
+              <td>
+                <p class="headings">${RightPalmPrimLabel}</p>
+              </td>
+              #end
+              #if( $biometrics.get($key).get("CapturedThumbs") )
+              <td>
+                <p class="headings">${ThumbsPrimLabel}</p>
+              </td>
+              #end
+            </tr>
+            <tr>
+              #if( $biometrics.get($key).get("CapturedLeftSlap") )
+              <td>
+                <img src=$biometrics.get($key).get("CapturedLeftSlap") border="0" width="85" height="80" />
+              </td>
+              #end
+              #if($biometrics.get($key).get("CapturedRightSlap") )
+              <td>
+                <img src=$biometrics.get($key).get("CapturedRightSlap") border="0" width="85" height="80" />
+              </td>
+              #end
+              #if($biometrics.get($key).get("CapturedThumbs") )
+              <td>
+                <img src=$biometrics.get($key).get("CapturedThumbs") border="0" width="85" height="80" />
+              </td>
+              #end
+            </tr>
+          </table>
+
+          <table class="biometricsTable">
+            <tr>
+              #if( $biometrics.get($key).get("FaceImageSource") )
+              <td>
+                <p class="headings">${FacePrimLabel}</p>
+              </td>
+              #end
+              #if( $biometrics.get($key).get("subType") == "applicant" && $ExceptionImageSource )
+              <td>
+                <p class="headings">${ExceptionPhotoPrimLabel}</p>
+              </td>
+              #end
+            </tr>
+            <tr>
+              #if( $biometrics.get($key).get("FaceImageSource") )
+              <td>
+                <img src=$biometrics.get($key).get("FaceImageSource") border="0" width="85" height="80" />
+              </td>
+              #end
+              #if( $biometrics.get($key).get("subType") == "applicant" && $ExceptionImageSource )
+              <td>
+                <img src=${ExceptionImageSource} border="0" width="85" height="80" />
+              </td>
+              #end
+            </tr>
+          </table>
+        </div>
+        <hr />
+        #end
+
+        <!-- Registration center details -->
+        <div class=layouts>
+          <div class="headingDetail">
+            <b>Détails du centre d'inscription</b>
+          </div>
+          <table>
+            <tr>
+              <td>
+                <p class=headings>${RONamePrimLabel}</p><br />${ROName}<br />
+              </td>
+              <td>
+                <p class=headings>${RegCenterPrimLabel}</p><br />${RegCenter}<br />
+              </td>
+            <tr>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
