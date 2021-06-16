@@ -61,7 +61,8 @@ public class IdaStarter extends Application {
 		// Set window for fixed size.
 		stage.setResizable(false);
 		// Setting window icon
-		stage.getIcons().add(new Image("images//logo.png"));
+		stage.getIcons().add(new Image(this.getClass().getClassLoader().getResourceAsStream("images/logo.png")));
+//		stage.getIcons().add(new Image("images//logo.png"));
 		// Display the Stage
 		stage.show();
 	}

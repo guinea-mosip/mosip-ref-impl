@@ -408,7 +408,7 @@
     "label": {
       "primary": "Complément d'Adresse"
     },
-    "type": "simpleType",
+    "type": "string",
     "minimum": 0,
     "maximum": 0,
     "controlType": "textbox",
