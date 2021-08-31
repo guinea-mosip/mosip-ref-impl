@@ -1,6 +1,6 @@
 FROM openjdk:11
 
-ENV biosdk_zip_url=$biosdk_zip_url
+ENV biosdk_zip_url=$biosdk_zip_file_path
 ENV biosdk_bioapi_impl=$biosdk_bioapi_impl
 
 copy ./target/biosdk-services-*.jar /biosdk-services.jar
