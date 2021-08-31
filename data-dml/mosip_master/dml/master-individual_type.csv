@@ -1,3 +1,0 @@
-﻿code,name,lang_code,is_active,cr_by,cr_dtimes
-NFR,NON RESIDENT,fra,TRUE,superadmin,now()
-FR,RESIDENT,fra,TRUE,superadmin,now()

@@ -1,4 +1,1 @@
 ﻿id,uin,name,email,mobile,status_code,regcntr_id,lang_code,last_login_method,is_active,cr_by,cr_dtimes,eff_dtimes
-lisbon,9317596868,lisbon,lisbon@mosip.io,9876543213,ACT,10002,fra,PWD,TRUE,superadmin,2020-07-27 6:51:58,2020-07-28 6:51:57
-madrid,9317596869,madrid,madrid@mosip.io,9876543214,ACT,10002,fra,PWD,TRUE,superadmin,2020-07-27 6:51:58,2020-07-29 6:51:57
-berlin,9317596869,berlin,berlin@mosip.io,9876543214,ACT,10002,fra,PWD,TRUE,superadmin,2020-07-27 6:51:58,2020-07-30 6:51:57
